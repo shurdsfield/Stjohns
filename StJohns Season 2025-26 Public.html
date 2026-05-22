@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="St John's Chorlton U15 Greens — Season Review 2025–26. Results, player stats, match reports and more.">
+<meta property="og:title" content="St John's Chorlton U15 Greens · Season 2025–26">
+<meta property="og:description" content="Full season review — 19 league games, 44 points, 96 goals scored.">
+<title>St John's Chorlton U15 Greens · Season 2025–26</title>
+<style>
+/* ── COLOUR TOKENS ────────────────────────────────────────────────── */
+/* Background layers: deep navy → slate → card surfaces               */
+/* Text: always near-white body, medium-grey secondary, white headers  */
+:root{
+  --bg-page:   #132338;   /* page background — mid navy, clearly readable  */
+  --bg-nav:    #1e293b;   /* sticky nav                              */
+  --bg-card:   #1e2d40;   /* cards, table rows alt                   */
+  --bg-row:    #162032;   /* table row even                          */
+  --bg-expand: #1a2d3e;   /* expanded match row                      */
+  --bg-total:  #1d3351;   /* totals / header rows                    */
+  --border:    #2d4a6a;   /* borders and dividers                    */
+
+  --text-body:  #e8eef4;  /* main body text — near white             */
+  --text-sub:   #a8c4d8;  /* secondary labels — clearly readable     */
+  --text-muted: #89a8c0;  /* tertiary / hints — still legible        */
+  --text-head:  #ffffff;  /* headings and strong values              */
+
+  --accent-blue:  #60a5fa;
+  --accent-green: #4ade80;
+  --accent-amber: #fbbf24;
+  --accent-red:   #f87171;
+  --accent-purple:#c4b5fd;
+}
+
+/* ── RESET & BASE ─────────────────────────────────────────────────── */
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg-page);color:var(--text-body);min-height:100vh;padding-bottom:60px;-webkit-font-smoothing:antialiased;font-size:15px;line-height:1.5}
+a{color:var(--accent-blue);text-decoration:none}
+
+/* ── TOP BANNER ───────────────────────────────────────────────────── */
+.top-banner{background:linear-gradient(135deg,#1a3561 0%,#163050 40%,#1a3d28 100%);border-bottom:3px solid var(--border);padding:32px 20px 26px;text-align:center;position:relative;overflow:hidden}
+.top-banner::before{content:'⚽';position:absolute;font-size:160px;opacity:.06;top:-20px;left:-20px;transform:rotate(-15deg)}
+.top-banner::after{content:'⚽';position:absolute;font-size:160px;opacity:.06;bottom:-20px;right:-20px;transform:rotate(20deg)}
+.club-badge{width:68px;height:68px;background:linear-gradient(135deg,#2563eb,#16a34a);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:12px;box-shadow:0 4px 24px #2563eb55}
+.club-name{font-size:26px;font-weight:800;color:#ffffff;letter-spacing:-0.02em;margin-bottom:4px}
+.club-sub{font-size:13px;color:#93c5fd;letter-spacing:0.06em;margin-bottom:18px}
+.season-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.season-pill{background:#ffffff18;border:1px solid #ffffff25;border-radius:20px;padding:6px 16px;font-size:12px;color:#bfdbfe;backdrop-filter:blur(4px)}
+.season-pill strong{color:#ffffff;font-weight:700}
+
+/* ── NAV ──────────────────────────────────────────────────────────── */
+.nav-sticky{background:var(--bg-nav);border-bottom:2px solid var(--border);position:sticky;top:0;z-index:100;overflow-x:auto;display:flex;scrollbar-width:none}
+.nav-sticky::-webkit-scrollbar{display:none}
+.nav-btn{background:none;border:none;border-bottom:3px solid transparent;color:var(--text-sub);cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;letter-spacing:0.04em;padding:15px 20px;text-transform:uppercase;transition:all .2s;white-space:nowrap}
+.nav-btn:hover{color:var(--text-body);background:#ffffff08}
+.nav-btn.active{color:#ffffff;border-bottom-color:#3b82f6;background:#ffffff06}
+
+/* ── SECTIONS ─────────────────────────────────────────────────────── */
+.section{display:none;padding:28px 18px;max-width:980px;margin:0 auto}
+.section.active{display:block}
+
+/* ── SECTION HEADINGS ─────────────────────────────────────────────── */
+.section-title{font-size:12px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-body);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── STAT CARDS ───────────────────────────────────────────────────── */
+.stat-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:30px}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.stat-card .val{font-size:30px;font-weight:800;line-height:1;margin-bottom:5px;color:var(--text-head)}
+.stat-card .lbl{font-size:12px;color:var(--text-body);text-transform:uppercase;letter-spacing:0.1em;font-weight:600}
+
+/* ── TABLES ───────────────────────────────────────────────────────── */
+.table-wrap{overflow-x:auto;margin-bottom:28px;border-radius:10px;border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:#1a3561}
+th{padding:11px 13px;text-align:left;color:#93c5fd;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-bottom:2px solid var(--border);white-space:nowrap}
+th.r,td.r{text-align:center}
+td{padding:11px 13px;border-bottom:1px solid #1e3450;vertical-align:middle;color:var(--text-head)}
+tr:last-child td{border-bottom:none}
+tr.ev{background:#182d45}
+tr.od{background:#1e3452}
+tr.tr-row{background:#1d3d6e}
+tr.tr-row td{font-weight:700;color:#ffffff;padding:12px 13px;border-top:2px solid var(--border)}
+
+/* ── BADGES ───────────────────────────────────────────────────────── */
+.comp-badge{border-radius:5px;padding:3px 9px;font-size:11px;font-weight:700;color:#fff;letter-spacing:0.03em;display:inline-block}
+.res-badge{border-radius:5px;padding:3px 10px;font-weight:800;font-size:13px;display:inline-block}
+.ha-badge{font-weight:700;font-size:13px}
+
+/* ── MATCH EXPAND ─────────────────────────────────────────────────── */
+.match-row{cursor:pointer;transition:background .12s}
+.match-row:hover td{background:#1e3a5a!important}
+.match-row .expand-icon{color:var(--text-muted);font-size:11px;transition:transform .2s;display:inline-block}
+.match-row.open .expand-icon{transform:rotate(180deg);color:var(--accent-blue)}
+.expand-row{display:none;background:var(--bg-expand)}
+.expand-row.open{display:table-row}
+.expand-cell{padding:14px 18px 18px!important}
+.expand-inner{border-left:3px solid #3b82f6;padding-left:16px}
+.expand-summary{color:var(--text-body);font-size:14px;line-height:1.8;margin-bottom:12px}
+.expand-meta{display:flex;gap:28px;flex-wrap:wrap}
+.expand-label{font-size:11px;text-transform:uppercase;letter-spacing:0.1em;font-weight:700;color:var(--text-sub)}
+.expand-val{font-size:13px;color:var(--text-body);font-weight:500}
+
+/* ── FILTER TABS ──────────────────────────────────────────────────── */
+.filter-row{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.filter-btn{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;color:var(--text-sub);cursor:pointer;font-family:inherit;font-size:12px;font-weight:600;letter-spacing:0.06em;padding:7px 16px;transition:all .15s}
+.filter-btn:hover{border-color:#4a7fa5;color:var(--text-body)}
+.filter-btn.active{color:#fff;border-color:transparent}
+
+/* ── PLAYER CARDS ─────────────────────────────────────────────────── */
+.player-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:13px;margin-bottom:28px}
+.player-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:18px;transition:all .2s}
+.player-card:hover{border-color:#4a7fa5;transform:translateY(-2px);box-shadow:0 8px 24px #00000040}
+.player-name{font-size:17px;font-weight:700;color:var(--text-head);margin-bottom:3px}
+.player-role{font-size:11px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:13px;font-weight:600}
+.player-stat-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #1e3450}
+.player-stat-row:last-of-type{border-bottom:none}
+.player-stat-lbl{font-size:11px;color:var(--text-sub);text-transform:uppercase;letter-spacing:0.08em;font-weight:600}
+.player-stat-val{font-size:16px;font-weight:800}
+.goal-pills{display:flex;gap:5px;flex-wrap:wrap;margin-top:11px}
+.goal-pill{font-size:11px;border-radius:4px;padding:3px 8px;border:1px solid;font-weight:600}
+.motm-line{margin-top:9px;font-size:12px;color:var(--accent-purple);font-weight:600}
+.player-note{margin-top:9px;font-size:12px;color:var(--text-body);font-style:italic;line-height:1.5}
+
+/* ── H2H ──────────────────────────────────────────────────────────── */
+.result-chip{display:inline-block;font-size:11px;font-weight:600;border-radius:5px;padding:2px 8px;margin:2px 4px 2px 0;border:1px solid var(--border);background:var(--bg-card)}
+
+/* ── REPORT ───────────────────────────────────────────────────────── */
+.report-body{max-width:700px;margin:0 auto;background:#1a3461;border-radius:12px;padding:32px 36px;border:1px solid var(--border)}
+.report-body h3{font-size:19px;font-weight:700;color:#ffffff;margin:34px 0 13px;padding-left:14px;border-left:4px solid #60a5fa}
+.report-body p{color:#ffffff;font-size:15px;line-height:1.9;margin-bottom:16px}
+.report-body blockquote{border-left:4px solid #60a5fa;padding:12px 18px;margin:18px 0;color:#e8f4ff;font-style:italic;font-size:14px;line-height:1.8;background:#0f2040;border-radius:0 8px 8px 0}
+.highlight{color:#4ade80;font-weight:700}
+.player-ref{color:#c4b5fd;font-weight:700}
+.report-signoff{color:#93c5fd;font-size:13px;margin-top:40px;text-align:right;font-style:italic;border-top:1px solid #2d5a8a;padding-top:18px}
+
+/* ── FOOTER ───────────────────────────────────────────────────────── */
+.site-footer{text-align:center;padding:36px 16px 20px;color:var(--text-sub);font-size:12px;letter-spacing:0.06em;border-top:1px solid var(--border)}
+
+/* ── RESPONSIVE ───────────────────────────────────────────────────── */
+@media(max-width:600px){
+  .club-name{font-size:21px}
+  .stat-cards{grid-template-columns:repeat(2,1fr)}
+  .expand-meta{flex-direction:column;gap:10px}
+  th,td{padding:8px 9px}
+  .section{padding:16px 12px}
+  .nav-btn{font-size:11px;padding:13px 14px}
+  .report-body{padding:20px 18px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── TOP BANNER ─────────────────────────────────────────────────── -->
+<div class="top-banner">
+  <div class="club-badge">⚽</div>
+  <div class="club-name">St John's Chorlton U15 Greens</div>
+  <div class="club-sub">Season 2025–26 &nbsp;·&nbsp; Managers: Nick &amp; Steve Hurdsfield</div>
+  <div class="season-pills">
+    <div class="season-pill">🏆 League <strong>44 pts</strong></div>
+    <div class="season-pill">⚽ Goals <strong>124 scored</strong></div>
+    <div class="season-pill">✅ <strong>20 wins</strong> all comps</div>
+    <div class="season-pill">📅 <strong>27 games</strong> played</div>
+  </div>
+</div>
+
+<!-- ── NAV ────────────────────────────────────────────────────────── -->
+<nav class="nav-sticky" role="navigation" aria-label="Main navigation">
+  <button class="nav-btn active" onclick="showSection('overview',this)">📊 Overview</button>
+  <button class="nav-btn" onclick="showSection('matches',this)">📅 Results</button>
+  <button class="nav-btn" onclick="showSection('players',this)">👤 Players</button>
+  <button class="nav-btn" onclick="showSection('h2h',this)">⚔️ vs Each Team</button>
+  <button class="nav-btn" onclick="showSection('report',this)">📖 Season Story</button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     OVERVIEW
+══════════════════════════════════════════════════════════════════ -->
+<div id="overview" class="section active">
+
+  <!-- Quick stat cards -->
+  <div class="stat-cards" style="margin-top:8px">
+    <div class="stat-card"><div class="val" style="color:#4ade80">44</div><div class="lbl">League Points</div></div>
+    <div class="stat-card"><div class="val" style="color:#60a5fa">19</div><div class="lbl">League Games</div></div>
+    <div class="stat-card"><div class="val" style="color:#4ade80">14</div><div class="lbl">League Wins</div></div>
+    <div class="stat-card"><div class="val" style="color:#60a5fa">96</div><div class="lbl">League Goals</div></div>
+    <div class="stat-card"><div class="val" style="color:#fbbf24">28</div><div class="lbl">Petr Goals</div></div>
+    <div class="stat-card"><div class="val" style="color:#fbbf24">27</div><div class="lbl">Dylan H Goals</div></div>
+  </div>
+
+  <!-- Competition table -->
+  <div class="section-title">Results by Competition</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Competition</th>
+        <th class="r">Played</th><th class="r">Won</th><th class="r">Drew</th><th class="r">Lost</th>
+        <th class="r">For</th><th class="r">Against</th><th class="r">Diff</th><th class="r">Points</th>
+      </tr></thead>
+      <tbody>
+        <tr class="ev"><td><span class="comp-badge" style="background:#2563eb">League</span> <small style="color:var(--text-sub);font-size:12px">incl. 2 walkovers</small></td><td class="r">19</td><td class="r" style="color:#4ade80;font-weight:700">14</td><td class="r" style="color:#facc15">2</td><td class="r" style="color:#f87171">3</td><td class="r">92</td><td class="r">41</td><td class="r" style="color:#4ade80">+51</td><td class="r" style="color:#facc15;font-weight:800;font-size:15px">44</td></tr>
+        <tr class="od"><td><span class="comp-badge" style="background:#16a34a">League Cup</span> <small style="color:var(--text-sub);font-size:12px">incl. 1 walkover</small></td><td class="r">5</td><td class="r" style="color:#4ade80;font-weight:700">4</td><td class="r" style="color:#facc15">0</td><td class="r" style="color:#f87171">1</td><td class="r">20</td><td class="r">11</td><td class="r" style="color:#4ade80">+9</td><td class="r" style="color:#facc15;font-weight:800">12</td></tr>
+        <tr class="ev"><td><span class="comp-badge" style="background:#d97706">Plate Cup</span></td><td class="r">1</td><td class="r" style="color:#4ade80;font-weight:700">1</td><td class="r" style="color:#facc15">0</td><td class="r" style="color:#f87171">0</td><td class="r">5</td><td class="r">2</td><td class="r" style="color:#4ade80">+3</td><td class="r" style="color:#facc15;font-weight:800">3</td></tr>
+        <tr class="od"><td><span class="comp-badge" style="background:#dc2626">SDFL Cup</span></td><td class="r">1</td><td class="r" style="color:#4ade80;font-weight:700">0</td><td class="r" style="color:#facc15">0</td><td class="r" style="color:#f87171">1</td><td class="r">3</td><td class="r">7</td><td class="r" style="color:#f87171">-4</td><td class="r" style="color:#facc15;font-weight:800">0</td></tr>
+        <tr class="ev"><td><span class="comp-badge" style="background:#7c3aed">Friendly</span></td><td class="r">1</td><td class="r" style="color:#4ade80;font-weight:700">1</td><td class="r" style="color:#facc15">0</td><td class="r" style="color:#f87171">0</td><td class="r">7</td><td class="r">3</td><td class="r" style="color:#4ade80">+4</td><td class="r" style="color:var(--text-sub)">—</td></tr>
+        <tr class="tr-row"><td><strong>All Competitions</strong></td><td class="r">27</td><td class="r" style="color:#4ade80">20</td><td class="r" style="color:#facc15">2</td><td class="r" style="color:#f87171">5</td><td class="r">124</td><td class="r">62</td><td class="r" style="color:#4ade80">+62</td><td class="r" style="color:#fbbf24;font-size:15px">59</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Top scorers -->
+  <div class="section-title">Top Scorers — All Competitions</div>
+  <div class="table-wrap" id="overview-scorers"></div>
+
+  <!-- MOTM -->
+  <div class="section-title">Man of the Match Awards</div>
+  <div class="table-wrap" id="overview-motm"></div>
+
+  <!-- Season highlights -->
+  <div class="section-title">Season Highlights</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:28px" id="highlights-grid"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     RESULTS
+══════════════════════════════════════════════════════════════════ -->
+<div id="matches" class="section">
+  <div class="filter-row" id="match-filters"></div>
+  <p style="color:var(--text-sub);font-size:13px;margin-bottom:12px">Tap any result to read the match report ▾</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Date</th><th>Competition</th><th class="r">H/A</th><th>Opponent</th>
+        <th class="r">Score</th><th class="r">Result</th><th class="r">Pts</th><th>Man of Match</th><th class="r"></th>
+      </tr></thead>
+      <tbody id="matches-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     PLAYERS
+══════════════════════════════════════════════════════════════════ -->
+<div id="players" class="section">
+  <div class="section-title">Goals by Player &amp; Competition</div>
+  <div class="table-wrap" id="player-table-wrap"></div>
+  <div class="section-title" style="margin-top:8px">Player Cards</div>
+  <div class="player-grid" id="player-cards"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     HEAD TO HEAD
+══════════════════════════════════════════════════════════════════ -->
+<div id="h2h" class="section">
+  <p style="color:var(--text-sub);font-size:13px;margin-bottom:16px">Our record against every team we faced this season, across all competitions.</p>
+  <div class="table-wrap" id="h2h-table-wrap"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════
+     SEASON STORY
+══════════════════════════════════════════════════════════════════ -->
+<div id="report" class="section">
+  <div class="report-body" id="report-body">
+    <div style="text-align:center;margin-bottom:36px">
+      <div style="font-size:10px;letter-spacing:0.3em;color:#93c5fd;text-transform:uppercase;margin-bottom:8px">Presentation Day · June 2026</div>
+      <div style="font-size:24px;font-weight:800;color:#ffffff;margin-bottom:4px">St John's Chorlton U15 Greens</div>
+      <div style="font-size:13px;color:#93c5fd">Season Review 2025–26 · Managers: Nick &amp; Steve Hurdsfield</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ──────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div>St John's Chorlton U15 Greens &nbsp;·&nbsp; Season 2025–26</div>
+  <div style="margin-top:4px"><span>SDFL Salford &amp; Districts Football League</span></div>
+</footer>
+
+<script>
+'use strict';
+
+// ── COMPETITION COLOURS ───────────────────────────────────────────────
+const BC = {
+  League:      '#2563eb',
+  'League Cup':'#16a34a',
+  'Plate Cup': '#d97706',
+  'SDFL Cup':  '#dc2626',
+  Friendly:    '#7c3aed'
+};
+const RC = { W:'#4ade80', D:'#facc15', L:'#f87171', ABN:'#64748b' };
+const COMPS = ['League','SDFL Cup','Plate Cup','League Cup','Friendly'];
+
+// ── MATCH DATA ────────────────────────────────────────────────────────
+const matches = [
+  {date:'06 Sep',comp:'Friendly',  ha:'A',opp:'Barr Hill',      score:'7–3', res:'W',pts:null,motm:'—',scorers:'Micah 2, Petr 2, Ivan, Lucas, Jamie',summary:'A great pre-season run-out to blow the cobwebs away. The lads were on the front foot from the first whistle — Ivan, Micah and Jamie all caused real problems throughout. A slight wobble just before half time let Barr Hill pull it back to 5–3, but Micah and Jamie finished the job in the second half. Plenty of positives and great football played.'},
+  {date:'13 Sep',comp:'League',    ha:'A',opp:'RS Titans',       score:'2–2', res:'D',pts:1, motm:'Jamie',scorers:'Petr, Micah',summary:'A real game of two halves at Kingsway School. RS Titans had the better of the first half, but the lads stood firm. A dominant second half saw Petr break the offside trap to equalise before squaring for Micah to make it 2–1. A last-gasp RS corner crept into the corner of the net to level it at the death. Tough to take, but a draw was probably fair on the day. Man of the Match Jamie — relentless on the right wing all game, causing problems in both directions.'},
+  {date:'20 Sep',comp:'League',    ha:'H',opp:'Salford L&G',     score:'6–8', res:'L',pts:0, motm:'Jamie',scorers:'Jamie 2, Dylan H, Lucas, Petr, OG',summary:'A remarkable game in terrible conditions at Turn Moss. The lads raced into a 2–0 lead before switching off and conceding four in a poor spell. A half-time rollicking sparked an extraordinary second-half comeback — they clawed it back to 6–7 with two minutes on the clock before a late penalty settled it. Heads never dropped against a strong, physical team. Immensely proud of that second-half performance. Man of the Match Jamie — two goals, an assist and non-stop energy.'},
+  {date:'27 Sep',comp:'League',    ha:'A',opp:'Salford Storm',   score:'4–1', res:'W',pts:3, motm:'Javar',scorers:'Harry, OG, Petr 2',summary:"Our first league win of the season and the lads were brilliant. Quick passing and off-the-ball running tore Lightning apart. Harry finished low under the keeper for the opener, Javar won a header at a corner that somehow found the net, and Petr latched onto two Javar through balls to seal a comfortable victory. Breathtaking football at times. Man of the Match Javar — three assists and a real captain's performance from the back."},
+  {date:'04 Oct',comp:'League',    ha:'A',opp:'Wythenshawe W',   score:'—',   res:'ABN',pts:0,motm:'—',scorers:'Abandoned',summary:'The referee called the game off due to unplayable conditions before half time. Raphie had time to score from a corner before the whistle — typical! A massive thank you to everyone who braved the weather to get there.'},
+  {date:'11 Oct',comp:'SDFL Cup',  ha:'H',opp:'Salford United',  score:'3–7', res:'L',pts:0, motm:'Max',scorers:'Ivan, Petr 2',summary:"A Division 1 side and current cup holders — always going to be a tough ask. The lads gave absolutely everything though. Ivan scored directly from a corner and Petr grabbed two lovely finishes. We clawed back to within a goal on three separate occasions. The opposition coach came over afterwards and complimented us on how well we'd played. Man of the Match Max — excellent in the no.10 role, at the heart of all our good work."},
+  {date:'18 Oct',comp:'League',    ha:'A',opp:'Swinton Panthers',score:'3–2', res:'W',pts:3, motm:'Luke',scorers:'Dylan H 3 (hat-trick)',summary:"What a game on a horrendous pitch! Dylan H put us ahead before half time and grabbed two more in the second half — though everyone in the ground agreed Petr's header had clearly crossed the line before the ref waved it away. Noah was sin-binned for dissent and we played the final ten minutes with ten men. Swinton pulled it back to 2–3 with hearts in mouths before Luke appeared from absolutely nowhere with a heroic last-ditch sliding tackle. Man of the Match Luke — immense at centre-back."},
+  {date:'01 Nov',comp:'League',    ha:'H',opp:'Winton Wanderers',score:'7–2', res:'W',pts:3, motm:'Dylan C',scorers:'Dylan C 4, Max 2, Petr',summary:'Winton started the day two points above us in the table and we swept them completely aside. Dylan C was absolutely outstanding — four goals including a penalty, causing chaos throughout. Max added two great strikes and Petr got a well-deserved goal too. A dominant second-half performance after a tight first forty minutes. Man of the Match Dylan C — four goals and a brilliant all-round display.'},
+  {date:'08 Nov',comp:'League',    ha:'A',opp:'Man South End',   score:'3–3', res:'D',pts:1, motm:'Dylan H',scorers:'Dylan H 3 (hat-trick)',summary:"Remembrance weekend — both teams observed a minute's silence with real respect and dignity before kick-off. The pitch made Turn Moss look like Wembley, but the lads adapted well. Dylan H scored three times but we found ourselves behind each time he equalised. Their keeper had an inspired game to keep it level. On another day we win comfortably. Man of the Match Dylan H — hat-trick and relentless off-the-ball running all game."},
+  {date:'22 Nov',comp:'League',    ha:'A',opp:'Ordsall Park',    score:'4–0', res:'W',pts:3, motm:'Petr',scorers:'Connor, Petr 2, Luke',summary:"Ordsall started the day above us in the league, but we were tactically superb — Nick and Steve's 5-3-2 system worked a treat. Connor opened the scoring with a long-range strike, Petr curled a beauty into the top corner from a short corner routine and added a second, then Luke saved the absolute best for last — an absolute rocket from the edge of the area. Man of the Match Petr — two great finishes and brilliant link-up play throughout."},
+  {date:'13 Dec',comp:'Plate Cup', ha:'A',opp:'Whalley Range',   score:'5–2', res:'W',pts:3, motm:'Micah',scorers:'Dylan H, Micah, Max 3 (hat-trick)',summary:"A local derby in the Plate Cup and the lads came through in style. Dylan H opened with a lovely left-foot finish. Micah burst into the box to make it 2–0 before Max took over completely — three clinical goals including a composed hat-trick finish after Whalley Range had pulled two back to make it nervous. Man of the Match Micah — asked to play wing-back, covered every blade of grass and capped it with a brilliant finish."},
+  {date:'20 Dec',comp:'League',    ha:'H',opp:'RS Titans',       score:'5–4', res:'W',pts:3, motm:'—',scorers:'Dylan H, Petr, Max 2, Raphie, Micah',summary:"What a way to end 2025! A cracking game at Turn Moss with the lads going 5–4 up before Dylan C pulled off a stunning last-minute penalty save to preserve the win. The WhatsApp group absolutely exploded — Steve's 'What a save! LIMBS!!' message said it all. A brilliant Christmas present for everyone."},
+  {date:'17 Jan',comp:'League',    ha:'H',opp:'Salford Storm',   score:'7–0', res:'W',pts:3, motm:'Petr',scorers:'Dylan H 2, Connor, Micah 2, Noah, Jamie',summary:"A dominant performance from the first whistle to the last. Dylan H opened with two lovely lobs from Petr through balls, Connor swept home from the edge of the area for 3–0 at half time. Micah added two more after the break, Noah smashed home for six and Jamie rounded it off with a lovely turn and finish. Digby also saved a penalty to keep the clean sheet intact. Man of the Match Petr — involved in absolutely everything, even ended the game at centre-back."},
+  {date:'24 Jan',comp:'League',    ha:'H',opp:'Wythenshawe W',   score:'0–5', res:'L',pts:0, motm:'Ivan',scorers:'—',summary:"A tough day at Turn Moss against the league leaders, who had taken 33 points from 11 games. Luke had a goal harshly ruled out for offside, Dylan C was fouled in the box for a penalty that was saved, and we went in 0–2 at half time. Couldn't find a way through in the second half against the wind. The scoreline really didn't reflect the game — both the referee and the opposition coach said how well we played. Extremely proud of the lads' attitude and effort. Man of the Match Ivan — never stopped running for the full 80 minutes."},
+  {date:'31 Jan',comp:'League',    ha:'A',opp:'Salford L&G',     score:'3–1', res:'W',pts:3, motm:'Luke & Sonny',scorers:'Dylan H, OG, Dylan C',summary:"Revenge for the early-season defeat and what a performance it was. Completely controlled the game — barely gave the ball away, battled hard when we did lose it and played some beautiful passing football when we had it. Dylan H slotted home from a through ball, and Dylan C's third was a wonder goal — 20 yards, keeper off his line, first time, straight over the top and into the net. The referee complimented the lads on their composure throughout. Joint Man of the Match Luke and Sonny."},
+  {date:'21 Feb',comp:'League Cup',ha:'H',opp:'Wythenshawe W',   score:'1–5', res:'L',pts:0, motm:'Micah',scorers:'Petr',summary:"A tough opener in the League Cup group phase against a very strong side. We actually took the lead — a quick free kick found Petr in the box who lobbed the keeper with his very first touch as a substitute. Wythenshawe's physicality and quality told as the game went on and they ran out comfortable winners. Digby made several great saves to keep the score respectable. Man of the Match Micah — non-stop energy and effort regardless of where he was asked to play."},
+  {date:'28 Feb',comp:'League Cup',ha:'A',opp:'Ordsall Park',    score:'W/O', res:'W',pts:3, motm:'—',scorers:'Walkover',summary:"Opposition couldn't put a team out on the morning of the game. Walkover win and 3 points — as Isaac put it: 'Wooohoo — free points!'"},
+  {date:'07 Mar',comp:'League Cup',ha:'A',opp:'RS Titans',       score:'5–2', res:'W',pts:3, motm:'Dylan H',scorers:'Jamie, Dylan H 4',summary:"The lads went two goals down on a difficult pitch before really finding their feet. Jamie latched onto a great Dylan cross and finished first time to make it 2–1. Two clinical Dylan H finishes put us 2–3 ahead, and Luke dropped into centre-back to give us more control. Dylan H sealed it with two more on the break in the final minutes. George was magnificent on his debut in goal — a world-class save in the last ten minutes drew the loudest cheer of the entire day. Man of the Match Dylan H — four goals and an assist."},
+  {date:'21 Mar',comp:'League Cup',ha:'H',opp:'Salford L&G',     score:'3–0', res:'W',pts:3, motm:'Raphie',scorers:'Dylan C, OG, Dylan H',summary:"A completely professional performance against a strong and physical side. Dylan C lifted a finish into the top corner after a brilliant mazy run from Max. Ivan's corner was fumbled into the net under pressure from Raphie. A lovely touch from Petr put Dylan H through on goal to round the keeper from a tight angle. The lads worked tirelessly and barely gave Digby a single thing to do. Man of the Match Raphie — won every tackle, header and clearance, showed great composure on the ball throughout."},
+  {date:'15 Apr',comp:'League Cup',ha:'A',opp:'Winton Wanderers',score:'8–2', res:'W',pts:3, motm:'Ewan',scorers:'Petr, Micah, Connor, Ilyas, Jamie, Sonny, Max, Luke',summary:"A cracking final group game on a wet Wednesday evening in Eccles — four wins from five in the group and what a way to do it. Goals were shared around beautifully: Petr and Micah made it 2–0 quickly, Connor finished from a great corner routine and Ilyas fired home for 4–0 at half time. Jamie, Sonny, Max and Luke all scored in the second half. Dylan C saved a penalty and had two goals disallowed. Man of the Match Ewan — bombing up and down the left wing all night, creating chances and grabbing two assists."},
+  {date:'18 Apr',comp:'League',    ha:'H',opp:'Ordsall Park',    score:'5–3', res:'W',pts:3, motm:'Ethan',scorers:'Ewan, Harry, Raphie, Petr, Dylan H',summary:"A brilliant comeback that showed real character. Third versus fourth in the league and Ordsall made it 3–1 after half time — but the heads never dropped. Harry scored direct from a corner to make it 3–2, and Raphie absolutely smashed home the equaliser. Their keeper pulled off two stunning saves before Petr tapped home and Dylan H sealed it in the final minutes. Man of the Match Ethan — pace, power and constant communication at the back all afternoon."},
+  {date:'22 Apr',comp:'League',    ha:'H',opp:'Man South End',   score:'5–1', res:'W',pts:3, motm:'Luke',scorers:'Petr, Dylan H 2, Max, Luke',summary:"Steve described it afterwards as the best passing game of the entire season — and he was absolutely right. Petr opened the scoring before Dylan H struck a stunning half-volley into the roof of the net. Luke then stepped up and curled a 30-yard beauty into the top corner from the edge of the area. Max slotted home from a slick short corner routine for 4–0 at half time. Dylan H added a header at the back post after the break. The first half in particular was as good as we've played all year. Man of the Match Luke — controlled the midfield, scored a beauty and set up the fifth."},
+  {date:'25 Apr',comp:'League',    ha:'H',opp:'Swinton Panthers',score:'5–2', res:'W',pts:3, motm:'Petr',scorers:'Petr 3 (hat-trick), Dylan H, Jamie',summary:"A cracking game in the April sunshine at Turn Moss. Petr side-footed us in front early on before Swinton equalised with a great strike. Max had a penalty saved just before half time. The lads raised their game in the second half — Petr slotted in a perfect cutback from Dylan H, who then broke the offside trap to make it 3–1 himself. Swinton pulled one back before Jamie met Petr's cross with a beautiful volley at the back post. Petr sealed his hat-trick smashing home the rebound after his own shot had come back off the post. Man of the Match Petr — hat-trick and an assist, calm and composed throughout."},
+  {date:'29 Apr',comp:'League',    ha:'A',opp:'Whalley Range',   score:'2–3', res:'L',pts:0, motm:'Ethan',scorers:'Dylan C, Petr',summary:"A real game of two halves at Hough End on a wet Wednesday evening. Three Whalley Range free kicks had us 3–0 down at half time in difficult conditions. The second half was a completely different story — Dylan C lobbed the keeper to make it 3–1 and then hit the post with a great header. Petr made it 3–2 with a calm finish. We hit the woodwork again, had goalmouth scrambles, but it just wouldn't go in. We would go on to beat them at home before the end of the season. Man of the Match Ethan — dominated their striker throughout."},
+  {date:'30 Apr',comp:'League',    ha:'H',opp:'Reddish Vulcans', score:'W/O', res:'W',pts:3, motm:'—',scorers:'Walkover',summary:"Opposition couldn't put a team out for the Bank Holiday weekend fixture. Walkover win and 3 points. Nick: 'Enjoy the Bank Holiday!'"},
+  {date:'09 May',comp:'League',    ha:'H',opp:'Reddish Vulcans', score:'12–0',res:'W',pts:3, motm:'Lucas',scorers:'Dylan C 4, Petr 4, Micah, Jamie, Sonny, Lucas',summary:"Champagne football from the very first whistle — one of the great performances of the season. Dylan C bagged four, Petr four — some absolutely stunning goals throughout including a Dylan C top-corner special in the opening minutes. 5–0 at half time and the lads came back hungry for more. Lucas capped the whole thing in style — a lung-busting run from centre-back into the penalty area, a saved penalty, then absolutely hammering home the rebound. The celebration was something special. Man of the Match Lucas — composed at the back, always found a team-mate, and loved every second of that goal."},
+  {date:'16 May',comp:'League',    ha:'A',opp:'Winton Wanderers',score:'14–2',res:'W',pts:3, motm:'Ilyas',scorers:'Dylan H 4, Dylan C 3, Petr 3, Jamie 2, Micah, Ivan',summary:"The perfect way to finish the league season — a brilliant 14–2 away win. Dylan H latched onto a great Ilyas ball for an early lead. Dylan C met Luke's cross with a diving header. All three strikers completed hat-tricks in an extraordinary second half. Jamie's beautifully controlled volley at the back post and Ivan's top-corner finish from the edge of the area were the standout goals. Digby and the defence were solid throughout. A truly fitting finale to a brilliant season. Man of the Match Ilyas — captain on the day, box to box from first to last, won absolutely everything."},
+  {date:'20 May',comp:'League',    ha:'H',opp:'Whalley Range',   score:'5–2', res:'W',pts:3, motm:'—',scorers:'Dylan H 2, Ivan, Petr, Jamie',summary:"A brilliant home win to round off the league season at Turn Moss — and sweet revenge for the 2–3 defeat away earlier in the season. Dylan H bagged two, Ivan, Petr and Jamie all got on the scoresheet in a dominant and commanding performance. The perfect send-off on home soil."},
+];
+
+// ── PLAYER DATA ───────────────────────────────────────────────────────
+const players = [
+  {name:'Petr',    role:'Forward',      goals:{League:22,'SDFL Cup':2,'Plate Cup':0,'League Cup':2,Friendly:2}, motm:{League:3}, note:'Top scorer — 28 goals across all competitions'},
+  {name:'Dylan H', role:'Forward',      goals:{League:21,'SDFL Cup':0,'Plate Cup':1,'League Cup':5,Friendly:0}, motm:{League:1,'League Cup':1}, note:'Three hat-tricks during the season'},
+  {name:'Dylan C', role:'Forward/Mid',  goals:{League:13,'SDFL Cup':0,'Plate Cup':0,'League Cup':1,Friendly:0}, motm:{League:1}, note:'Wonder goal vs Salford L&G (Jan). Last-minute penalty save vs RS Titans (Dec)'},
+  {name:'Jamie',   role:'Midfielder',   goals:{League:8, 'SDFL Cup':0,'Plate Cup':0,'League Cup':2,Friendly:1}, motm:{League:2}},
+  {name:'Micah',   role:'Midfielder',   goals:{League:6, 'SDFL Cup':0,'Plate Cup':1,'League Cup':1,Friendly:2}, motm:{'Plate Cup':1,'League Cup':1}},
+  {name:'Max',     role:'Midfielder',   goals:{League:5, 'SDFL Cup':0,'Plate Cup':3,'League Cup':1,Friendly:0}, motm:{'SDFL Cup':1}, note:'Hat-trick in Plate Cup vs Whalley Range'},
+  {name:'Connor',  role:'Midfielder',   goals:{League:2, 'SDFL Cup':0,'Plate Cup':0,'League Cup':1,Friendly:0}, motm:{}},
+  {name:'Luke',    role:'Midfielder',   goals:{League:2, 'SDFL Cup':0,'Plate Cup':0,'League Cup':1,Friendly:0}, motm:{League:3}},
+  {name:'Lucas',   role:'Defender/Mid', goals:{League:2, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:1}, motm:{League:1}},
+  {name:'Harry',   role:'Midfielder',   goals:{League:2, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{}},
+  {name:'Raphie',  role:'Defender',     goals:{League:2, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{'League Cup':1}},
+  {name:'Ivan',    role:'Midfielder',   goals:{League:2, 'SDFL Cup':1,'Plate Cup':0,'League Cup':0,Friendly:1}, motm:{League:1}},
+  {name:'Noah',    role:'Midfielder',   goals:{League:1, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{}},
+  {name:'Sonny',   role:'Midfielder',   goals:{League:1, 'SDFL Cup':0,'Plate Cup':0,'League Cup':1,Friendly:0}, motm:{League:1}},
+  {name:'Ewan',    role:'Midfielder',   goals:{League:1, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{'League Cup':1}},
+  {name:'Ilyas',   role:'Midfielder',   goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':1,Friendly:0}, motm:{League:1}},
+  {name:'Javar',   role:'Midfielder',   goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{League:1}, note:'3 assists in the Salford Storm win (Sep)'},
+  {name:'Ethan',   role:'Defender',     goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{League:2}, note:'Key defensive performer all season'},
+  {name:'Dalton',  role:'Defender',     goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{}, note:'Solid defensive contributions throughout'},
+  {name:'Elliot',  role:'Defender',     goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{}, note:'Reliable defensive presence'},
+  {name:'Digby',   role:'Goalkeeper',   goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{}, note:'Penalty saves: vs Salford Storm (Jan) &amp; vs Salford L&G (Apr)'},
+  {name:'George',  role:'Goalkeeper',   goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{}, note:'Outstanding debut — world-class save vs RS Titans in the League Cup (Mar)'},
+];
+
+const highlights = [
+  {icon:'🏆', text:'14–2 away win at Winton on the final day — all three strikers completing hat-tricks'},
+  {icon:'⚽', text:'12–0 home win over Reddish Vulcans — Dylan C and Petr both scoring four goals'},
+  {icon:'🪄', text:"Dylan C's 20-yard first-time lob over the keeper at Salford L&G in January"},
+  {icon:'🧤', text:"Dylan C's last-minute penalty save vs RS Titans in December — Steve: 'LIMBS!!'"},
+  {icon:'💫', text:"Luke's 30-yard curler into the top corner against Manchester South End (April)"},
+  {icon:'🌟', text:"George's outstanding debut — world-class save vs RS Titans in the League Cup"},
+  {icon:'🎯', text:'7–0 home win over Salford Storm — including a Digby penalty save for the clean sheet'},
+  {icon:'💪', text:'Came back from 3–1 down to beat Ordsall 5–3 in April — real character shown'},
+];
+
+// ── HELPERS ───────────────────────────────────────────────────────────
+function totalG(p){return COMPS.reduce((s,c)=>s+(p.goals[c]||0),0);}
+function totalM(p){return Object.values(p.motm||{}).reduce((s,v)=>s+v,0);}
+function gd(n){return(n>=0?'+':'')+n;}
+
+const playersSorted=[...players].sort((a,b)=>totalG(b)-totalG(a)||totalM(b)-totalM(a));
+
+// ── NAV ───────────────────────────────────────────────────────────────
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── OVERVIEW ──────────────────────────────────────────────────────────
+function buildOverview(){
+  // Top scorers table
+  const scorersWrap=document.getElementById('overview-scorers');
+  let t=`<table><thead><tr><th>#</th><th>Player</th>`;
+  COMPS.forEach(c=>t+=`<th class="r" style="color:${BC[c]||'#94a3b8'}">${c}</th>`);
+  t+=`<th class="r">Total</th></tr></thead><tbody>`;
+  playersSorted.filter(p=>totalG(p)>0).forEach((p,i)=>{
+    const tot=totalG(p);
+    const tc=tot>=20?'#4ade80':tot>=10?'#60a5fa':'#cbd5e1';
+    t+=`<tr class="${i%2===0?'ev':'od'}"><td style="color:var(--text-sub)">${i+1}</td><td style="font-weight:600;color:#ffffff">${p.name}</td>`;
+    COMPS.forEach(c=>{const g=p.goals[c]||0;t+=`<td class="r" style="color:${g?BC[c]:'#1e293b'};font-weight:${g?700:400}">${g||'—'}</td>`;});
+    t+=`<td class="r" style="color:${tc};font-weight:800;font-size:14px">${tot}</td></tr>`;
+  });
+  t+=`</tbody></table>`;
+  scorersWrap.innerHTML=t;
+
+  // MOTM table
+  const motmAll={};
+  matches.forEach(m=>{
+    if(!m.motm||m.motm==='—')return;
+    m.motm.split('&').map(s=>s.trim()).forEach(name=>{
+      if(!motmAll[name])motmAll[name]={};
+      motmAll[name][m.comp]=(motmAll[name][m.comp]||0)+1;
+    });
+  });
+  const motmWrap=document.getElementById('overview-motm');
+  let mt=`<table><thead><tr><th>Player</th><th class="r">Total Awards</th><th>By Competition</th></tr></thead><tbody>`;
+  Object.entries(motmAll)
+    .sort((a,b)=>Object.values(b[1]).reduce((s,v)=>s+v,0)-Object.values(a[1]).reduce((s,v)=>s+v,0))
+    .forEach(([name,comps],i)=>{
+      const total=Object.values(comps).reduce((s,v)=>s+v,0);
+      const breakdown=Object.entries(comps).map(([c,v])=>`<span class="comp-badge" style="background:${BC[c]||'#475569'};font-size:10px;margin-right:4px">${c} ×${v}</span>`).join('');
+      mt+=`<tr class="${i%2===0?'ev':'od'}"><td style="font-weight:600;color:#ffffff">${name}</td><td class="r" style="color:var(--accent-purple);font-weight:800;font-size:16px">${total}</td><td style="padding-top:8px;padding-bottom:8px">${breakdown}</td></tr>`;
+    });
+  mt+=`</tbody></table>`;
+  motmWrap.innerHTML=mt;
+
+  // Highlights
+  const grid=document.getElementById('highlights-grid');
+  highlights.forEach(h=>{
+    const card=document.createElement('div');
+    card.style.cssText='background:#0d1420;border:1px solid #1e293b;border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start';
+    card.innerHTML=`<span style="font-size:22px;flex-shrink:0">${h.icon}</span><span style="color:var(--text-head);font-size:14px;line-height:1.6">${h.text}</span>`;
+    grid.appendChild(card);
+  });
+}
+
+// ── MATCHES ───────────────────────────────────────────────────────────
+function buildFilters(){
+  const div=document.getElementById('match-filters');
+  const compsInData=['All',...new Set(matches.map(m=>m.comp))];
+  compsInData.forEach((f,i)=>{
+    const btn=document.createElement('button');
+    btn.className='filter-btn'+(i===0?' active':'');
+    btn.textContent=f;
+    if(i===0){btn.style.background=BC[f]||'#2563eb';btn.style.color='#fff';btn.style.borderColor='transparent';}
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.filter-btn').forEach(b=>{b.classList.remove('active');b.style.background='';b.style.color='';b.style.borderColor='';});
+      btn.classList.add('active');btn.style.background=BC[f]||'#2563eb';btn.style.color='#fff';btn.style.borderColor='transparent';
+      renderMatches(f);
+    });
+    div.appendChild(btn);
+  });
+}
+
+function renderMatches(filter){
+  const tbody=document.getElementById('matches-body');
+  tbody.innerHTML='';
+  const vis=filter==='All'?matches:matches.filter(m=>m.comp===filter);
+  vis.forEach((m,i)=>{
+    const bc=BC[m.comp]||'#475569';
+    const rc=RC[m.res]||'#64748b';
+    const ptsShow=(m.res==='ABN'||m.pts===null)?'—':m.pts;
+    const ptsCol=m.pts===3?'#4ade80':m.pts===1?'#facc15':m.res==='L'?'#f87171':'#64748b';
+
+    const tr=document.createElement('tr');
+    tr.className='match-row '+(i%2===0?'ev':'od');
+    tr.setAttribute('aria-expanded','false');
+    tr.innerHTML=`
+      <td style="color:var(--text-sub);white-space:nowrap;font-size:12px">${m.date}</td>
+      <td><span class="comp-badge" style="background:${bc}">${m.comp}</span></td>
+      <td class="r"><span class="ha-badge" style="color:${m.ha==='H'?'#60a5fa':'#f59e0b'}">${m.ha==='H'?'Home':'Away'}</span></td>
+      <td style="font-weight:600;color:#e2e8f0">${m.opp}</td>
+      <td class="r" style="font-family:monospace;font-weight:800;color:#f1f5f9;font-size:14px;letter-spacing:.05em">${m.score}</td>
+      <td class="r"><span class="res-badge" style="color:${rc};background:${rc}18">${m.res==='W'?'Win':m.res==='L'?'Loss':m.res==='D'?'Draw':'Abn'}</span></td>
+      <td class="r" style="font-weight:700;color:${ptsCol}">${ptsShow}</td>
+      <td style="color:#a78bfa;font-size:12px">${m.motm&&m.motm!=='—'?'🏅 '+m.motm:''}</td>
+      <td class="r"><span class="expand-icon">▾</span></td>`;
+
+    const er=document.createElement('tr');
+    er.className='expand-row';
+    er.innerHTML=`<td colspan="9" class="expand-cell">
+      <div class="expand-inner" style="border-color:${bc}">
+        <p class="expand-summary">${m.summary||''}</p>
+        <div class="expand-meta">
+          <div><span class="expand-label" style="color:#60a5fa">Goalscorers &nbsp;</span><span class="expand-val">${m.scorers||'—'}</span></div>
+          ${m.motm&&m.motm!=='—'?`<div><span class="expand-label" style="color:#a78bfa">Man of the Match &nbsp;</span><span class="expand-val" style="color:#a78bfa;font-weight:700">${m.motm}</span></div>`:''}
+        </div>
+      </div></td>`;
+
+    tr.addEventListener('click',()=>{
+      const isOpen=er.classList.contains('open');
+      document.querySelectorAll('.expand-row.open').forEach(r=>r.classList.remove('open'));
+      document.querySelectorAll('.match-row.open').forEach(r=>{r.classList.remove('open');r.setAttribute('aria-expanded','false');});
+      if(!isOpen){
+        er.classList.add('open');
+        tr.classList.add('open');
+        tr.setAttribute('aria-expanded','true');
+      }
+    });
+
+    tbody.appendChild(tr);
+    tbody.appendChild(er);
+  });
+
+  // Total row
+  const scored=vis.filter(m=>m.res!=='ABN'&&m.pts!==null);
+  const W=scored.filter(m=>m.res==='W').length;
+  const D=scored.filter(m=>m.res==='D').length;
+  const L=scored.filter(m=>m.res==='L').length;
+  const Pts=scored.reduce((s,m)=>s+(m.pts||0),0);
+  const tr=document.createElement('tr');tr.className='tr-row';
+  tr.innerHTML=`<td colspan="5" style="padding:12px">${filter==='All'?'All Competitions':filter} &nbsp;<span style="color:var(--text-sub);font-size:12px;font-weight:500">${scored.length} games · ${W} wins · ${D} draws · ${L} losses</span></td><td></td><td class="r" style="color:#fbbf24;font-size:15px">${Pts} pts</td><td colspan="2"></td>`;
+  tbody.appendChild(tr);
+}
+
+// ── PLAYERS ───────────────────────────────────────────────────────────
+function buildPlayers(){
+  // Table
+  const wrap=document.getElementById('player-table-wrap');
+  let t=`<table><thead><tr><th>Player</th><th style="color:var(--text-sub);font-size:11px">Position</th>`;
+  COMPS.forEach(c=>t+=`<th class="r" style="color:${BC[c]}">${c}</th>`);
+  t+=`<th class="r" style="color:#f1f5f9">Total</th><th class="r" style="color:#a78bfa">MOTM</th><th>Notes</th></tr></thead><tbody>`;
+
+  playersSorted.forEach((p,i)=>{
+    const tot=totalG(p);
+    const tc=tot>=20?'#4ade80':tot>=10?'#60a5fa':tot>0?'#cbd5e1':'#334155';
+    const motmBreak=Object.entries(p.motm||{}).filter(([,v])=>v>0)
+      .map(([c,v])=>`<span style="color:${BC[c]||'#a78bfa'};font-size:11px">${c}×${v}</span>`).join(' ')||'—';
+    t+=`<tr class="${i%2===0?'ev':'od'}">
+      <td style="font-weight:700;color:#f1f5f9">${p.name}</td>
+      <td style="color:var(--text-sub);font-size:12px;font-weight:500">${p.role||''}</td>`;
+    COMPS.forEach(c=>{const g=p.goals[c]||0;t+=`<td class="r" style="color:${g?BC[c]:'#1e293b'};font-weight:${g?700:400}">${g||'—'}</td>`;});
+    t+=`<td class="r" style="color:${tc};font-weight:800;font-size:14px">${tot||'—'}</td>
+      <td class="r" style="font-size:11px">${motmBreak}</td>
+      <td style="color:var(--text-sub);font-size:12px">${p.note||''}</td></tr>`;
+  });
+
+  // Totals
+  const compTotals=COMPS.map(c=>playersSorted.reduce((s,p)=>s+(p.goals[c]||0),0));
+  const grand=compTotals.reduce((a,b)=>a+b,0);
+  const motmGrand=playersSorted.reduce((s,p)=>s+totalM(p),0);
+  t+=`<tr class="tr-row"><td><strong>Totals</strong></td><td></td>`;
+  compTotals.forEach((g,i)=>t+=`<td class="r" style="color:${BC[COMPS[i]]}">${g}</td>`);
+  t+=`<td class="r" style="color:#4ade80;font-size:14px">${grand}</td><td class="r" style="color:#a78bfa">${motmGrand}</td><td></td></tr>`;
+  t+=`</tbody></table>`;
+  wrap.innerHTML=t;
+
+  // Cards
+  const grid=document.getElementById('player-cards');
+  playersSorted.forEach(p=>{
+    const tot=totalG(p),motmTot=totalM(p);
+    const tc=tot>=20?'#4ade80':tot>=10?'#60a5fa':tot>0?'#2563eb':'#334155';
+    const goalPills=COMPS.filter(c=>p.goals[c]>0)
+      .map(c=>`<span class="goal-pill" style="color:${BC[c]};border-color:${BC[c]}44;background:${BC[c]}11">${c}: ${p.goals[c]}</span>`).join('');
+    const motmLines=Object.entries(p.motm||{}).filter(([,v])=>v>0).map(([c,v])=>`${c}×${v}`).join(', ');
+
+    const card=document.createElement('div');
+    card.className='player-card';
+    card.innerHTML=`
+      <div class="player-name">${p.name}</div>
+      <div class="player-role">${p.role||''}</div>
+      <div class="player-stat-row"><span class="player-stat-lbl">Goals</span><span class="player-stat-val" style="color:${tc}">${tot}</span></div>
+      <div class="player-stat-row"><span class="player-stat-lbl">MOTM</span><span class="player-stat-val" style="color:#a78bfa">${motmTot}</span></div>
+      ${goalPills?`<div class="goal-pills">${goalPills}</div>`:''}
+      ${motmLines?`<div class="motm-line">🏅 ${motmLines}</div>`:''}
+      ${p.note?`<div class="player-note">${p.note}</div>`:''}`;
+    grid.appendChild(card);
+  });
+}
+
+// ── HEAD TO HEAD ──────────────────────────────────────────────────────
+function buildH2H(){
+  const opps={};
+  matches.filter(m=>m.res!=='ABN').forEach(m=>{
+    if(!opps[m.opp])opps[m.opp]=[];
+    opps[m.opp].push(m);
+  });
+
+  let t=`<table><thead><tr><th>Opponent</th><th class="r">P</th><th class="r">W</th><th class="r">D</th><th class="r">L</th><th class="r">GF</th><th class="r">GA</th><th class="r">GD</th><th>Results</th></tr></thead><tbody>`;
+  Object.entries(opps).sort((a,b)=>b[1].length-a[1].length).forEach(([opp,games],i)=>{
+    const W=games.filter(m=>m.res==='W').length;
+    const D=games.filter(m=>m.res==='D').length;
+    const L=games.filter(m=>m.res==='L').length;
+    let gf=0,ga=0;
+    games.forEach(m=>{const pts=m.score.split('–');if(pts.length===2&&!isNaN(pts[0])){gf+=+pts[0];ga+=+pts[1];}});
+    const gdVal=gf-ga;
+
+    const chips=games.map(m=>{
+      const rc=RC[m.res]||'#94a3b8';
+      const bc=BC[m.comp]||'#475569';
+      return`<span class="result-chip" style="background:${rc}18;border:1px solid ${rc}33"><span class="comp-badge" style="background:${bc};font-size:9px;padding:1px 5px">${m.comp}</span> <span style="color:var(--text-sub);font-size:11px">${m.date}</span> <span style="color:${rc};font-weight:700;font-size:11px">${m.score}</span></span>`;
+    }).join('');
+
+    const overall=W>L?'#4ade80':L>W?'#f87171':'#facc15';
+    t+=`<tr class="${i%2===0?'ev':'od'}">
+      <td style="font-weight:600;color:#f1f5f9">${opp}</td>
+      <td class="r">${games.length}</td>
+      <td class="r" style="color:#4ade80;font-weight:700">${W}</td>
+      <td class="r" style="color:#facc15">${D}</td>
+      <td class="r" style="color:#f87171">${L}</td>
+      <td class="r">${gf}</td><td class="r">${ga}</td>
+      <td class="r" style="color:${gdVal>=0?'#4ade80':'#f87171'};font-weight:700">${gd(gdVal)}</td>
+      <td style="line-height:2">${chips}</td></tr>`;
+  });
+  t+=`</tbody></table>`;
+  document.getElementById('h2h-table-wrap').innerHTML=t;
+}
+
+// ── SEASON REPORT ─────────────────────────────────────────────────────
+function buildReport(){
+  const body=document.getElementById('report-body');
+  const sections=[
+    {heading:'Introduction',paras:[
+      `What a season it has been. From the opening pre-season friendly against Barr Hill right through to a <span class="highlight">5–2 home win over Whalley Range</span> on the final day, the St John's U15 Greens have grown into a team that any manager would be proud of. Twenty wins from twenty-seven games across all competitions, <span class="highlight">124 goals scored</span>, and a league points total of <span class="highlight">44</span> — the numbers tell a story of real quality and total consistency.`,
+      `<span class="player-ref">Nick</span> and <span class="player-ref">Steve</span> deserve enormous credit for the way they have developed this group throughout the year. The tactical evolution — particularly the 5-3-2 system that produced such excellent results in the autumn — showed a coaching team not afraid to adapt and innovate. More importantly, the lads responded every single time they were asked to raise their game.`
+    ]},
+    {heading:'How the Season Unfolded',paras:[
+      `The campaign began in September with a confident friendly win over Barr Hill before the league got underway with a hard-fought 2–2 draw away to RS Titans — a result that felt like two points dropped at the time, but set the tone for a group that would never give up. The early weeks were a mixture of brilliant highs and frustrating lows: a remarkable <span class="highlight">6–8 home defeat to Salford Lads and Girls</span> in which the lads trailed 2–6 at half time and still somehow made it 6–7 in the closing minutes showed that this group had heart and character in abundance.`,
+      `From October through to January the team hit their stride — <span class="highlight">seven consecutive league wins</span> including a brilliant 4–0 away win at Ordsall, a dominant 7–2 home victory over Winton, and a stunning 7–0 demolition of Salford Storm in which <span class="player-ref">Digby</span> saved a penalty to boot. The spring brought more of the same, with some of the best football of the entire season played in April and May.`
+    ]},
+    {heading:'The Goals — and the Goalscorers',paras:[
+      `<span class="player-ref">Petr</span> finished the season as the top scorer with an extraordinary <span class="highlight">28 goals</span> across all competitions. His ability to score from anywhere, combine brilliantly with team-mates and track back when needed made him one of the most complete players in the division. <span class="player-ref">Dylan H</span> was right alongside him with <span class="highlight">27 goals</span> — including three hat-tricks — and his relentless movement and clinical finishing caused problems for every defence he came up against.`,
+      `<span class="player-ref">Dylan C</span> added <span class="highlight">14 goals</span> with some truly special individual moments, none better than his wonder goal away at Salford Lads and Girls in January — 20 yards, keeper off his line, first time, straight over the top. He also pulled off a stunning last-minute penalty save against RS Titans in December. <span class="player-ref">Jamie</span> chipped in with 11 goals, <span class="player-ref">Max</span> with 9 including a Plate Cup hat-trick, and <span class="player-ref">Micah</span> was tireless throughout with 10 goals and two Man of the Match awards.`
+    ]},
+    {heading:'Defensive Solidity',paras:[
+      `Goals win games but clean sheets win titles, and the defensive unit throughout this season deserves enormous credit. <span class="player-ref">Digby</span> was a commanding and reliable presence in goal all year — his penalty saves against Salford Storm in January and Salford Lads and Girls in April were game-defining moments. When <span class="player-ref">George</span> stepped in for cup duty in March he immediately produced a stunning debut performance against RS Titans, with a world-class save that drew the loudest cheer of the entire day.`,
+      `<span class="player-ref">Ethan</span>, <span class="player-ref">Lucas</span>, <span class="player-ref">Luke</span>, <span class="player-ref">Dalton</span>, <span class="player-ref">Elliot</span>, <span class="player-ref">Sonny</span> and <span class="player-ref">Raphie</span> all contributed magnificently at the back throughout the season, with Ethan picking up two Man of the Match awards for his performances.`
+    ]},
+    {heading:'Thank You',paras:[
+      `A huge thank you to every parent and family member who turned up week after week — often in genuinely awful weather — to support the lads. Your encouragement makes a real difference and never goes unnoticed.`,
+      `To the lads themselves: you have been a fantastic group to work with this season. You have improved as footballers, shown real character when things got tough, supported each other throughout, and represented St John's with real pride. Here's to next season. 👊⚽`
+    ]},
+  ];
+
+  sections.forEach(s=>{
+    const h=document.createElement('h3');h.textContent=s.heading;body.appendChild(h);
+    s.paras.forEach(text=>{const p=document.createElement('p');p.innerHTML=text;body.appendChild(p);});
+  });
+
+  highlights.forEach(h=>{
+    const bq=document.createElement('blockquote');
+    bq.innerHTML=`${h.icon} ${h.text}`;
+    body.appendChild(bq);
+  });
+
+  const so=document.createElement('div');so.className='report-signoff';
+  so.innerHTML='Nick &amp; Steve Hurdsfield &nbsp;·&nbsp; St John\'s Chorlton U15 Greens &nbsp;·&nbsp; June 2026';
+  body.appendChild(so);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────
+buildOverview();
+buildFilters();
+renderMatches('All');
+buildPlayers();
+buildH2H();
+buildReport();
+</script>
+</body>
+</html>
