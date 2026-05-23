@@ -172,6 +172,7 @@ tr.tr-row td{font-weight:700;color:#ffffff;padding:12px 13px;border-top:2px soli
   <button class="nav-btn" onclick="showSection('players',this)">👤 Players</button>
   <button class="nav-btn" onclick="showSection('h2h',this)">⚔️ vs Each Team</button>
   <button class="nav-btn" onclick="showSection('report',this)">📖 Season Story</button>
+  <button onclick="showSection('table',this)">📋 League Table</button>
 </nav>
 
 <!-- ══════════════════════════════════════════════════════════════════
@@ -646,5 +647,90 @@ buildPlayers();
 buildH2H();
 buildReport();
 </script>
+
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     LEAGUE TABLE
+══════════════════════════════════════════════════════════════════ -->
+<div id="table" class="section">
+  <div style="max-width:900px;margin:0 auto 16px">
+    <p style="color:var(--text-sub);font-size:13px;margin-bottom:6px">
+      SDFL Salford &amp; Districts Football League · U15s · Division 2 · Final standings 2025–26.
+    </p>
+    <p style="color:var(--text-muted);font-size:11px">
+      † Wythenshawe and St John's figures updated to reflect the final two games played after this screenshot was taken.
+    </p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="r" style="width:36px">Pos</th>
+          <th>Team</th>
+          <th class="r">P</th>
+          <th class="r">W</th>
+          <th class="r">D</th>
+          <th class="r">L</th>
+          <th class="r">Pts</th>
+        </tr>
+      </thead>
+      <tbody id="league-tbody"></tbody>
+    </table>
+  </div>
+  <div style="max-width:900px;margin:8px auto 0;display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--text-sub)">
+    <span>🏆 Champions</span>
+    <span>🥈 Runners-up (St John's)</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  const rows = [
+    { pos:1,  team:"Wythenshawe Wanderers U15",          P:20, W:19, D:1, L:0,  Pts:58, champion:true,  note:"Champions — only draw was vs St John's on final day" },
+    { pos:2,  team:"St Johns Chorlton U15 JFC Greens",   P:20, W:14, D:3, L:3,  Pts:45, us:true,        note:"Runners-up — clinched 2nd on the final day" },
+    { pos:3,  team:"Salford Lads & Girls Club U15",      P:20, W:13, D:2, L:5,  Pts:41 },
+    { pos:4,  team:"RS JFC U15 Titans",                  P:20, W:11, D:3, L:6,  Pts:36 },
+    { pos:5,  team:"Ordsall Park Juniors FC U15 United", P:19, W:10, D:1, L:8,  Pts:31 },
+    { pos:6,  team:"Whalley Range AFC Juniors U15",      P:19, W:7,  D:4, L:8,  Pts:25 },
+    { pos:7,  team:"Salford Storm FC U15 Lightning",     P:20, W:6,  D:2, L:12, Pts:20 },
+    { pos:8,  team:"Swinton U15 Panthers",               P:17, W:5,  D:1, L:11, Pts:16 },
+    { pos:9,  team:"Winton Wanderers U15 Cobras",        P:18, W:5,  D:0, L:13, Pts:15 },
+    { pos:10, team:"Manchester South End FC U15 MSE",    P:17, W:3,  D:2, L:12, Pts:11 },
+    { pos:11, team:"Reddish Vulcans Junior U15 Bombers", P:18, W:1,  D:1, L:16, Pts:4  },
+  ];
+
+  const tbody = document.getElementById('league-tbody');
+  rows.forEach((r, i) => {
+    const isUs = !!r.us;
+    const isChamp = !!r.champion;
+    const bg = isUs ? '#1a3d6e' : isChamp ? '#1a3d28' : i%2===0 ? '#182d45' : '#1e3452';
+    const borderL = isUs ? 'border-left:4px solid #3b82f6' : isChamp ? 'border-left:4px solid #16a34a' : 'border-left:4px solid transparent';
+    const posIcon = isChamp ? '🏆' : isUs ? '🥈' : r.pos;
+    const posColor = isUs ? '#60a5fa' : isChamp ? '#4ade80' : 'var(--text-sub)';
+    const teamColor = isUs ? '#ffffff' : isChamp ? '#4ade80' : 'var(--text-body)';
+    const ptsColor = isUs ? '#fbbf24' : isChamp ? '#4ade80' : 'var(--text-head)';
+    const ptsSz = isUs || isChamp ? '16px' : '13px';
+
+    const tr = document.createElement('tr');
+    tr.style.cssText = `background:${bg};${borderL}`;
+    tr.innerHTML = `
+      <td class="r" style="font-weight:700;color:${posColor};font-size:${isUs||isChamp?'15px':'13px'}">${posIcon}</td>
+      <td style="font-weight:${isUs||isChamp?700:500};color:${teamColor}">
+        ${r.team}
+        ${r.note ? `<div style="font-size:11px;color:var(--text-sub);font-weight:400;margin-top:2px">${r.note}</div>` : ''}
+        ${r.pos <= 2 ? `<div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:1px">† Updated from screenshot</div>` : ''}
+      </td>
+      <td class="r" style="color:var(--text-sub)">${r.P}</td>
+      <td class="r" style="color:#4ade80;font-weight:600">${r.W}</td>
+      <td class="r" style="color:#facc15">${r.D}</td>
+      <td class="r" style="color:#f87171">${r.L}</td>
+      <td class="r" style="font-weight:800;font-size:${ptsSz};color:${ptsColor}">${r.Pts}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+})();
+</script>
+
 </body>
 </html>
