@@ -172,7 +172,7 @@ tr.tr-row td{font-weight:700;color:#ffffff;padding:12px 13px;border-top:2px soli
   <button class="nav-btn" onclick="showSection('players',this)">👤 Players</button>
   <button class="nav-btn" onclick="showSection('h2h',this)">⚔️ vs Each Team</button>
   <button class="nav-btn" onclick="showSection('report',this)">📖 Season Story</button>
-  <button onclick="showSection('table',this)">📋 League Table</button>
+  <button class="nav-btn" onclick="showSection('table',this)">📋 League Table</button>
 </nav>
 
 <!-- ══════════════════════════════════════════════════════════════════
@@ -186,8 +186,8 @@ tr.tr-row td{font-weight:700;color:#ffffff;padding:12px 13px;border-top:2px soli
     <div class="stat-card"><div class="val" style="color:#60a5fa">20</div><div class="lbl">League Games</div></div>
     <div class="stat-card"><div class="val" style="color:#4ade80">14</div><div class="lbl">League Wins</div></div>
     <div class="stat-card"><div class="val" style="color:#60a5fa">96</div><div class="lbl">League Goals</div></div>
-    <div class="stat-card"><div class="val" style="color:#fbbf24">31</div><div class="lbl">Petr Goals</div></div>
-    <div class="stat-card"><div class="val" style="color:#fbbf24">27</div><div class="lbl">Dylan H Goals</div></div>
+    <div class="stat-card"><div class="val" style="color:#6ee7b7">35</div><div class="lbl">Petr Goals</div></div>
+    <div class="stat-card"><div class="val" style="color:#6ee7b7">30</div><div class="lbl">Dylan H Goals</div></div>
   </div>
 
   <!-- Competition table -->
@@ -326,28 +326,28 @@ const matches = [
 
 // ── PLAYER DATA ───────────────────────────────────────────────────────
 const players = [
-  {name:'Petr',    role:'Forward',      goals:{League:25,'SDFL Cup':2,'Plate Cup':0,'League Cup':2,Friendly:2}, motm:{League:3}, note:'Top scorer — 31 goals across all competitions'},
-  {name:'Dylan H', role:'Forward',      goals:{League:21,'SDFL Cup':0,'Plate Cup':1,'League Cup':5,Friendly:0}, motm:{League:1,'League Cup':1}, note:'Three hat-tricks during the season'},
-  {name:'Dylan C', role:'Forward/Mid',  goals:{League:13,'SDFL Cup':0,'Plate Cup':0,'League Cup':1,Friendly:0}, motm:{League:1}, note:'Wonder goal vs Salford L&G (Jan). Last-minute penalty save vs RS Titans (Dec)'},
-  {name:'Jamie',   role:'Midfielder',   goals:{League:8, 'SDFL Cup':0,'Plate Cup':0,'League Cup':2,Friendly:1}, motm:{League:2}},
-  {name:'Micah',   role:'Midfielder',   goals:{League:6, 'SDFL Cup':0,'Plate Cup':1,'League Cup':1,Friendly:2}, motm:{'Plate Cup':1,'League Cup':1}},
-  {name:'Max',     role:'Midfielder',   goals:{League:5, 'SDFL Cup':0,'Plate Cup':3,'League Cup':1,Friendly:0}, motm:{'SDFL Cup':1}, note:'Hat-trick in Plate Cup vs Whalley Range'},
-  {name:'Connor',  role:'Midfielder',   goals:{League:2, 'SDFL Cup':0,'Plate Cup':0,'League Cup':1,Friendly:0}, motm:{}},
-  {name:'Luke',    role:'Midfielder',   goals:{League:2, 'SDFL Cup':0,'Plate Cup':0,'League Cup':1,Friendly:0}, motm:{League:3}},
-  {name:'Lucas',   role:'Defender/Mid', goals:{League:2, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:1}, motm:{League:1}},
-  {name:'Harry',   role:'Midfielder',   goals:{League:2, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{}},
-  {name:'Raphie',  role:'Defender',     goals:{League:2, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{'League Cup':1}},
-  {name:'Ivan',    role:'Midfielder',   goals:{League:2, 'SDFL Cup':1,'Plate Cup':0,'League Cup':0,Friendly:1}, motm:{League:1}},
-  {name:'Noah',    role:'Midfielder',   goals:{League:1, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{}},
-  {name:'Sonny',   role:'Midfielder',   goals:{League:1, 'SDFL Cup':0,'Plate Cup':0,'League Cup':1,Friendly:0}, motm:{League:1}},
-  {name:'Ewan',    role:'Midfielder',   goals:{League:2, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{'League Cup':1}},
-  {name:'Ilyas',   role:'Midfielder',   goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':1,Friendly:0}, motm:{League:1}},
-  {name:'Javar',   role:'Midfielder',   goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{League:1}, note:'3 assists in the Salford Storm win (Sep)'},
-  {name:'Ethan',   role:'Defender',     goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{League:2}, note:'Key defensive performer all season'},
-  {name:'Dalton',  role:'Defender',     goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{}, note:'Solid defensive contributions throughout'},
-  {name:'Elliot',  role:'Defender',     goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{}, note:'Reliable defensive presence'},
-  {name:'Digby',   role:'Goalkeeper',   goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{}, note:'Penalty saves: vs Salford Storm (Jan) &amp; vs Salford L&G (Apr)'},
-  {name:'George',  role:'Goalkeeper',   goals:{League:0, 'SDFL Cup':0,'Plate Cup':0,'League Cup':0,Friendly:0}, motm:{}, note:'Outstanding debut — world-class save vs RS Titans in the League Cup (Mar)'},
+  {name:'Petr',    surname:'Crhak',      role:'Forward',    gk:false, friA:1, lgeA:18, cupA:6,  friG:2,  lgeG:29, cupG:4,  motm:{League:3},       note:'Top scorer — 35 goals all competitions'},
+  {name:'Dylan H', surname:'Harper',     role:'Forward',    gk:false, friA:0, lgeA:13, cupA:3,  friG:0,  lgeG:24, cupG:6,  motm:{League:1,Cup:1}, note:'Three hat-tricks during the season'},
+  {name:'Dylan C', surname:'Chesworth',  role:'Fwd/Mid',    gk:false, friA:0, lgeA:13, cupA:5,  friG:0,  lgeG:16, cupG:1,  motm:{League:1},       note:'Wonder goal vs Salford L&G (Jan) · Penalty save vs RS Titans (Dec)'},
+  {name:'Max',     surname:'Colly',      role:'Midfielder', gk:false, friA:1, lgeA:15, cupA:5,  friG:0,  lgeG:9,  cupG:4,  motm:{Cup:1},          note:'Hat-trick in Plate Cup vs Whalley Range'},
+  {name:'Micah',   surname:'Liburd',     role:'Midfielder', gk:false, friA:1, lgeA:19, cupA:6,  friG:2,  lgeG:8,  cupG:2,  motm:{Cup:2}},
+  {name:'Jamie',   surname:'Morgan',     role:'Midfielder', gk:false, friA:1, lgeA:21, cupA:3,  friG:1,  lgeG:8,  cupG:2,  motm:{League:2}},
+  {name:'Ivan',    surname:'Murray',     role:'Midfielder', gk:false, friA:0, lgeA:23, cupA:6,  friG:1,  lgeG:2,  cupG:1,  motm:{League:1}},
+  {name:'Luke',    surname:'Smith',      role:'Midfielder', gk:false, friA:1, lgeA:21, cupA:5,  friG:0,  lgeG:3,  cupG:1,  motm:{League:3}},
+  {name:'Sonny',   surname:'Hurdsfield', role:'Midfielder', gk:false, friA:1, lgeA:25, cupA:6,  friG:0,  lgeG:2,  cupG:1,  motm:{League:1}},
+  {name:'Lucas',   surname:'Turner',     role:'Def/Mid',    gk:false, friA:1, lgeA:25, cupA:6,  friG:1,  lgeG:2,  cupG:0,  motm:{League:1}},
+  {name:'Ewan',    surname:'Hope',       role:'Midfielder', gk:false, friA:1, lgeA:22, cupA:6,  friG:0,  lgeG:2,  cupG:0,  motm:{Cup:1}},
+  {name:'Raphie',  surname:'Leyland',    role:'Defender',   gk:false, friA:1, lgeA:21, cupA:5,  friG:0,  lgeG:2,  cupG:0,  motm:{Cup:1}},
+  {name:'Connor',  surname:'Lowe',       role:'Midfielder', gk:false, friA:1, lgeA:10, cupA:1,  friG:0,  lgeG:2,  cupG:1,  motm:{}},
+  {name:'Ilyas',   surname:'Jama',       role:'Midfielder', gk:false, friA:1, lgeA:20, cupA:6,  friG:0,  lgeG:1,  cupG:1,  motm:{League:1}},
+  {name:'Harry',   surname:'Agnew',      role:'Midfielder', gk:false, friA:1, lgeA:5,  cupA:0,  friG:0,  lgeG:2,  cupG:0,  motm:{}},
+  {name:'Noah',    surname:'Byrnes',     role:'Midfielder', gk:false, friA:0, lgeA:4,  cupA:0,  friG:0,  lgeG:1,  cupG:0,  motm:{}},
+  {name:'Digby',   surname:'Gorse',      role:'Goalkeeper', gk:true,  friA:1, lgeA:15, cupA:3,  friG:0,  lgeG:0,  cupG:0,  motm:{League:1}, note:'Pen saves: Salford Storm (Jan) & Salford L&G (Apr)'},
+  {name:'Elliot',  surname:'Swainston',  role:'Defender',   gk:false, friA:0, lgeA:11, cupA:3,  friG:0,  lgeG:0,  cupG:0,  motm:{}},
+  {name:'Javar',   surname:'Ferreira',   role:'Midfielder', gk:false, friA:1, lgeA:10, cupA:2,  friG:0,  lgeG:0,  cupG:0,  motm:{League:1}, note:'3 assists vs Salford Storm (Sep)'},
+  {name:'Ethan',   surname:'Drinkwater', role:'Defender',   gk:false, friA:0, lgeA:9,  cupA:3,  friG:0,  lgeG:0,  cupG:0,  motm:{League:2}, note:'Key defensive performer all season'},
+  {name:'Dalton',  surname:'Foote',      role:'Defender',   gk:false, friA:0, lgeA:3,  cupA:0,  friG:0,  lgeG:0,  cupG:0,  motm:{}},
+  {name:'George',  surname:'',           role:'Goalkeeper', gk:true,  friA:0, lgeA:1,  cupA:1,  friG:0,  lgeG:0,  cupG:0,  motm:{}, note:'Debut worldie save vs RS Titans (Mar)'},
 ];
 
 const highlights = [
@@ -363,11 +363,11 @@ const highlights = [
 ];
 
 // ── HELPERS ───────────────────────────────────────────────────────────
-function totalG(p){return COMPS.reduce((s,c)=>s+(p.goals[c]||0),0);}
-function totalM(p){return Object.values(p.motm||{}).reduce((s,v)=>s+v,0);}
-function gd(n){return(n>=0?'+':'')+n;}
-
-const playersSorted=[...players].sort((a,b)=>totalG(b)-totalG(a)||totalM(b)-totalM(a));
+function totalG(p){ return (p.friG||0)+(p.lgeG||0)+(p.cupG||0); }
+function gd(n){ return (n>=0?"+":"")+n; }
+function totalA(p){ return (p.friA||0)+(p.lgeA||0)+(p.cupA||0); }
+function totalM(p){ return Object.values(p.motm||{}).reduce((s,v)=>s+v,0); }
+const playersSorted=[...players].sort((a,b)=>totalG(b)-totalG(a)||totalA(b)-totalA(a));
 
 // ── NAV ───────────────────────────────────────────────────────────────
 function showSection(id,btn){
@@ -381,19 +381,17 @@ function showSection(id,btn){
 function buildOverview(){
   // Top scorers table
   const scorersWrap=document.getElementById('overview-scorers');
-  let t=`<table><thead><tr><th>#</th><th>Player</th>`;
-  COMPS.forEach(c=>t+=`<th class="r" style="color:${BC[c]||'#94a3b8'}">${c}</th>`);
-  t+=`<th class="r">Total</th></tr></thead><tbody>`;
+  let t=`<table><thead><tr><th>#</th><th>Player</th><th class="r" style="color:#b0c4d8">Friendly</th><th class="r" style="color:#93c5fd">League</th><th class="r" style="color:#86efac">Cup</th><th class="r">Total</th></tr></thead><tbody>`;
   playersSorted.filter(p=>totalG(p)>0).forEach((p,i)=>{
-    const tot=totalG(p);
-    const tc=tot>=20?'#4ade80':tot>=10?'#60a5fa':'#cbd5e1';
-    t+=`<tr class="${i%2===0?'ev':'od'}"><td style="color:var(--text-sub)">${i+1}</td><td style="font-weight:600;color:#ffffff">${p.name}</td>`;
-    COMPS.forEach(c=>{const g=p.goals[c]||0;t+=`<td class="r" style="color:${g?BC[c]:'#1e293b'};font-weight:${g?700:400}">${g||'—'}</td>`;});
+    const tot=totalG(p),tc=tot>=20?'#6ee7b7':tot>=10?'#93c5fd':'#f1f5f9';
+    const cell=(v,col)=>`<td class="r" style="color:${v?col:'#1e293b'};font-weight:${v?700:400}">${v||'—'}</td>`;
+    t+=`<tr class="${i%2===0?'ev':'od'}"><td style="color:var(--text-sub)">${i+1}</td><td style="font-weight:600;color:#fff">${p.name} <span style="color:var(--text-muted);font-size:11px">${p.surname||''}</span></td>`;
+    t+=cell(p.friG,'#b0c4d8')+cell(p.lgeG,'#93c5fd')+cell(p.cupG,'#86efac');
     t+=`<td class="r" style="color:${tc};font-weight:800;font-size:14px">${tot}</td></tr>`;
   });
-  t+=`</tbody></table>`;
+  const tF=playersSorted.reduce((s,p)=>s+(p.friG||0),0),tL=playersSorted.reduce((s,p)=>s+(p.lgeG||0),0),tC=playersSorted.reduce((s,p)=>s+(p.cupG||0),0);
+  t+=`<tr class="tr-row"><td></td><td><strong>Totals</strong></td><td class="r">${tF}</td><td class="r">${tL}</td><td class="r">${tC}</td><td class="r" style="font-size:14px">${tF+tL+tC}</td></tr></tbody></table>`;
   scorersWrap.innerHTML=t;
-
   // MOTM table
   const motmAll={};
   matches.forEach(m=>{
@@ -506,60 +504,31 @@ function renderMatches(filter){
 
 // ── PLAYERS ───────────────────────────────────────────────────────────
 function buildPlayers(){
-  // Table
   const wrap=document.getElementById('player-table-wrap');
-  let t=`<table><thead><tr><th>Player</th><th style="color:var(--text-sub);font-size:11px">Position</th>`;
-  COMPS.forEach(c=>t+=`<th class="r" style="color:${BC[c]}">${c}</th>`);
-  t+=`<th class="r" style="color:#f1f5f9">Total</th><th class="r" style="color:#a78bfa">MOTM</th><th>Notes</th></tr></thead><tbody>`;
-
+  let t=`<table><thead><tr><th>Player</th><th style="color:var(--text-sub);font-size:11px">Position</th><th class="r">Apps</th><th class="r" style="color:#b0c4d8">Fri</th><th class="r" style="color:#93c5fd">League</th><th class="r" style="color:#86efac">Cup</th><th class="r" style="color:#fbbf24;border-left:2px solid var(--border)">Goals</th><th class="r" style="color:#b0c4d8">Fri</th><th class="r" style="color:#93c5fd">League</th><th class="r" style="color:#86efac">Cup</th><th class="r" style="color:#a78bfa">MOTM</th></tr></thead><tbody>`;
   playersSorted.forEach((p,i)=>{
-    const tot=totalG(p);
-    const tc=tot>=20?'#4ade80':tot>=10?'#60a5fa':tot>0?'#cbd5e1':'#334155';
-    const motmBreak=Object.entries(p.motm||{}).filter(([,v])=>v>0)
-      .map(([c,v])=>`<span style="color:${BC[c]||'#a78bfa'};font-size:11px">${c}×${v}</span>`).join(' ')||'—';
-    t+=`<tr class="${i%2===0?'ev':'od'}">
-      <td style="font-weight:700;color:#f1f5f9">${p.name}</td>
-      <td style="color:var(--text-sub);font-size:12px;font-weight:500">${p.role||''}</td>`;
-    COMPS.forEach(c=>{const g=p.goals[c]||0;t+=`<td class="r" style="color:${g?BC[c]:'#1e293b'};font-weight:${g?700:400}">${g||'—'}</td>`;});
-    t+=`<td class="r" style="color:${tc};font-weight:800;font-size:14px">${tot||'—'}</td>
-      <td class="r" style="font-size:11px">${motmBreak}</td>
-      <td style="color:var(--text-sub);font-size:12px">${p.note||''}</td></tr>`;
+    if(i>0&&totalG(playersSorted[i-1])>0&&totalG(p)===0) t+=`<tr style="background:#0f1e30"><td colspan="11" style="padding:6px 12px;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)">No goals scored</td></tr>`;
+    const tot=totalG(p),apps=totalA(p),motmTot=totalM(p);
+    const gc=tot>=20?'#6ee7b7':tot>=10?'#93c5fd':tot>0?'#f1f5f9':'var(--text-muted)';
+    const ac=apps>=25?'#6ee7b7':apps>=15?'#93c5fd':'#f1f5f9';
+    const mb=Object.entries(p.motm||{}).filter(([,v])=>v>0).map(([c,v])=>c+'×'+v).join(' ')||'—';
+    const cell=(v,b=false)=>`<td class="r" style="color:${v?'#f1f5f9':'var(--text-muted)'};font-weight:${b?700:400}">${v||'—'}</td>`;
+    t+=`<tr class="${i%2===0?'ev':'od'}"><td><span style="font-weight:700;color:#fff">${p.name}${p.gk?' 🧤':''}</span>${p.surname?` <span style="color:var(--text-muted);font-size:11px">${p.surname}</span>`:''}${p.note?`<div style="font-size:11px;color:var(--text-sub);margin-top:2px">${p.note}</div>`:''}</td><td style="color:var(--text-sub);font-size:12px">${p.role}</td><td class="r" style="font-weight:700;font-size:14px;color:${ac}">${apps}</td>${cell(p.friA)}${cell(p.lgeA,true)}${cell(p.cupA)}<td class="r" style="font-weight:800;font-size:${tot>=10?15:13}px;color:${gc};border-left:2px solid var(--border)">${tot||'—'}</td>${cell(p.friG)}${cell(p.lgeG,true)}${cell(p.cupG)}<td class="r" style="font-size:11px;color:#a78bfa">${mb}</td></tr>`;
   });
-
-  // Totals
-  const compTotals=COMPS.map(c=>playersSorted.reduce((s,p)=>s+(p.goals[c]||0),0));
-  const grand=compTotals.reduce((a,b)=>a+b,0);
-  const motmGrand=playersSorted.reduce((s,p)=>s+totalM(p),0);
-  t+=`<tr class="tr-row"><td><strong>Totals</strong></td><td></td>`;
-  compTotals.forEach((g,i)=>t+=`<td class="r" style="color:${BC[COMPS[i]]}">${g}</td>`);
-  t+=`<td class="r" style="color:#4ade80;font-size:14px">${grand}</td><td class="r" style="color:#a78bfa">${motmGrand}</td><td></td></tr>`;
-  t+=`</tbody></table>`;
+  const sA=k=>playersSorted.reduce((s,p)=>s+(p[k]||0),0),gG=playersSorted.reduce((s,p)=>s+totalG(p),0);
+  t+=`<tr class="tr-row"><td colspan="2"><strong>Totals</strong> <span style="font-weight:400;font-size:11px;color:var(--text-muted)">(${playersSorted.length} players)</span></td><td class="r">${playersSorted.reduce((s,p)=>s+totalA(p),0)}</td><td class="r">${sA('friA')}</td><td class="r">${sA('lgeA')}</td><td class="r">${sA('cupA')}</td><td class="r" style="font-size:15px;border-left:2px solid var(--border)">${gG}</td><td class="r">${sA('friG')}</td><td class="r">${sA('lgeG')}</td><td class="r">${sA('cupG')}</td><td class="r" style="color:#a78bfa">${playersSorted.reduce((s,p)=>s+totalM(p),0)}</td></tr></tbody></table>`;
   wrap.innerHTML=t;
-
-  // Cards
   const grid=document.getElementById('player-cards');
   playersSorted.forEach(p=>{
-    const tot=totalG(p),motmTot=totalM(p);
-    const tc=tot>=20?'#4ade80':tot>=10?'#60a5fa':tot>0?'#2563eb':'#334155';
-    const goalPills=COMPS.filter(c=>p.goals[c]>0)
-      .map(c=>`<span class="goal-pill" style="color:${BC[c]};border-color:${BC[c]}44;background:${BC[c]}11">${c}: ${p.goals[c]}</span>`).join('');
-    const motmLines=Object.entries(p.motm||{}).filter(([,v])=>v>0).map(([c,v])=>`${c}×${v}`).join(', ');
-
-    const card=document.createElement('div');
-    card.className='player-card';
-    card.innerHTML=`
-      <div class="player-name">${p.name}</div>
-      <div class="player-role">${p.role||''}</div>
-      <div class="player-stat-row"><span class="player-stat-lbl">Goals</span><span class="player-stat-val" style="color:${tc}">${tot}</span></div>
-      <div class="player-stat-row"><span class="player-stat-lbl">MOTM</span><span class="player-stat-val" style="color:#a78bfa">${motmTot}</span></div>
-      ${goalPills?`<div class="goal-pills">${goalPills}</div>`:''}
-      ${motmLines?`<div class="motm-line">🏅 ${motmLines}</div>`:''}
-      ${p.note?`<div class="player-note">${p.note}</div>`:''}`;
+    const tot=totalG(p),apps=totalA(p),tc=tot>=20?'#6ee7b7':tot>=10?'#93c5fd':tot>0?'#60a5fa':'var(--text-muted)',ac=apps>=25?'#6ee7b7':apps>=15?'#93c5fd':'#f1f5f9';
+    const ml=Object.entries(p.motm||{}).filter(([,v])=>v>0).map(([c,v])=>c+'×'+v).join(' · ');
+    const card=document.createElement('div');card.className='player-card';
+    card.innerHTML=`<div class="player-name">${p.name}${p.gk?' 🧤':''}</div><div class="player-role">${p.role}${p.surname?' · '+p.surname:''}</div><div class="player-stat-row"><span class="player-stat-lbl">Appearances</span><span class="player-stat-val" style="color:${ac}">${apps}</span></div><div class="player-stat-row"><span class="player-stat-lbl">Goals</span><span class="player-stat-val" style="color:${tc}">${tot}</span></div><div class="player-stat-row"><span class="player-stat-lbl">MOTM</span><span class="player-stat-val" style="color:#a78bfa">${totalM(p)}</span></div>${ml?`<div class="motm-line">🏅 ${ml}</div>`:''}${p.note?`<div class="player-note">${p.note}</div>`:''}`;
     grid.appendChild(card);
   });
 }
 
-// ── HEAD TO HEAD ──────────────────────────────────────────────────────
+
 function buildH2H(){
   const opps={};
   matches.filter(m=>m.res!=='ABN').forEach(m=>{
@@ -648,89 +617,64 @@ buildH2H();
 buildReport();
 </script>
 
-
-
-<!-- ══════════════════════════════════════════════════════════════════
-     LEAGUE TABLE
-══════════════════════════════════════════════════════════════════ -->
 <div id="table" class="section">
   <div style="max-width:900px;margin:0 auto 16px">
-    <p style="color:var(--text-sub);font-size:13px;margin-bottom:6px">
-      SDFL Salford &amp; Districts Football League · U15s · Division 2 · Final standings 2025–26.
-    </p>
-    <p style="color:var(--text-muted);font-size:11px">
-      † Wythenshawe and St John's figures updated to reflect the final two games played after this screenshot was taken.
-    </p>
+    <p style="color:var(--text-sub);font-size:13px;margin-bottom:6px">SDFL Salford &amp; Districts Football League · U15s · Division 2 · Final standings 2025–26.</p>
+    <p style="color:var(--text-muted);font-size:11px">&dagger; Wythenshawe and St John's figures updated to reflect the final two games played after the screenshot was taken.</p>
   </div>
   <div class="table-wrap">
     <table>
-      <thead>
-        <tr>
-          <th class="r" style="width:36px">Pos</th>
-          <th>Team</th>
-          <th class="r">P</th>
-          <th class="r">W</th>
-          <th class="r">D</th>
-          <th class="r">L</th>
-          <th class="r">Pts</th>
-        </tr>
-      </thead>
+      <thead><tr>
+        <th class="r" style="width:36px">Pos</th><th>Team</th>
+        <th class="r">P</th><th class="r">W</th><th class="r">D</th><th class="r">L</th><th class="r">Pts</th>
+      </tr></thead>
       <tbody id="league-tbody"></tbody>
     </table>
   </div>
   <div style="max-width:900px;margin:8px auto 0;display:flex;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--text-sub)">
-    <span>🏆 Champions</span>
-    <span>🥈 Runners-up (St John's)</span>
+    <span>🏆 Champions</span><span>🥈 Runners-up — St John's</span>
   </div>
 </div>
-
 <script>
 (function(){
-  const rows = [
-    { pos:1,  team:"Wythenshawe Wanderers U15",          P:20, W:19, D:1, L:0,  Pts:58, champion:true,  note:"Champions — only draw was vs St John's on final day" },
-    { pos:2,  team:"St Johns Chorlton U15 JFC Greens",   P:20, W:14, D:3, L:3,  Pts:45, us:true,        note:"Runners-up — clinched 2nd on the final day" },
-    { pos:3,  team:"Salford Lads & Girls Club U15",      P:20, W:13, D:2, L:5,  Pts:41 },
-    { pos:4,  team:"RS JFC U15 Titans",                  P:20, W:11, D:3, L:6,  Pts:36 },
-    { pos:5,  team:"Ordsall Park Juniors FC U15 United", P:19, W:10, D:1, L:8,  Pts:31 },
-    { pos:6,  team:"Whalley Range AFC Juniors U15",      P:19, W:7,  D:4, L:8,  Pts:25 },
-    { pos:7,  team:"Salford Storm FC U15 Lightning",     P:20, W:6,  D:2, L:12, Pts:20 },
-    { pos:8,  team:"Swinton U15 Panthers",               P:17, W:5,  D:1, L:11, Pts:16 },
-    { pos:9,  team:"Winton Wanderers U15 Cobras",        P:18, W:5,  D:0, L:13, Pts:15 },
-    { pos:10, team:"Manchester South End FC U15 MSE",    P:17, W:3,  D:2, L:12, Pts:11 },
-    { pos:11, team:"Reddish Vulcans Junior U15 Bombers", P:18, W:1,  D:1, L:16, Pts:4  },
+  const rows=[
+    {pos:1,team:"Wythenshawe Wanderers U15",P:20,W:19,D:1,L:0,Pts:58,champion:true,note:"Champions — only draw was vs St John's (4–4) on final day"},
+    {pos:2,team:"St Johns Chorlton U15 JFC Greens",P:20,W:14,D:3,L:3,Pts:45,us:true,note:"Runners-up — clinched 2nd place on the final day"},
+    {pos:3,team:"Salford Lads & Girls Club U15",P:20,W:13,D:2,L:5,Pts:41},
+    {pos:4,team:"RS JFC U15 Titans",P:20,W:11,D:3,L:6,Pts:36},
+    {pos:5,team:"Ordsall Park Juniors FC U15 United",P:19,W:10,D:1,L:8,Pts:31},
+    {pos:6,team:"Whalley Range AFC Juniors U15",P:19,W:7,D:4,L:8,Pts:25},
+    {pos:7,team:"Salford Storm FC U15 Lightning",P:20,W:6,D:2,L:12,Pts:20},
+    {pos:8,team:"Swinton U15 Panthers",P:17,W:5,D:1,L:11,Pts:16},
+    {pos:9,team:"Winton Wanderers U15 Cobras",P:18,W:5,D:0,L:13,Pts:15},
+    {pos:10,team:"Manchester South End FC U15 MSE",P:17,W:3,D:2,L:12,Pts:11},
+    {pos:11,team:"Reddish Vulcans Junior U15 Bombers",P:18,W:1,D:1,L:16,Pts:4},
   ];
-
-  const tbody = document.getElementById('league-tbody');
-  rows.forEach((r, i) => {
-    const isUs = !!r.us;
-    const isChamp = !!r.champion;
-    const bg = isUs ? '#1a3d6e' : isChamp ? '#1a3d28' : i%2===0 ? '#182d45' : '#1e3452';
-    const borderL = isUs ? 'border-left:4px solid #3b82f6' : isChamp ? 'border-left:4px solid #16a34a' : 'border-left:4px solid transparent';
-    const posIcon = isChamp ? '🏆' : isUs ? '🥈' : r.pos;
-    const posColor = isUs ? '#60a5fa' : isChamp ? '#4ade80' : 'var(--text-sub)';
-    const teamColor = isUs ? '#ffffff' : isChamp ? '#4ade80' : 'var(--text-body)';
-    const ptsColor = isUs ? '#fbbf24' : isChamp ? '#4ade80' : 'var(--text-head)';
-    const ptsSz = isUs || isChamp ? '16px' : '13px';
-
-    const tr = document.createElement('tr');
-    tr.style.cssText = `background:${bg};${borderL}`;
-    tr.innerHTML = `
-      <td class="r" style="font-weight:700;color:${posColor};font-size:${isUs||isChamp?'15px':'13px'}">${posIcon}</td>
-      <td style="font-weight:${isUs||isChamp?700:500};color:${teamColor}">
-        ${r.team}
-        ${r.note ? `<div style="font-size:11px;color:var(--text-sub);font-weight:400;margin-top:2px">${r.note}</div>` : ''}
-        ${r.pos <= 2 ? `<div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:1px">† Updated from screenshot</div>` : ''}
-      </td>
-      <td class="r" style="color:var(--text-sub)">${r.P}</td>
-      <td class="r" style="color:#4ade80;font-weight:600">${r.W}</td>
-      <td class="r" style="color:#facc15">${r.D}</td>
-      <td class="r" style="color:#f87171">${r.L}</td>
-      <td class="r" style="font-weight:800;font-size:${ptsSz};color:${ptsColor}">${r.Pts}</td>
-    `;
+  const tbody=document.getElementById('league-tbody');
+  if(!tbody)return;
+  rows.forEach((r,i)=>{
+    const isUs=!!r.us,isChamp=!!r.champion;
+    const bg=isUs?'#1a3d6e':isChamp?'#1a3d28':i%2===0?'var(--bg-row)':'var(--bg-card)';
+    const bl=isUs?'border-left:4px solid #3b82f6':isChamp?'border-left:4px solid #16a34a':'border-left:4px solid transparent';
+    const posIcon=isChamp?'🏆':isUs?'🥈':r.pos;
+    const pc=isUs?'#60a5fa':isChamp?'#4ade80':'var(--text-sub)';
+    const tc=isUs?'#ffffff':isChamp?'#4ade80':'var(--text-body)';
+    const ptsC=isUs?'#fbbf24':isChamp?'#4ade80':'var(--text-head)';
+    const tr=document.createElement('tr');
+    tr.style.cssText='background:'+bg+';'+bl;
+    tr.innerHTML='<td class="r" style="font-weight:700;color:'+pc+';font-size:'+(isUs||isChamp?'15':'13')+'px">'+posIcon+'</td>'+
+      '<td style="font-weight:'+(isUs||isChamp?700:500)+';color:'+tc+'">'+r.team+
+      (r.note?'<div style="font-size:11px;color:var(--text-sub);font-weight:400;margin-top:2px">'+r.note+'</div>':'')+
+      (r.pos<=2?'<div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:1px">&dagger; Updated from screenshot</div>':'')+
+      '</td>'+
+      '<td class="r" style="color:var(--text-sub)">'+r.P+'</td>'+
+      '<td class="r" style="color:#4ade80;font-weight:600">'+r.W+'</td>'+
+      '<td class="r" style="color:#facc15">'+r.D+'</td>'+
+      '<td class="r" style="color:#f87171">'+r.L+'</td>'+
+      '<td class="r" style="font-weight:800;font-size:'+(isUs||isChamp?'16':'13')+'px;color:'+ptsC+'">'+r.Pts+'</td>';
     tbody.appendChild(tr);
   });
 })();
 </script>
-
 </body>
 </html>
