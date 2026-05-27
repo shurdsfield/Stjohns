@@ -582,7 +582,82 @@
       "fri_apps": 1
     }
   ],
-  "league_table": [],
+  "league_table": [
+    {
+      "pos": 1,
+      "team": "Altrincham FC Juniors U15 Titans",
+      "P": 14,
+      "W": 10,
+      "D": 2,
+      "L": 2,
+      "Pts": 32,
+      "champion": true
+    },
+    {
+      "pos": 2,
+      "team": "Trafford FC Youth U15 Titans",
+      "P": 14,
+      "W": 10,
+      "D": 1,
+      "L": 3,
+      "Pts": 31
+    },
+    {
+      "pos": 3,
+      "team": "Wilmslow Town U15 Cougars",
+      "P": 14,
+      "W": 7,
+      "D": 3,
+      "L": 4,
+      "Pts": 24
+    },
+    {
+      "pos": 4,
+      "team": "Wilmslow Town U15 Jaguars",
+      "P": 14,
+      "W": 7,
+      "D": 3,
+      "L": 4,
+      "Pts": 24
+    },
+    {
+      "pos": 5,
+      "team": "Sale United U15 Coyotes",
+      "P": 14,
+      "W": 5,
+      "D": 1,
+      "L": 8,
+      "Pts": 16
+    },
+    {
+      "pos": 6,
+      "team": "Winton Wanderers U15 Vipers",
+      "P": 14,
+      "W": 5,
+      "D": 1,
+      "L": 8,
+      "Pts": 16
+    },
+    {
+      "pos": 7,
+      "team": "Fletcher Moss Rangers U15 Tellows",
+      "P": 14,
+      "W": 4,
+      "D": 1,
+      "L": 9,
+      "Pts": 13
+    },
+    {
+      "pos": 8,
+      "team": "St Johns (CHORLTON) U15 JFC Whites",
+      "P": 14,
+      "W": 2,
+      "D": 0,
+      "L": 12,
+      "Pts": 6,
+      "us": true
+    }
+  ],
   "_league_table_note": "Timperley & District JFL table — add manually or configure fulltime.league_table_url in whites.json",
   "season_story": {
     "presentation_date": "Presentation Day · June 2026",

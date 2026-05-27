@@ -1730,7 +1730,6 @@ function buildLeagueTable(){
     tr.innerHTML=`<td class="r" style="font-weight:700;color:${pc};font-size:${isUs||isChamp?15:13}px">${posIcon}</td>`+
       `<td style="font-weight:${isUs||isChamp?700:500};color:${tc}">${r.team}`+
         (r.note?`<div style="font-size:11px;color:var(--text-sub);font-weight:400;margin-top:2px">${r.note}</div>`:'')+
-        (r.pos<=2?`<div style="font-size:10px;color:var(--text-muted);font-weight:400;margin-top:1px">† Updated from screenshot</div>`:'')+
       `</td>`+
       `<td class="r" style="color:var(--text-sub)">${r.P}</td>`+
       `<td class="r" style="color:#4ade80;font-weight:600">${r.W}</td>`+
@@ -2061,13 +2060,16 @@ def main():
         t2_hash_file = os.path.join(t2_team_dir, ".source_hashes.json")
         t2_new_hashes = {k: sha256_file(v) for k, v in t2_sources.items() if os.path.isfile(v)}
         t2_old_hashes = load_source_hashes(t2_hash_file)
-        if t2_new_hashes != t2_old_hashes or force_extract:
+        if t2_new_hashes != t2_old_hashes or force_extract or args.fetch_table:
             changed = [k for k in t2_new_hashes if t2_new_hashes[k] != t2_old_hashes.get(k)]
-            print(f"Team 2 sources changed ({', '.join(changed)}) — re-extracting…", flush=True)
+            if changed or force_extract:
+                print(f"Team 2 sources changed ({', '.join(changed or ['forced'])}) — re-extracting…", flush=True)
             import subprocess
             cmd = [sys.executable, __file__, "--team", args.team_2, "--extract-only"]
             if force_extract:
                 cmd.append("--force-extract")
+            if args.fetch_table:
+                cmd.append("--fetch-table")
             subprocess.run(cmd, check=True)
 
         if os.path.exists(sun_config_path):

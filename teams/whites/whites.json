@@ -13,15 +13,15 @@
   },
 
   "sources": {
-    "results_pdf":   "teams/whites/results/",
-    "players_pdf":   "teams/whites/players/",
+    "results_pdf":   "teams/whites/results/stjohns_whites.pdf",
+    "players_pdf":   "teams/whites/players/stjohns_whites_players.pdf",
     "chat_zip":      "teams/whites/chat/stjohns_chat.zip",
     "season_config": "teams/whites/season_config.json",
     "output_html":   "index.html"
   },
 
   "fulltime": {
-    "league_table_url": null,
+    "league_table_url": "https://fulltime.thefa.com/index.html?selectedSeason=354462616&selectedFixtureGroupAgeGroup=8&selectedDivision=991238732&selectedCompetition=0",
     "season_id": null,
     "division_id": null,
     "notes": [
@@ -30,16 +30,5 @@
     ]
   },
 
-  "our_team_name_in_fa": "St Johns (CHORLTON) U15 JFC Whites",
-
-  "whatsapp": {
-    "managers": ["Mike Lowe Football St Johns", "SJFC Ivan Paul"],
-    "player_names": [
-      "Henry","Keizo","Harry","Dalton","Elliot","Ivan","Nathaniel","Rio",
-      "Conor","Luke","Noah","Petr","Ewan","George","Dylan","Ethan",
-      "Reuben","Raphie","Aker","Tom","Aryan","Caidan","Zeze","Max","Micah"
-    ],
-    "season_start_hints": ["9/8/25", "Sale Coyotes"],
-    "name_normalisations": {}
-  }
+  "our_team_name_in_fa": "St Johns (CHORLTON) U15 JFC Whites"
 }
