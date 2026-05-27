@@ -1,0 +1,616 @@
+{
+  "_sources": {
+    "chat": "teams/whites/chat/stjohns_chat.zip — WhatsApp match reports (only source — no FA PDFs yet)",
+    "notes": [
+      "All match data extracted manually from WhatsApp chat (SJFC Ivan Paul + Mike Lowe Football St Johns).",
+      "Appearances not tracked (no players PDF).",
+      "Sep 21 Hough End: 'Away win' per Ivan — 4 goals scored, opposition score unknown.",
+      "Oct 18 Ivan 'great away win' — Saturday message, refers to Greens match, NOT Whites.",
+      "Oct 26 Petr scored for Whites — Greens player occasionally used by Sunday team.",
+      "Feb 1 Unicorn Vipers: 'Unicorn won' — result confirmed L, score unknown.",
+      "Feb 8 Rosehill friendly: 'lost 1st half, drew 2nd' — overall result listed as L (no final score).",
+      "Feb 22 Fletcher Moss — Game Off (postponed, not rescheduled in chat).",
+      "Mar 8 Winton — CANCELLED (Mike posted 'Game off on Sunday' on Mar 4 — Winton couldn't cover coach).",
+      "Apr 21 Wilmslow Cougars — Cancelled (not enough registered players).",
+      "Apr 26 Moston Reds — Opposition cancelled morning of game.",
+      "May 10 Juno — Away friendly win, score not recorded in chat.",
+      "Luke Smith (May 17 Winton goal) — friendly/cup only player, not in FA stats.",
+      "George Noden = Sunday GK."
+    ]
+  },
+  "meta": {
+    "title": "St John's Chorlton U15 Whites · Season 2025–26",
+    "description": "St John's Chorlton U15 Whites — Season Review 2025–26. Results, player stats, match reports and more.",
+    "og_title": "St John's Chorlton U15 Whites · Season 2025–26",
+    "og_description": "Full season review — Timperley & District JFL, Sunday team."
+  },
+  "team": {
+    "name": "St John's Chorlton U15 Whites",
+    "season": "2025–26",
+    "league": "Timperley & District JFL",
+    "division": "Under 15s",
+    "managers": "Mike Lowe &amp; Paul Murray"
+  },
+  "banner_pills": [
+    {
+      "text": "🏆 League <strong>9 pts</strong>"
+    },
+    {
+      "text": "⚽ Goals <strong>34 scored</strong>"
+    },
+    {
+      "text": "✅ <strong>4 wins</strong> all comps"
+    },
+    {
+      "text": "📅 <strong>22 games</strong> played"
+    }
+  ],
+  "stat_cards": [
+    {
+      "val": "3",
+      "lbl": "League Wins",
+      "color": "#4ade80"
+    },
+    {
+      "val": "23",
+      "lbl": "Games Played",
+      "color": "#60a5fa"
+    },
+    {
+      "val": "19",
+      "lbl": "Henry Goals",
+      "color": "#6ee7b7"
+    },
+    {
+      "val": "6",
+      "lbl": "Keizo Goals",
+      "color": "#6ee7b7"
+    }
+  ],
+  "matches": [
+    {
+      "date": "14 Sep",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Sale Coyotes",
+      "score": "5–3",
+      "res": "W",
+      "pts": 3,
+      "motm": null,
+      "scorers": "Harry 2, Keizo, Noah, Henry",
+      "summary": "A well deserved 3 pts today lads — well done! It was a proper team effort against a good side and you all played some great football too. Our shape was good today coupled with a massive effort by midfield and some great link-up play down the flanks. Nice one Noah on your league debut goal! And a big shout out to Dylan between the sticks — I counted 3 or 4 vital blocks/saves and some tidy distribution which gave us possession and put us on the front foot."
+    },
+    {
+      "date": "21 Sep",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Hough End",
+      "score": "?",
+      "res": "W",
+      "pts": 3,
+      "motm": null,
+      "scorers": "Henry 2, Keizo, Elliot",
+      "summary": "The high & lows of junior football! We made things nigh on impossible for ourselves today before we even kicked a ball — but let's not dwell on that as some better communication & housekeeping will sort that out really easily. Given the circumstances everyone had to put in a massive effort today — clearly it was really hard work but you all stuck at it."
+    },
+    {
+      "date": "28 Sep",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Fletcher Moss",
+      "score": "1–0",
+      "res": "W",
+      "pts": 3,
+      "motm": "Ethan",
+      "scorers": "Keizo",
+      "summary": "What a great game that was! Let's be honest a draw would have been fair — Fletchers are a fine side — but a key decision finally going our way allowed Keizo to slot home from the spot in the 88th minute. Loads to love today and I think with a touch more belief in our ability to play when there's time we could have taken the game to them a bit more. Hopefully that will come but our shape was really good again, workrate was massive."
+    },
+    {
+      "date": "05 Oct",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Trafford Titans",
+      "score": "—",
+      "res": "P",
+      "pts": null,
+      "motm": null,
+      "scorers": null,
+      "summary": "Postponed — standing water on the pitch."
+    },
+    {
+      "date": "19 Oct",
+      "comp": "Friendly",
+      "ha": "H",
+      "opp": "West Didsbury",
+      "score": "2–4",
+      "res": "L",
+      "pts": null,
+      "motm": null,
+      "scorers": "Keizo, Henry",
+      "summary": "Oh, football can be so deflating! At its worst when it's self-inflicted. Poor attitude cost us big time today and frankly we got what we deserved. Well done West, they stuck to their task and scored a couple of nice goals. The lads know they are so much better than today's showing so let's get in on time at training on Wednesday — we can have a laugh, shake today off then put in a good shift ahead of Wilmslow away."
+    },
+    {
+      "date": "26 Oct",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Winton Wanderers",
+      "score": "1–9",
+      "res": "L",
+      "pts": 0,
+      "motm": "Ivan",
+      "scorers": "Petr",
+      "summary": "Ooof that was a sore one. I won't go as far as to say it was a game of two halves but that 4th goal just before HT took it away from us — for spells we did play some good football, creating a few chances and we were in the game. Well done Winton, they are a strong team who arrived early with the right attitude hungry for 3 pts."
+    },
+    {
+      "date": "02 Nov",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Wilmslow Cougars",
+      "score": "1–4",
+      "res": "L",
+      "pts": 0,
+      "motm": "Rio",
+      "scorers": "Henry",
+      "summary": "Frustrating one today — we deserved a lot more out of this game and overall I do think we were the better side. Loads of good play in the first half where we got in on the right again and again — and after Henry's equaliser we really should have taken the lead when we were firmly on top. Conor, Aker, Rio and Henry linking up particularly well."
+    },
+    {
+      "date": "09 Nov",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Hough End",
+      "score": "1–9",
+      "res": "L",
+      "pts": 0,
+      "motm": "Reuben",
+      "scorers": "Elliot",
+      "summary": "Not the ending our bright start pointed towards today. If one of the 3 or 4 chances we created early on goes in, or the ref gives the foul on Dylan for their 3rd, I think the game could have panned out differently. Fair play to HE — they too toiled on a difficult pitch and looked more of a threat throughout, but if one of the three clear chances we created immediately after the restart goes in I think we could have made more of a game of it."
+    },
+    {
+      "date": "16 Nov",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Wilmslow Jags",
+      "score": "3–4",
+      "res": "L",
+      "pts": 0,
+      "motm": "Harry",
+      "scorers": "Henry, Nathaniel, Rio",
+      "summary": "A few cups of tea later and I'm still pretty hacked off about today — we have to be beating them today. Sloppiness killed a lot of our good work — poor restarts straight to the opposition, extra touches at the back when we should be clearing our lines, turning into danger in the middle of the park. Either halted our momentum or gave them a chance to get back on the front foot."
+    },
+    {
+      "date": "23 Nov",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Trafford",
+      "score": "1–9",
+      "res": "L",
+      "pts": 0,
+      "motm": "Dalton",
+      "scorers": "Henry",
+      "summary": "A filthy day and a lousy result. Well beaten today in awful conditions by probably the best team we've faced this season. Trafford are a good side with 7 or 8 comfortable on the ball — it was hard not to admire their movement, hunger and overall team play. Clearly we were never really at it today but you can see why they have shipped a few goals this season as there was always space down the flanks."
+    },
+    {
+      "date": "11 Jan",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Winton Wanderers",
+      "score": "2–3",
+      "res": "L",
+      "pts": 0,
+      "motm": "Conor",
+      "scorers": "Ivan, Henry",
+      "summary": "What a great advert for junior football. No let up for 80 mins — both teams fully committed, admirably trying to pass on a tough pitch and playing the game in a great spirit. Well done all. Performance levels were noticeably up today and I thought we competed well all over the pitch, led by the defence who handled a lot of pressure and took to their new shape really well."
+    },
+    {
+      "date": "18 Jan",
+      "comp": "Friendly",
+      "ha": "H",
+      "opp": "Wythenshawe",
+      "score": "2–2",
+      "res": "D",
+      "pts": null,
+      "motm": "Ivan",
+      "scorers": "Henry 2",
+      "summary": "A very watchable game in gloomy drizzly conditions. Fair result in the end but at 2–0 I really fancied us. First half we were competing all over the pitch, knitting passes together and creating good chances. We really should have been home and hosed by half-time but fair play to Wythenshawe — they picked things up second half and deserved the draw. Well done Henry on the 2 goals and well done Ivan — best game for a while!"
+    },
+    {
+      "date": "25 Jan",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Sale Coyotes",
+      "score": "2–3",
+      "res": "L",
+      "pts": 0,
+      "motm": "Reuben",
+      "scorers": "Rio, Ivan",
+      "summary": "The overriding feeling is we didn't do enough today and Sale, who stuck really well to a short passing game on a sticky pitch, deserved their win. The first half was really slow and we just couldn't seem to get going — we defended for long spells and desperately needed possession and territory to get into the game. Boys miles more competitive than earlier in the season and says something about how far we've come that we are so disappointed today."
+    },
+    {
+      "date": "01 Feb",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Unicorn Vipers",
+      "score": "—",
+      "res": "L",
+      "pts": 0,
+      "motm": null,
+      "scorers": null,
+      "summary": "Unicorn won in a pants game. See you Wednesday lads where the slate will be clean for everyone and we go again. Definitely had a preseason vibe to the game today."
+    },
+    {
+      "date": "08 Feb",
+      "comp": "Friendly",
+      "ha": "A",
+      "opp": "Rosehill",
+      "score": "—",
+      "res": "L",
+      "pts": null,
+      "motm": "Henry",
+      "scorers": "Ewan, Henry 2",
+      "summary": "Took the first half to get used to the pitch but once we did we played some really nice football and were on top for chunks of the second half. Great to see Ewan get a goal today — ran tirelessly, regularly made it into the box to get on the end of crosses and earned his goal. Henry too was a real handful — working his socks off to get us back in the game and deserved 2 goals."
+    },
+    {
+      "date": "01 Mar",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Wilmslow Jags",
+      "score": "1–5",
+      "res": "L",
+      "pts": 0,
+      "motm": "Henry",
+      "scorers": "Henry",
+      "summary": "Three penalties in a match — well, I've never experienced that before! And whilst Dylan pulled off a great save on the 3rd, the game was done and dusted by then as we were well beaten by a fairly average side. Sadly we just didn't get going today — the game was flat and our passing was really sloppy all over the park apart from the 15 mins before HT where Wilmslow's 3rd goal seemed to shake us into action."
+    },
+    {
+      "date": "08 Mar",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Winton",
+      "score": "—",
+      "res": "P",
+      "pts": null,
+      "motm": null,
+      "scorers": null,
+      "summary": "Game off — Winton couldn't cover for the coach who was away."
+    },
+    {
+      "date": "15 Mar",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Altrincham",
+      "score": "1–6",
+      "res": "L",
+      "pts": 0,
+      "motm": "Reuben",
+      "scorers": "Keizo",
+      "summary": "A belting first half performance delivered exactly what we asked for — great attitude, competing, encouraging, bravery on the ball. We more than matched a side who have been putting teams away all season. Clearly we were a bit fortuitous not to concede at times but with Dylan making a few decent saves and the lads working so hard and linking up so well they earned their luck. A completely different second half sadly."
+    },
+    {
+      "date": "22 Mar",
+      "comp": "Cup",
+      "ha": "A",
+      "opp": "Trafford",
+      "score": "1–3",
+      "res": "L",
+      "pts": null,
+      "motm": "George",
+      "scorers": "Henry",
+      "summary": "Cup Semi-final. So proud of the lads today — they took a strong Trafford side all the way to the final whistle in a hard-fought cup tie. Yes it would have been nice to win but the performance was full of positives and showed what the lads are made of. When we bring the right attitude, are prepared to put a shift in and support and encourage one another we'll give most teams a proper game. Today we did that."
+    },
+    {
+      "date": "12 Apr",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Altrincham",
+      "score": "3–6",
+      "res": "L",
+      "pts": 0,
+      "motm": "Conor",
+      "scorers": "Henry, Nathaniel, Conor",
+      "summary": "Another game of two halves against Alty today. Really watchable first half where we came in at 2–2 looking the better side but sadly tiredness and a lack of fitness kicked in to take the game away from us in the second. With the Easter break hopefully behind us now, let's make sure we finish the season on a high."
+    },
+    {
+      "date": "14 Apr",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Fletcher Moss",
+      "score": "1–4",
+      "res": "L",
+      "pts": 0,
+      "motm": "Harry",
+      "scorers": "Henry",
+      "summary": "A cracking game played at a really fast pace with both teams competing all over the park for 80 mins. Result aside I thought the lads stood up to the physical challenge thrown at them really well tonight and whilst Fletchers earned their win I can't help wondering whether we could have run them a bit closer if their 3rd goal was correctly flagged for offside."
+    },
+    {
+      "date": "26 Apr",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Moston Reds",
+      "score": "—",
+      "res": "P",
+      "pts": null,
+      "motm": null,
+      "scorers": null,
+      "summary": "Opposition cancelled the morning of the game."
+    },
+    {
+      "date": "03 May",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Trafford",
+      "score": "2–3",
+      "res": "L",
+      "pts": 0,
+      "motm": "Harry",
+      "scorers": "Henry 2",
+      "summary": "Well, that's all folks. The curtain fell on the league campaign today and I think it displayed how we've grown into this division. Let's be honest Trafford schooled us in the reverse fixture pre-Christmas but in the cup semi recently and again this morning the lads stuck together, competed well and ran them to the final whistle. It was a great watch in spells."
+    },
+    {
+      "date": "10 May",
+      "comp": "Friendly",
+      "ha": "A",
+      "opp": "Juno",
+      "score": "—",
+      "res": "W",
+      "pts": null,
+      "motm": null,
+      "scorers": null,
+      "summary": "Away friendly win — score not recorded in chat."
+    },
+    {
+      "date": "17 May",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Winton Wanderers",
+      "score": "4–5",
+      "res": "L",
+      "pts": 0,
+      "motm": null,
+      "scorers": "Dalton 2, Luke, Henry",
+      "summary": "A result that summed up the season — they scored the winner with the very last kick of the game. Moments earlier we had two gilt-edged chances to win it. Cracking effort from the lads; Dalton, Henry and Harry caused them problems all afternoon, and with a bit more luck we could have — and probably should have — taken the points."
+    }
+  ],
+  "players": [
+    {
+      "name": "Henry",
+      "lge_goals": 13,
+      "cup_goals": 1,
+      "fri_goals": 5,
+      "lge_apps": 13,
+      "cup_apps": 1,
+      "fri_apps": 4
+    },
+    {
+      "name": "Keizo",
+      "lge_goals": 4,
+      "cup_goals": 0,
+      "fri_goals": 1,
+      "lge_apps": 4,
+      "cup_apps": 0,
+      "fri_apps": 1
+    },
+    {
+      "name": "Harry",
+      "lge_goals": 2,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 14,
+      "cup_apps": 1,
+      "fri_apps": 4
+    },
+    {
+      "name": "Dalton",
+      "lge_goals": 2,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 14,
+      "cup_apps": 1,
+      "fri_apps": 3
+    },
+    {
+      "name": "Elliot",
+      "lge_goals": 2,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 10,
+      "cup_apps": 1,
+      "fri_apps": 3
+    },
+    {
+      "name": "Ivan",
+      "lge_goals": 2,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 15,
+      "cup_apps": 1,
+      "fri_apps": 4
+    },
+    {
+      "name": "Nathaniel",
+      "lge_goals": 2,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 13,
+      "cup_apps": 1,
+      "fri_apps": 2
+    },
+    {
+      "name": "Rio",
+      "lge_goals": 2,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 11,
+      "cup_apps": 0,
+      "fri_apps": 2
+    },
+    {
+      "name": "Conor",
+      "lge_goals": 1,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 15,
+      "cup_apps": 1,
+      "fri_apps": 4
+    },
+    {
+      "name": "Luke",
+      "lge_goals": 1,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 0,
+      "cup_apps": 0,
+      "fri_apps": 1
+    },
+    {
+      "name": "Noah",
+      "lge_goals": 1,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 11,
+      "cup_apps": 0,
+      "fri_apps": 4
+    },
+    {
+      "name": "Petr",
+      "lge_goals": 1,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 0,
+      "cup_apps": 0,
+      "fri_apps": 0,
+      "note": "Greens player, guested for Whites"
+    },
+    {
+      "name": "Ewan",
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 1,
+      "lge_apps": 1,
+      "cup_apps": 0,
+      "fri_apps": 2
+    },
+    {
+      "name": "George",
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 3,
+      "cup_apps": 1,
+      "fri_apps": 0,
+      "pos": "GK",
+      "note": "George Noden, Sunday GK"
+    },
+    {
+      "name": "Dylan",
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 14,
+      "cup_apps": 0,
+      "fri_apps": 4,
+      "pos": "GK"
+    },
+    {
+      "name": "Ethan",
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 10,
+      "cup_apps": 1,
+      "fri_apps": 1
+    },
+    {
+      "name": "Reuben",
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 10,
+      "cup_apps": 1,
+      "fri_apps": 2
+    },
+    {
+      "name": "Raphie",
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 14,
+      "cup_apps": 1,
+      "fri_apps": 4
+    },
+    {
+      "name": "Aker",
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 10,
+      "cup_apps": 0,
+      "fri_apps": 2
+    },
+    {
+      "name": "Tom",
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 6,
+      "cup_apps": 0,
+      "fri_apps": 2
+    },
+    {
+      "name": "Aryan",
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 1,
+      "cup_apps": 0,
+      "fri_apps": 0
+    },
+    {
+      "name": "Javar",
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 0,
+      "cup_apps": 0,
+      "fri_apps": 1
+    },
+    {
+      "name": "Sonny",
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "lge_apps": 0,
+      "cup_apps": 0,
+      "fri_apps": 1
+    }
+  ],
+  "league_table": [],
+  "_league_table_note": "Timperley & District JFL table — add manually or configure fulltime.league_table_url in whites.json",
+  "season_story": {
+    "presentation_date": "Presentation Day · June 2026",
+    "report_title": "St John's Chorlton U15 Whites",
+    "report_subtitle": "Season Review 2025–26 · Managers: Mike &amp; Paul",
+    "signoff": "Mike Lowe &amp; Paul Murray &nbsp;·&nbsp; St John's Chorlton U15 Whites &nbsp;·&nbsp; June 2026",
+    "sections": [
+      {
+        "heading": "Early Season",
+        "paras": [
+          "The season opened brilliantly with a <span class=\"highlight\">5–3 win away at Sale Coyotes</span> — Harry bagging two, with Keizo, Noah and Henry also on the scoresheet. A second away win followed at Hough End the following week, and Fletcher Moss were beaten 1–0 in the 88th minute thanks to a Keizo penalty.",
+          "Three wins from the first three games was a perfect start. The good vibes carried into October, although the Winton Wanderers brought the side back down to earth with a 9–1 defeat at Turn Moss."
+        ]
+      },
+      {
+        "heading": "Mid-Season",
+        "paras": [
+          "November and December proved the toughest stretch — five league defeats, including 9–1 reverses against Hough End and Trafford, tested the squad's resilience. But the managers kept things positive and the lads responded.",
+          "January brought renewed optimism. A 2–3 defeat at Winton was one of the performances of the season — both teams committed, admirably trying to pass the ball, playing in a great spirit. A friendly draw with Wythenshawe (2–2) and a cup semi-final run showed real growth."
+        ]
+      },
+      {
+        "heading": "Run-in",
+        "paras": [
+          "The cup semi-final against Trafford on March 22 was a highlight — George Noden was exceptional in goal, Henry scored and the boys took a strong side all the way to the final whistle.",
+          "The final league game of the season — a 4–5 home defeat to Winton Wanderers — summed up the campaign perfectly. Dalton scored twice, Luke and Henry added goals, and St John's had two gilt-edged chances to win it in the closing minutes before Winton grabbed a late winner."
+        ]
+      }
+    ]
+  }
+}

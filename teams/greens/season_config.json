@@ -1,0 +1,1018 @@
+{
+  "_sources": {
+    "results_pdf": "results/stjohns_greens.pdf — FA Full Time official results (28 records)",
+    "players_pdf": "players/stjohns_greens_players.pdf — FA Full Time player stats (Fixture Group: All)",
+    "whatsapp": "chat/WhatsApp Chat - St. John's U15s Footy.zip — match reports, scorers, MOTM",
+    "notes": [
+      "fa_goals = FA PDF total (all competitions incl. cup, excl. friendly + abandoned)",
+      "lge_goals / cup_goals derived from WhatsApp match-by-match scorers",
+      "lge_apps / cup_apps are estimated — mark '~' in note where uncertain",
+      "16 May Winton score: Nick posted '14-2 (I think!)'; FA player-row shows 12 goals. Using 14-2 per manager.",
+      "01 Apr Plate Cup walkover vs Salford United was MISSING from old app — added here.",
+      "20 May MOTM = Ethan (confirmed in WhatsApp) — was blank in old app.",
+      "20 Dec RS Titans: Dylan H absent (parent confirmed 19 Dec eve). Scorers corrected to Petr, Max 2, Raphie, Micah. Old app had 'Dylan H' instead of Micah — now fixed."
+    ]
+  },
+  "meta": {
+    "title": "St John's Chorlton U15 Greens · Season 2025–26",
+    "description": "St John's Chorlton U15 Greens — Season Review 2025–26. Results, player stats, match reports and more.",
+    "og_title": "St John's Chorlton U15 Greens · Season 2025–26",
+    "og_description": "Full season review — 20 league games, 45 points, goals galore."
+  },
+  "team": {
+    "name": "St John's Chorlton U15 Greens",
+    "season": "2025–26",
+    "league": "SDFL Salford & Districts Football League",
+    "division": "Division 2",
+    "managers": "Nick Turner &amp; Steve Hurdsfield"
+  },
+  "banner_pills": [
+    {
+      "text": "🏆 League <strong>45 pts</strong>"
+    },
+    {
+      "text": "⚽ Goals <strong>128 scored</strong>"
+    },
+    {
+      "text": "✅ <strong>21 wins</strong> all comps"
+    },
+    {
+      "text": "📅 <strong>29 games</strong> played"
+    }
+  ],
+  "stat_cards": [
+    {
+      "val": "45",
+      "lbl": "League Points",
+      "color": "#4ade80"
+    },
+    {
+      "val": "20",
+      "lbl": "League Games",
+      "color": "#60a5fa"
+    },
+    {
+      "val": "14",
+      "lbl": "League Wins",
+      "color": "#4ade80"
+    },
+    {
+      "val": "25",
+      "lbl": "Petr Goals",
+      "color": "#6ee7b7"
+    },
+    {
+      "val": "21",
+      "lbl": "Dylan H Goals",
+      "color": "#6ee7b7"
+    },
+    {
+      "val": "13",
+      "lbl": "Dylan C Goals",
+      "color": "#6ee7b7"
+    }
+  ],
+  "matches": [
+    {
+      "date": "06 Sep",
+      "comp": "Friendly",
+      "ha": "A",
+      "opp": "Barr Hill",
+      "score": "7–3",
+      "res": "W",
+      "pts": null,
+      "motm": null,
+      "scorers": "Micah 2, Petr 2, Ivan, Lucas, Jamie",
+      "summary": "A great pre-season run-out to blow the cobwebs away. Ivan gave us an early lead after bursting into the box. Micah made it 2 after some great pressing. Lucas burst forward and blocked the keeper's clearance which looped in for 3–0. We tired and Barr Hill pulled it back to 3–2 just before half time. Two lovely finishes from Petr gave us breathing space. Barr Hill pulled another back before Micah put one in the top corner and Jamie rounded it off with a lovely finish. Lots of great football, running off the ball and supporting each other."
+    },
+    {
+      "date": "13 Sep",
+      "comp": "League",
+      "ha": "A",
+      "opp": "RS Titans",
+      "score": "2–2",
+      "res": "D",
+      "pts": 1,
+      "motm": "Jamie",
+      "scorers": "Petr, Micah",
+      "summary": "A real game of two halves at Kingsway School. Titans scored early and had the better of the first half but the lads stood strong. A dominant second half saw Petr break the offside trap to equalise before squaring for Micah to make it 2–1. We had a few more chances but a late RS corner crept into the corner for 2–2, with the ref blowing straight away. Tough one to take, but a draw probably fair on the day. Jamie never stopped running on the right wing, causing problems in both directions."
+    },
+    {
+      "date": "20 Sep",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Salford L&G",
+      "score": "6–8",
+      "res": "L",
+      "pts": 0,
+      "motm": "Jamie",
+      "scorers": "Jamie 2, Dylan H, Lucas, Petr, OG",
+      "summary": "A remarkable game in terrible conditions at Turn Moss. St John's raced into a 2–0 lead before switching off and shipping four goals. A half-time rollicking sparked an extraordinary second-half comeback — we clawed it back to 6–7 with two minutes on the clock before a late penalty settled it at 6–8. A poor 25-minute spell cost us, but heads never dropped against a strong, physical team. Immensely proud of the lads for that second-half performance. MOTM Jamie: two goals, an assist and non-stop energy."
+    },
+    {
+      "date": "27 Sep",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Salford Storm",
+      "score": "4–1",
+      "res": "W",
+      "pts": 3,
+      "motm": "Javar",
+      "scorers": "Harry, OG, Petr 2",
+      "summary": "Our first league win of the season and the lads were brilliant. Quick passing and off-the-ball running tore Lightning apart. Harry got the first with a lovely finish under the keeper. Javar won a header at a corner that somehow ended up in the net. Petr hit the bar and their keeper made a great save from Ewan's overhead kick before Petr latched onto two Javar through-balls to seal a comfortable 4–1. Breathtaking football at times. MOTM Javar: three assists and a real captain's performance from the back."
+    },
+    {
+      "date": "04 Oct",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Wythenshawe W",
+      "score": "—",
+      "res": "ABN",
+      "pts": null,
+      "motm": null,
+      "scorers": "Abandoned",
+      "summary": "The referee called the game off due to unplayable conditions — standing water in the goalmouth — before half time. Raphie had time to score from a corner before the whistle — typical! A massive thank you to everyone who braved the weather to get there."
+    },
+    {
+      "date": "11 Oct",
+      "comp": "SDFL Cup",
+      "ha": "H",
+      "opp": "Salford United",
+      "score": "3–7",
+      "res": "L",
+      "pts": 0,
+      "motm": "Max",
+      "scorers": "Ivan, Petr 2",
+      "summary": "Always going to be a tough ask against a Division 1 side and current cup holders. Ivan scored directly from a corner and Petr grabbed two lovely finishes. We clawed back to within a goal on three separate occasions but just couldn't maintain the momentum. The opposition coach came over afterwards and complimented us on how well we'd played. MOTM Max: excellent in the no.10 role, at the heart of all our good link-up play between midfield and attack."
+    },
+    {
+      "date": "18 Oct",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Swinton Panthers",
+      "score": "3–2",
+      "res": "W",
+      "pts": 3,
+      "motm": "Luke",
+      "scorers": "Dylan H 3",
+      "summary": "What a game on a horrendous pitch! Dylan H put us ahead before half time and grabbed two more in the second half — though everyone agreed Petr's header had clearly crossed the line before the ref waved it away. Noah was sin-binned for dissent and we played the final ten minutes with ten men. Swinton pulled it back to 2–3 with hearts in mouths before Luke appeared from absolutely nowhere with a heroic last-ditch sliding tackle. MOTM Luke: immense at centre-back throughout."
+    },
+    {
+      "date": "01 Nov",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Winton Wanderers",
+      "score": "7–2",
+      "res": "W",
+      "pts": 3,
+      "motm": "Dylan C",
+      "scorers": "Dylan C 4, Max 2, Petr",
+      "summary": "Winton started the day two points above us in the table and we swept them completely aside. Dylan C was absolutely outstanding — four goals including a penalty, causing chaos throughout. Max added two great strikes and Petr got a well-deserved goal. A dominant second-half performance after a tight first forty minutes. MOTM Dylan C: four goals and a brilliant all-round display, excelling in the no.10 role."
+    },
+    {
+      "date": "08 Nov",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Man South End",
+      "score": "3–3",
+      "res": "D",
+      "pts": 1,
+      "motm": "Dylan H",
+      "scorers": "Dylan H 3",
+      "summary": "Remembrance weekend — both teams observed a minute's silence with real respect before kick-off. Dylan H scored three times but we found ourselves behind each time he equalised. Their keeper had an inspired game to keep it level. A frustrating draw on a pitch that made Turn Moss look like Wembley, but on another day we win comfortably. MOTM Dylan H: hat-trick and relentless off-the-ball running all game."
+    },
+    {
+      "date": "22 Nov",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Ordsall Park",
+      "score": "4–0",
+      "res": "W",
+      "pts": 3,
+      "motm": "Petr",
+      "scorers": "Connor, Petr 2, Luke",
+      "summary": "Ordsall started the day above us in the league with only one defeat. A tactically superb performance — the 5-3-2 system worked a treat. Connor opened the scoring with a long-range shot, Petr curled a beauty into the top corner from a short corner routine and added a second, then Luke saved the absolute best for last — an absolute rocket from the edge of the area. MOTM Petr: two great finishes and brilliant link-up play throughout."
+    },
+    {
+      "date": "13 Dec",
+      "comp": "Plate Cup",
+      "ha": "A",
+      "opp": "Whalley Range",
+      "score": "5–2",
+      "res": "W",
+      "pts": 3,
+      "motm": "Micah",
+      "scorers": "Dylan H, Micah, Max 3",
+      "summary": "A local derby in the Plate Cup and the lads came through in style. Dylan H opened with a lovely left-foot finish. Micah burst into the box to make it 2–0 before Max took over completely — three clinical goals including a composed hat-trick finish after Whalley Range had pulled two back to make it nervous. MOTM Micah: asked to play wing-back, covered every blade of grass and capped it with a brilliant finish."
+    },
+    {
+      "date": "20 Dec",
+      "comp": "League",
+      "ha": "H",
+      "opp": "RS Titans",
+      "score": "5–4",
+      "res": "W",
+      "pts": 3,
+      "motm": null,
+      "_note": "FA records 5 goals for St Johns. Named scorers from WhatsApp not fully confirmed — older app listed 6 names, one removed to match FA total.",
+      "scorers": "Petr, Max 2, Raphie, Micah",
+      "summary": "What a way to end 2025! A cracking game at Turn Moss that went right to the wire. The lads went 5–4 up and Dylan C then pulled off a stunning last-minute penalty save to preserve the win. The WhatsApp group absolutely exploded — LIMBS!! A brilliant Christmas present for everyone."
+    },
+    {
+      "date": "17 Jan",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Salford Storm",
+      "score": "7–0",
+      "res": "W",
+      "pts": 3,
+      "motm": "Petr",
+      "scorers": "Dylan H 2, Connor, Micah 2, Noah, Jamie",
+      "summary": "A dominant performance from the first whistle. Dylan H opened with two lovely lobs from Petr through-balls, Connor swept home from the edge of the area for 3–0 at half time. Micah added two more, Noah smashed home for six and Jamie rounded it off with a lovely turn and shot. Digby also saved a penalty to keep the clean sheet. MOTM Petr: involved in everything, great link-up play, ended the game at centre-back."
+    },
+    {
+      "date": "24 Jan",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Wythenshawe W",
+      "score": "0–5",
+      "res": "L",
+      "pts": 0,
+      "motm": "Ivan",
+      "scorers": "—",
+      "summary": "Always going to be a tough ask against a team who had taken 33 points from 11 games. Luke had a goal harshly ruled out for offside, Dylan C was fouled for a penalty that the keeper saved, and we went in 0–2 at half time. Couldn't get going against the wind in the second half. The scoreline really didn't reflect the game — both the referee and the opposition coach said how well we played. Extremely proud of the lads' attitude. MOTM Ivan: never stopped running for the full 80 minutes."
+    },
+    {
+      "date": "31 Jan",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Salford L&G",
+      "score": "3–1",
+      "res": "W",
+      "pts": 3,
+      "motm": "Luke & Sonny",
+      "scorers": "Dylan H, OG, Dylan C",
+      "summary": "Revenge for the early-season defeat. A completely controlled performance — barely gave the ball away, battled hard when we lost it, and played some beautiful passing football. Dylan H slotted home from a through-ball; an OG from a corner made it 2–1. Then Dylan C's third was a wonder goal — 20 yards, keeper off his line, first time, straight over the top and into the net. The referee complimented the lads on their composure. Joint MOTM Luke and Sonny."
+    },
+    {
+      "date": "21 Feb",
+      "comp": "League Cup",
+      "ha": "H",
+      "opp": "Wythenshawe W",
+      "score": "1–5",
+      "res": "L",
+      "pts": 0,
+      "motm": "Micah",
+      "scorers": "Petr",
+      "summary": "A tough opener in the League Cup group phase. We actually took the lead — a quick free kick found Petr in the box who lobbed the keeper with his very first touch as a substitute. Wythenshawe's physicality told as the game went on. Digby made several great saves to keep the score respectable. MOTM Micah: non-stop running, energy and effort, put in great tackles regardless of position."
+    },
+    {
+      "date": "28 Feb",
+      "comp": "League Cup",
+      "ha": "A",
+      "opp": "Ordsall Park",
+      "score": "W/O",
+      "res": "W",
+      "pts": 3,
+      "motm": null,
+      "scorers": "Walkover",
+      "summary": "Opposition couldn't put a team out on the morning of the game. Walkover win and 3 points."
+    },
+    {
+      "date": "07 Mar",
+      "comp": "League Cup",
+      "ha": "A",
+      "opp": "RS Titans",
+      "score": "5–2",
+      "res": "W",
+      "pts": 3,
+      "motm": "Dylan H",
+      "scorers": "Jamie, Dylan H 4",
+      "summary": "The lads went two goals down on a difficult pitch before finding their feet. Jamie latched onto a great Dylan cross and finished first time to make it 2–1. Two clinical Dylan H finishes put us 2–3 ahead, and Luke dropped into centre-back for more control. Dylan H sealed it with two more on the break in the final minutes. George was magnificent on his debut in goal — a world-class save drew the loudest cheer of the day. MOTM Dylan H: four goals and an assist."
+    },
+    {
+      "date": "21 Mar",
+      "comp": "League Cup",
+      "ha": "H",
+      "opp": "Salford L&G",
+      "score": "3–0",
+      "res": "W",
+      "pts": 3,
+      "motm": "Raphie",
+      "scorers": "Dylan C, OG, Dylan H",
+      "summary": "A completely professional performance. Dylan C lifted a finish into the top corner after a brilliant mazy run from Max. Ivan's corner was fumbled into the net under pressure from Raphie. A lovely touch from Petr put Dylan H through on goal to round the keeper from a tight angle. The lads worked tirelessly and barely gave Digby a single thing to do. MOTM Raphie: won every tackle, header and clearance, showed great composure on the ball throughout."
+    },
+    {
+      "date": "01 Apr",
+      "comp": "Plate Cup",
+      "ha": "A",
+      "opp": "Salford United",
+      "score": "W/O",
+      "res": "W",
+      "pts": 3,
+      "motm": null,
+      "scorers": "Walkover",
+      "summary": "Opposition forfeited the Plate Cup quarter-final. Walkover win and 3 points."
+    },
+    {
+      "date": "15 Apr",
+      "comp": "League Cup",
+      "ha": "A",
+      "opp": "Winton Wanderers",
+      "score": "8–2",
+      "res": "W",
+      "pts": 3,
+      "motm": "Ewan",
+      "scorers": "Petr, Micah, Connor, Ilyas, Jamie, Sonny, Max, Luke",
+      "summary": "A cracking final group game on a wet Wednesday evening in Eccles — four wins from five in the group and what a way to do it. Goals were shared around beautifully: Petr and Micah made it 2–0 quickly, Connor finished from a great corner routine and Ilyas fired home for 4–0 at half time. Jamie, Sonny, Max and Luke all scored in the second half. Dylan C saved a penalty and had two goals disallowed. MOTM Ewan: bombing up and down the left wing all night, creating chances and grabbing two assists."
+    },
+    {
+      "date": "18 Apr",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Ordsall Park",
+      "score": "5–3",
+      "res": "W",
+      "pts": 3,
+      "motm": "Ethan",
+      "scorers": "Ewan, Harry, Raphie, Petr, Dylan H",
+      "summary": "A brilliant comeback that showed real character. Third versus fourth in the league and Ordsall made it 3–1 after half time — but heads never dropped. Harry scored direct from a corner to make it 3–2, and Raphie smashed home the equaliser. Their keeper pulled off two stunning saves before Petr tapped home and Dylan H sealed it in the final minutes. MOTM Ethan: pace, power and constant communication at the back all afternoon."
+    },
+    {
+      "date": "22 Apr",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Man South End",
+      "score": "5–1",
+      "res": "W",
+      "pts": 3,
+      "motm": "Luke",
+      "scorers": "Petr, Dylan H 2, Max, Luke",
+      "summary": "Steve described it afterwards as the best passing game of the entire season. Petr opened the scoring before Dylan H struck a stunning half-volley into the roof of the net. Luke then stepped up and curled a 30-yard beauty into the top corner. Max slotted home from a slick short corner routine for 4–0 at half time. Dylan H added a header at the back post after the break. The first half in particular was as good as we've played all year. MOTM Luke: controlled the midfield, scored a beauty and set up the fifth."
+    },
+    {
+      "date": "25 Apr",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Swinton Panthers",
+      "score": "5–2",
+      "res": "W",
+      "pts": 3,
+      "motm": "Petr",
+      "scorers": "Petr 3, Dylan H, Jamie",
+      "summary": "A cracking game in the April sunshine. Petr side-footed us in front early on before Swinton equalised with a great strike. Max had a penalty saved just before half time. The lads raised their game in the second half — Petr slotted in a perfect cutback from Dylan H, who then broke the offside trap to make it 3–1. Swinton pulled one back before Jamie met Petr's cross with a beautiful volley at the back post. Petr sealed his hat-trick smashing home the rebound after his own shot hit the post. MOTM Petr: hat-trick, an assist, calm and composed throughout."
+    },
+    {
+      "date": "29 Apr",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Whalley Range",
+      "score": "2–3",
+      "res": "L",
+      "pts": 0,
+      "motm": "Ethan",
+      "scorers": "Dylan C, Petr",
+      "summary": "A real game of two halves at Hough End. Three Whalley Range free kicks had us 3–0 down at half time in difficult conditions. The second half was a completely different story — Dylan C lobbed the keeper to make it 3–1 and then hit the post with a great header. Petr made it 3–2 with a calm finish. We hit the woodwork again, had goalmouth scrambles, but it just wouldn't go in. We would go on to beat them at home before the end of the season. MOTM Ethan: dominated their striker throughout."
+    },
+    {
+      "date": "02 May",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Reddish Vulcans",
+      "score": "W/O",
+      "res": "W",
+      "pts": 3,
+      "motm": null,
+      "scorers": "Walkover",
+      "summary": "Opposition couldn't put a team out for the Bank Holiday weekend fixture. Walkover win and 3 points. Nick: 'Enjoy the Bank Holiday!'"
+    },
+    {
+      "date": "09 May",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Reddish Vulcans",
+      "score": "12–0",
+      "res": "W",
+      "pts": 3,
+      "motm": "Lucas",
+      "scorers": "Dylan C 4, Petr 4, Micah, Jamie, Sonny, Lucas",
+      "summary": "Champagne football from the very first whistle — one of the great performances of the season. Dylan C bagged four, Petr four — some absolutely stunning goals including a Dylan C top-corner special in the opening minutes. 5–0 at half time and the lads came back hungry for more. Lucas capped the whole thing in style — a lung-busting run from centre-back into the penalty area, a saved penalty, then absolutely hammering home the rebound. The celebration was something special. MOTM Lucas: composed at the back, always found a team-mate, and loved every second of that goal."
+    },
+    {
+      "date": "16 May",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Winton Wanderers",
+      "score": "14–2",
+      "res": "W",
+      "pts": 3,
+      "_note": "Nick posted '14-2 (I think!)'. FA player-row shows 12 goals for St Johns. Using manager's count. Named scorers total 14.",
+      "motm": "Ilyas",
+      "scorers": "Dylan H 4, Dylan C 3, Petr 3, Jamie 2, Micah, Ivan",
+      "summary": "The perfect way to finish the league season — a brilliant away win. Dylan H latched onto a great Ilyas ball for an early lead. Dylan C met a lovely cross from Luke with a diving header. Winton pulled one back just before half time. Second half was a different story — St John's were ruthless. All three strikers completed their hat-tricks in an extraordinary second half. Jamie's beautifully controlled volley at the back post and Ivan's top-corner finish from the edge of the area were the standout goals. Digby and the defence were solid throughout. MOTM Ilyas: captain on the day, never stopped running, won absolutely everything."
+    },
+    {
+      "date": "20 May",
+      "comp": "League",
+      "ha": "H",
+      "opp": "Whalley Range",
+      "score": "5–2",
+      "res": "W",
+      "pts": 3,
+      "motm": "Ethan",
+      "scorers": "Dylan H 2, Jamie, Ivan, Petr",
+      "summary": "One of the performances of the season from the lads. Dylan latched onto a through-ball to round their keeper after 30 seconds. Jamie popped up at the back post for 2–0. Ivan fired home from the edge of the box for 3–0 at half time. Whalley Range got back into it from a corner and quickly scored a second for 3–2 — but the lads stayed calm. Dylan quickly restored a two-goal advantage before crossing for Petr to fire home for 5–2. A fantastic all-round team performance. The win clinched 2nd place in the division with a game to play! MOTM Ethan: an absolute rock at the back."
+    },
+    {
+      "date": "23 May",
+      "comp": "League",
+      "ha": "A",
+      "opp": "Wythenshawe W",
+      "score": "4–4",
+      "res": "D",
+      "pts": 1,
+      "motm": "Digby",
+      "scorers": "Ewan, Petr 3",
+      "summary": "What a game to finish the season — against the champions who had not dropped a single point all season. Ewan crashed home a great volley from a corner for 1–0. Wythenshawe levelled before Petr slotted home from a tight angle for 2–1 at half time. Petr made it 3–1 before Wythenshawe drew level with two scrappy set-piece goals. Petr completed his hat-trick for 4–3. A controversial handball penalty made it 4–4. Then a dubious handball against Lucas — hearts in mouths — but Wythenshawe missed the spot kick. A heroic draw to clinch 2nd place in the division. Steve: 'It was honestly the best I have seen every player play this whole year.' MOTM Digby — tipped a shot onto the post, commanding throughout."
+    }
+  ],
+  "players": [
+    {
+      "name": "Petr",
+      "surname": "Crhak",
+      "role": "Forward",
+      "gk": false,
+      "fa_starts": 8,
+      "fa_bench": 16,
+      "fri_apps": 1,
+      "lge_apps": 18,
+      "cup_apps": 6,
+      "lge_goals": 25,
+      "cup_goals": 4,
+      "fri_goals": 2,
+      "motm": {
+        "League": 3
+      },
+      "note": "Top scorer — 29 FA goals + 2 friendly = 31 total"
+    },
+    {
+      "name": "Dylan H",
+      "surname": "Harper",
+      "role": "Forward",
+      "gk": false,
+      "fa_starts": 13,
+      "fa_bench": 1,
+      "fri_apps": 0,
+      "lge_apps": 11,
+      "cup_apps": 3,
+      "lge_goals": 20,
+      "cup_goals": 6,
+      "fri_goals": 0,
+      "_note_goals": "WhatsApp match-by-match count = 20 league + 6 cup = 26 total. FA PDF says 24. Was previously 21 lge — the 20 Dec goal belonged to Micah (Dylan H absent that day, confirmed by parent message 19 Dec).",
+      "motm": {
+        "League": 1,
+        "Cup": 1
+      },
+      "note": "Three hat-tricks during the season"
+    },
+    {
+      "name": "Dylan C",
+      "surname": "Chesworth",
+      "role": "Fwd/Mid",
+      "gk": false,
+      "fa_starts": 3,
+      "fa_bench": 16,
+      "fri_apps": 1,
+      "lge_apps": 14,
+      "cup_apps": 5,
+      "lge_goals": 13,
+      "cup_goals": 1,
+      "fri_goals": 0,
+      "_note_goals": "WhatsApp match scorers total 13 league; FA total 16. Using WhatsApp per-game count.",
+      "motm": {
+        "League": 1
+      },
+      "note": "Wonder goal vs Salford L&G (Jan) · Penalty save vs RS Titans (Dec)"
+    },
+    {
+      "name": "Max",
+      "surname": "Colly",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 2,
+      "fa_bench": 17,
+      "fri_apps": 1,
+      "lge_apps": 14,
+      "cup_apps": 5,
+      "lge_goals": 5,
+      "cup_goals": 4,
+      "fri_goals": 0,
+      "motm": {
+        "Cup": 1
+      },
+      "note": "Hat-trick in Plate Cup vs Whalley Range"
+    },
+    {
+      "name": "Micah",
+      "surname": "Liburd",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 19,
+      "fa_bench": 0,
+      "fri_apps": 1,
+      "lge_apps": 14,
+      "cup_apps": 5,
+      "lge_goals": 6,
+      "cup_goals": 2,
+      "fri_goals": 2,
+      "_note_goals": "lge_goals updated from 5 to 6: Micah scored in 20 Dec vs RS Titans (Dylan H was absent). Confirmed by Steve's match report 'Petr raphy Micah' and edited scorer list.",
+      "motm": {
+        "Cup": 2
+      }
+    },
+    {
+      "name": "Jamie",
+      "surname": "Morgan",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 21,
+      "fa_bench": 0,
+      "fri_apps": 1,
+      "lge_apps": 18,
+      "cup_apps": 3,
+      "lge_goals": 8,
+      "cup_goals": 2,
+      "fri_goals": 1,
+      "motm": {
+        "League": 2
+      }
+    },
+    {
+      "name": "Ivan",
+      "surname": "Murray",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 23,
+      "fa_bench": 0,
+      "fri_apps": 1,
+      "lge_apps": 18,
+      "cup_apps": 5,
+      "lge_goals": 2,
+      "cup_goals": 1,
+      "fri_goals": 1,
+      "_note_goals": "SDFL Cup goal (direct from corner) may be recorded as OG in FA — cup_goals kept as 1",
+      "motm": {
+        "League": 1
+      }
+    },
+    {
+      "name": "Luke",
+      "surname": "Smith",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 21,
+      "fa_bench": 0,
+      "fri_apps": 0,
+      "lge_apps": 17,
+      "cup_apps": 4,
+      "lge_goals": 2,
+      "cup_goals": 1,
+      "fri_goals": 0,
+      "motm": {
+        "League": 3
+      }
+    },
+    {
+      "name": "Sonny",
+      "surname": "Hurdsfield",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 25,
+      "fa_bench": 0,
+      "fri_apps": 0,
+      "lge_apps": 19,
+      "cup_apps": 6,
+      "lge_goals": 1,
+      "cup_goals": 1,
+      "fri_goals": 0,
+      "motm": {
+        "League": 1
+      }
+    },
+    {
+      "name": "Lucas",
+      "surname": "Turner",
+      "role": "Def/Mid",
+      "gk": false,
+      "fa_starts": 25,
+      "fa_bench": 0,
+      "fri_apps": 1,
+      "lge_apps": 19,
+      "cup_apps": 6,
+      "lge_goals": 2,
+      "cup_goals": 0,
+      "fri_goals": 1,
+      "motm": {
+        "League": 1
+      }
+    },
+    {
+      "name": "Ewan",
+      "surname": "Hope",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 22,
+      "fa_bench": 0,
+      "fri_apps": 1,
+      "lge_apps": 17,
+      "cup_apps": 5,
+      "lge_goals": 2,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "motm": {
+        "Cup": 1
+      }
+    },
+    {
+      "name": "Raphie",
+      "surname": "Leyland",
+      "role": "Defender",
+      "gk": false,
+      "fa_starts": 21,
+      "fa_bench": 0,
+      "fri_apps": 1,
+      "lge_apps": 16,
+      "cup_apps": 5,
+      "lge_goals": 2,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "motm": {
+        "Cup": 1
+      }
+    },
+    {
+      "name": "Connor",
+      "surname": "Lowe",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 10,
+      "fa_bench": 1,
+      "fri_apps": 1,
+      "lge_apps": 9,
+      "cup_apps": 2,
+      "lge_goals": 2,
+      "cup_goals": 1,
+      "fri_goals": 0,
+      "_note_goals": "FA PDF total = 2; WhatsApp shows 2 league goals + 1 cup = 3. FA may have missed one. Using WhatsApp count.",
+      "motm": {}
+    },
+    {
+      "name": "Ilyas",
+      "surname": "Jama",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 20,
+      "fa_bench": 0,
+      "fri_apps": 1,
+      "lge_apps": 15,
+      "cup_apps": 5,
+      "lge_goals": 0,
+      "cup_goals": 1,
+      "fri_goals": 0,
+      "motm": {
+        "League": 1
+      }
+    },
+    {
+      "name": "Harry",
+      "surname": "Agnew",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 0,
+      "fa_bench": 6,
+      "fri_apps": 1,
+      "lge_apps": 6,
+      "cup_apps": 0,
+      "lge_goals": 2,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "motm": {}
+    },
+    {
+      "name": "Noah",
+      "surname": "Byrnes",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 1,
+      "fa_bench": 5,
+      "fri_apps": 1,
+      "lge_apps": 6,
+      "cup_apps": 0,
+      "lge_goals": 1,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "motm": {}
+    },
+    {
+      "name": "Digby",
+      "surname": "Gorse",
+      "role": "Goalkeeper",
+      "gk": true,
+      "fa_starts": 15,
+      "fa_bench": 3,
+      "fri_apps": 1,
+      "lge_apps": 13,
+      "cup_apps": 5,
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "motm": {
+        "League": 1
+      },
+      "note": "Pen saves: Salford Storm (Jan) &amp; Wythenshawe (Jan cup)"
+    },
+    {
+      "name": "George",
+      "surname": "",
+      "role": "Goalkeeper",
+      "gk": true,
+      "fa_starts": 0,
+      "fa_bench": 0,
+      "fri_apps": 0,
+      "lge_apps": 1,
+      "cup_apps": 1,
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "_note": "Not in FA PDF — may not be registered. Appearances tracked manually from WhatsApp.",
+      "motm": {},
+      "note": "Debut worldie save vs RS Titans (Mar)"
+    },
+    {
+      "name": "Elliot",
+      "surname": "Swainston",
+      "role": "Defender",
+      "gk": false,
+      "fa_starts": 11,
+      "fa_bench": 0,
+      "fri_apps": 1,
+      "lge_apps": 8,
+      "cup_apps": 4,
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "motm": {}
+    },
+    {
+      "name": "Ethan",
+      "surname": "Drinkwater",
+      "role": "Defender",
+      "gk": false,
+      "fa_starts": 5,
+      "fa_bench": 7,
+      "fri_apps": 0,
+      "lge_apps": 10,
+      "cup_apps": 2,
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "motm": {
+        "League": 2
+      },
+      "note": "Key defensive performer — 3 MOTM awards across all games"
+    },
+    {
+      "name": "Javar",
+      "surname": "Ferreira",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 8,
+      "fa_bench": 3,
+      "fri_apps": 1,
+      "lge_apps": 9,
+      "cup_apps": 2,
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "motm": {
+        "League": 1
+      },
+      "note": "3 assists vs Salford Storm (Sep)"
+    },
+    {
+      "name": "Dalton",
+      "surname": "Foote",
+      "role": "Defender",
+      "gk": false,
+      "fa_starts": 3,
+      "fa_bench": 0,
+      "fri_apps": 0,
+      "lge_apps": 3,
+      "cup_apps": 0,
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "motm": {}
+    },
+    {
+      "name": "Connor C",
+      "surname": "Cla",
+      "role": "Midfielder",
+      "gk": false,
+      "fa_starts": 0,
+      "fa_bench": 1,
+      "fri_apps": 0,
+      "lge_apps": 0,
+      "cup_apps": 0,
+      "lge_goals": 0,
+      "cup_goals": 0,
+      "fri_goals": 0,
+      "_note": "0 appearances confirmed by manager. FA bench=1 may be named-but-unused.",
+      "motm": {}
+    }
+  ],
+  "highlights": [
+    {
+      "icon": "🏆",
+      "text": "14–2 away win at Winton on the final league day — all three strikers completing hat-tricks"
+    },
+    {
+      "icon": "⚽",
+      "text": "12–0 home win over Reddish Vulcans — Dylan C and Petr both scoring four goals"
+    },
+    {
+      "icon": "🪄",
+      "text": "Dylan C's 20-yard first-time lob over the keeper at Salford L&G in January"
+    },
+    {
+      "icon": "🧤",
+      "text": "Dylan C's last-minute penalty save vs RS Titans in December — LIMBS!!"
+    },
+    {
+      "icon": "💫",
+      "text": "Luke's 30-yard curler into the top corner against Manchester South End (April)"
+    },
+    {
+      "icon": "🌟",
+      "text": "George's outstanding debut — world-class save vs RS Titans in the League Cup"
+    },
+    {
+      "icon": "🎯",
+      "text": "7–0 home win over Salford Storm — including a Digby penalty save for the clean sheet"
+    },
+    {
+      "icon": "💪",
+      "text": "Came back from 3–1 down to beat Ordsall 5–3 in April — real character shown"
+    },
+    {
+      "icon": "🥈",
+      "text": "Drew 4–4 with champions Wythenshawe on the final day — the only points they dropped all season. Clinched 2nd place in the division"
+    }
+  ],
+  "league_table": [
+    {
+      "pos": 1,
+      "team": "Wythenshawe Wanderers U15",
+      "P": 20,
+      "W": 19,
+      "D": 1,
+      "L": 0,
+      "Pts": 58,
+      "champion": true
+    },
+    {
+      "pos": 2,
+      "team": "St Johns (CHORLTON) U15 JFC Greens",
+      "P": 20,
+      "W": 14,
+      "D": 3,
+      "L": 3,
+      "Pts": 45,
+      "us": true
+    },
+    {
+      "pos": 3,
+      "team": "Salford Lads & Girls Club U15",
+      "P": 20,
+      "W": 13,
+      "D": 2,
+      "L": 5,
+      "Pts": 41
+    },
+    {
+      "pos": 4,
+      "team": "RS JFC U15 Titans",
+      "P": 20,
+      "W": 11,
+      "D": 3,
+      "L": 6,
+      "Pts": 36
+    },
+    {
+      "pos": 5,
+      "team": "Ordsall Park Juniors FC U15 's United",
+      "P": 20,
+      "W": 11,
+      "D": 1,
+      "L": 8,
+      "Pts": 34
+    },
+    {
+      "pos": 6,
+      "team": "Whalley Range AFC Juniors U15",
+      "P": 20,
+      "W": 7,
+      "D": 4,
+      "L": 9,
+      "Pts": 25
+    },
+    {
+      "pos": 7,
+      "team": "Swinton U15 Panthers",
+      "P": 19,
+      "W": 6,
+      "D": 2,
+      "L": 11,
+      "Pts": 20
+    },
+    {
+      "pos": 8,
+      "team": "Salford Storm FC U15 Lightning",
+      "P": 20,
+      "W": 6,
+      "D": 2,
+      "L": 12,
+      "Pts": 20
+    },
+    {
+      "pos": 9,
+      "team": "Winton Wanderers U15 Cobras",
+      "P": 19,
+      "W": 5,
+      "D": 0,
+      "L": 14,
+      "Pts": 15
+    },
+    {
+      "pos": 10,
+      "team": "Manchester South End FC U15 MSE",
+      "P": 19,
+      "W": 4,
+      "D": 3,
+      "L": 12,
+      "Pts": 15
+    },
+    {
+      "pos": 11,
+      "team": "Reddish Vulcans Junior U15 Bombers",
+      "P": 19,
+      "W": 1,
+      "D": 1,
+      "L": 17,
+      "Pts": 4
+    }
+  ],
+  "season_story": {
+    "presentation_date": "Presentation Day · June 2026",
+    "report_title": "St John's Chorlton U15 Greens",
+    "report_subtitle": "Season Review 2025–26 · Managers: Nick &amp; Steve Hurdsfield",
+    "signoff": "Nick &amp; Steve Hurdsfield &nbsp;·&nbsp; St John's Chorlton U15 Greens &nbsp;·&nbsp; June 2026",
+    "sections": [
+      {
+        "heading": "Introduction",
+        "paras": [
+          "What a season it has been. From the opening pre-season friendly against Barr Hill right through to a <span class=\"highlight\">4–4 draw away at Wythenshawe</span> on the final day — the only points the champions dropped all season — the St John's U15 Greens have grown into a team that any manager would be proud of. Twenty-one wins from twenty-nine games across all competitions and a league points total of <span class=\"highlight\">45</span> — the numbers tell a story of real quality and total consistency.",
+          "<span class=\"player-ref\">Nick</span> and <span class=\"player-ref\">Steve</span> deserve enormous credit for the way they have developed this group throughout the year. The tactical evolution — particularly the 5-3-2 system that produced such excellent results in the autumn — showed a coaching team not afraid to adapt and innovate. More importantly, the lads responded every single time they were asked to raise their game."
+        ]
+      },
+      {
+        "heading": "How the Season Unfolded",
+        "paras": [
+          "The campaign began in September with a confident friendly win over Barr Hill before the league got underway with a hard-fought 2–2 draw away to RS Titans. The early weeks were a mixture of brilliant highs and frustrating lows: a remarkable <span class=\"highlight\">6–8 home defeat to Salford Lads and Girls</span> in which the lads trailed 2–6 at half time and still somehow made it 6–7 in the closing minutes showed that this group had heart and character in abundance.",
+          "From October through to January the team hit their stride — seven consecutive league wins including a brilliant 4–0 away win at Ordsall, a dominant 7–2 home victory over Winton, and a stunning 7–0 demolition of Salford Storm in which <span class=\"player-ref\">Digby</span> saved a penalty to boot. The spring brought more of the same, with some of the best football of the entire season played in April and May."
+        ]
+      },
+      {
+        "heading": "The Goals — and the Goalscorers",
+        "paras": [
+          "<span class=\"player-ref\">Petr</span> finished the season as the top scorer with an extraordinary <span class=\"highlight\">25 league goals</span> and 31 in total across all competitions. His ability to score from anywhere, combine brilliantly with team-mates and track back when needed made him one of the most complete players in the division. <span class=\"player-ref\">Dylan H</span> was right alongside him with <span class=\"highlight\">27 goals</span> — including three hat-tricks — and his relentless movement and clinical finishing caused problems for every defence he came up against.",
+          "<span class=\"player-ref\">Dylan C</span> added <span class=\"highlight\">14 goals</span> with some truly special individual moments, none better than his wonder goal away at Salford Lads and Girls in January — 20 yards, keeper off his line, first time, straight over the top. He also pulled off a stunning last-minute penalty save against RS Titans in December. <span class=\"player-ref\">Jamie</span> chipped in with 9 goals, <span class=\"player-ref\">Max</span> with 9 including a Plate Cup hat-trick, and <span class=\"player-ref\">Micah</span> was tireless throughout with 9 goals and two Man of the Match awards."
+        ]
+      },
+      {
+        "heading": "Defensive Solidity",
+        "paras": [
+          "Goals win games but clean sheets win titles, and the defensive unit throughout this season deserves enormous credit. <span class=\"player-ref\">Digby</span> was a commanding and reliable presence in goal all year — his penalty save against Salford Storm in January was a game-defining moment. When <span class=\"player-ref\">George</span> stepped in for cup duty in March he immediately produced a stunning debut performance against RS Titans, with a world-class save that drew the loudest cheer of the entire day.",
+          "<span class=\"player-ref\">Ethan</span>, <span class=\"player-ref\">Lucas</span>, <span class=\"player-ref\">Luke</span>, <span class=\"player-ref\">Dalton</span>, <span class=\"player-ref\">Elliot</span>, <span class=\"player-ref\">Sonny</span> and <span class=\"player-ref\">Raphie</span> all contributed magnificently at the back throughout the season, with Ethan picking up two Man of the Match awards for his performances."
+        ]
+      },
+      {
+        "heading": "Thank You",
+        "paras": [
+          "A huge thank you to every parent and family member who turned up week after week — often in genuinely awful weather — to support the lads. Your encouragement makes a real difference and never goes unnoticed.",
+          "The season ended in the most fitting way possible — a stunning 4–4 draw away at Wythenshawe, the only points they dropped all season, confirming <span class='highlight'>2nd place in the division</span>. Steve summed it up perfectly afterwards: <em>'It was honestly the best I have seen every player play this whole year.'</em> To the lads themselves: you have been a fantastic group to work with. You have improved as footballers, shown real character when things got tough, and represented St John's with real pride. Here's to next season. 👊⚽"
+        ]
+      }
+    ]
+  }
+}

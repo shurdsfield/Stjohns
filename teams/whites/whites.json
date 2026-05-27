@@ -1,0 +1,45 @@
+{
+  "_comment": "Sunday team config — St John's Chorlton U15 Whites. Used by generate_season.py to locate source files and fetch live data. All paths are relative to the project root (where generate_season.py lives).",
+
+  "team_id": "whites",
+  "team": {
+    "name": "St John's Chorlton U15 Whites",
+    "short_name": "Whites",
+    "season": "2025–26",
+    "league": "Timperley & District JFL",
+    "division": "TBC",
+    "managers": "Mike Lowe & Paul Murray",
+    "day": "Sunday"
+  },
+
+  "sources": {
+    "results_pdf":   "teams/whites/results/",
+    "players_pdf":   "teams/whites/players/",
+    "chat_zip":      "teams/whites/chat/stjohns_chat.zip",
+    "season_config": "teams/whites/season_config.json",
+    "output_html":   "index.html"
+  },
+
+  "fulltime": {
+    "league_table_url": null,
+    "season_id": null,
+    "division_id": null,
+    "notes": [
+      "FA Full Time URL not yet configured for Whites / Timperley & District JFL.",
+      "Add league_table_url once the correct FA Full Time division URL is known."
+    ]
+  },
+
+  "our_team_name_in_fa": "St Johns (CHORLTON) U15 JFC Whites",
+
+  "whatsapp": {
+    "managers": ["Mike Lowe Football St Johns", "SJFC Ivan Paul"],
+    "player_names": [
+      "Henry","Keizo","Harry","Dalton","Elliot","Ivan","Nathaniel","Rio",
+      "Conor","Luke","Noah","Petr","Ewan","George","Dylan","Ethan",
+      "Reuben","Raphie","Aker","Tom","Aryan","Caidan","Zeze","Max","Micah"
+    ],
+    "season_start_hints": ["9/8/25", "Sale Coyotes"],
+    "name_normalisations": {}
+  }
+}

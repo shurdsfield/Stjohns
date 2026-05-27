@@ -1,0 +1,49 @@
+{
+  "_comment": "Saturday team config — St John's Chorlton U15 Greens. Used by generate_season.py to locate source files and fetch live data. All paths are relative to the project root (where generate_season.py lives).",
+
+  "team_id": "greens",
+  "team": {
+    "name": "St John's Chorlton U15 Greens",
+    "short_name": "Greens",
+    "season": "2025–26",
+    "league": "SDFL Salford & Districts Football League",
+    "division": "Division 2",
+    "managers": "Nick Turner & Steve Hurdsfield",
+    "day": "Saturday"
+  },
+
+  "sources": {
+    "results_pdf":   "teams/greens/results/",
+    "players_pdf":   "teams/greens/players/",
+    "chat_zip":      "teams/greens/chat/stjohns_chat.zip",
+    "season_config": "teams/greens/season_config.json",
+    "output_html":   "index.html"
+  },
+
+  "fulltime": {
+    "league_table_url": "https://fulltime.thefa.com/table.html?selectedSeason=104067364&selectedDivision=156824807&ftsTablePageContent.fixtureAnalysisForm.standingsTableDay=27&ftsTablePageContent.fixtureAnalysisForm.standingsTableMonth=4&ftsTablePageContent.fixtureAnalysisForm.standingsTableYear=2026&activeTab=1#tab-1",
+    "season_id": "104067364",
+    "division_id": "156824807",
+    "notes": [
+      "URL fetches the final standings as of 27 Apr 2026 (end of season).",
+      "To get a mid-season snapshot change standingsTableDay/Month/Year params.",
+      "Page is JS-rendered — only P/W/D/L/Pts are reliably scraped; GF/GA/GD may need manual entry."
+    ]
+  },
+
+  "our_team_name_in_fa": "St Johns (CHORLTON) U15 JFC Greens",
+
+  "whatsapp": {
+    "managers": ["SJFC Lucas Nick", "steve", "Steve Chez Dylans Dad"],
+    "player_names": [
+      "Petr","Dylan H","Dylan C","Max","Micah","Jamie","Ivan","Luke","Sonny",
+      "Lucas","Ewan","Raphie","Connor","Ilyas","Harry","Noah","Digby","George",
+      "Elliot","Ethan","Javar","Dalton"
+    ],
+    "season_start_hints": ["6/9/25", "Barr Hill"],
+    "name_normalisations": {
+      "Ma": "Max",
+      "Conor": "Connor"
+    }
+  }
+}
