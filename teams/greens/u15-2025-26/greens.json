@@ -1,7 +1,10 @@
 {
-  "_comment": "Saturday team config — St John's Chorlton U15 Greens. Used by generate_season.py to locate source files and fetch live data. All paths are relative to the project root (where generate_season.py lives).",
+  "_comment": "Saturday team config — St John's Chorlton U15 Greens 2025-26. Used by generate_season.py to locate source files and fetch live data. All paths are relative to the project root (where generate_season.py lives).",
 
   "team_id": "greens",
+  "age_group": "U15",
+  "season_slug": "u15-2025-26",
+
   "team": {
     "name": "St John's Chorlton U15 Greens",
     "short_name": "Greens",
@@ -13,10 +16,10 @@
   },
 
   "sources": {
-    "results_pdf":   "teams/greens/results/",
-    "players_pdf":   "teams/greens/players/",
-    "chat_zip":      "teams/greens/chat/stjohns_chat.zip",
-    "season_config": "teams/greens/season_config.json",
+    "results_pdf":   "teams/greens/u15-2025-26/results/",
+    "players_pdf":   "teams/greens/u15-2025-26/players/",
+    "chat_zip":      "teams/greens/u15-2025-26/chat/stjohns_chat.zip",
+    "season_config": "teams/greens/u15-2025-26/season_config.json",
     "output_html":   "index.html"
   },
 
@@ -34,7 +37,7 @@
   "our_team_name_in_fa": "St Johns (CHORLTON) U15 JFC Greens",
 
   "whatsapp": {
-    "managers": ["SJFC Lucas Nick", "steve", "Steve Chez Dylans Dad"],
+    "managers": ["SJFC Lucas Nick", "steve"],
     "player_names": [
       "Petr","Dylan H","Dylan C","Max","Micah","Jamie","Ivan","Luke","Sonny",
       "Lucas","Ewan","Raphie","Connor","Ilyas","Harry","Noah","Digby","George",

@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-A single-file HTML season report app for St John's Chorlton JFC U15s, covering two teams:
+A single-file HTML season report app for St John's Chorlton JFC U15s, covering any teams:
 - **Saturday team**: U15 Greens — SDFL Salford & Districts Football League, Division 2
 - **Sunday team**: U15 Whites — Timperley & District JFL
 
@@ -36,10 +36,15 @@ The app has a **team switcher toggle** at the top (Greens / Whites) and **6 nav 
 there are 3 folders where the raw data comes from. the data should be extracted into a structured format for the app
 if there is no data the user should be prompted when generating the app. if the raw data changes the structured data should be regenerated
 
-- chat: the whatsapp chat group where we get the goalscorers and match reports from and friendly results extract
-- players: a list of each player and their appearances. both 'started' and 'Bench unused' count as an appearance
-- results: a list of all league and cup results but usually doesnt include friendlies
----
+Source data lives under `teams/<colour>/<age-season>/` e.g. `teams/greens/u15-2025-26/`:
+- `chat/` — WhatsApp chat ZIP: goalscorers, match reports, friendly results
+- `players/` — FA Full Time players PDF: appearances per player
+- `results/` — FA Full Time results PDF: league and cup results
+
+Each season folder also contains:
+- `<colour>.json` — team + season config (age_group, season_slug, source paths, WhatsApp config)
+- `season_config.json` — extracted structured data used to build index.html
+2---
 
 ## Technical Constraints
 
@@ -102,7 +107,7 @@ Squad messages (e.g. `Squad for Sunday: Conor, Ivan, Harry…`) matched to fixtu
 ### Manager names (filter for result/squad posts)
 | Team | WhatsApp display names |
 |---|---|
-| Saturday (Greens) | `SJFC Lucas Nick`, `steve`, `Steve Chez Dylans Dad` |
+| Saturday (Greens) | `SJFC Lucas Nick`, `steve` |
 | Sunday (Whites) | `Mike Lowe Football St Johns`, `SJFC Ivan Paul` |
 
 ---
