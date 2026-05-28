@@ -1903,7 +1903,6 @@ def build_html(cfg, config_hash, sun_cfg=None):
         '<div id="table" class="section">\n'
         '  <div style="max-width:900px;margin:0 auto 16px">\n'
         f'    <p id="league-caption" style="color:var(--text-sub);font-size:13px;margin-bottom:6px">{league_caption_content}</p>\n'
-        '    <p style="color:var(--text-muted);font-size:11px">&dagger; Top 2 updated from final games.</p>\n'
         '  </div>\n'
         '  <div class="table-wrap"><table>\n'
         '    <thead><tr><th class="r" style="width:36px">Pos</th><th>Team</th>'
