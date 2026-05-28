@@ -10,7 +10,7 @@ Pipeline:
 Usage:
     python3.13 generate_season.py [--config season_config.json] [--out index.html]
                                   [--force-extract] [--force-build] [--force] [--test]
-                                  [--team teams/greens/u15-2025-26/greens.json] [--fetch-table]
+                                  [--team teams/u15-2025-26/greens/greens.json] [--fetch-table]
 """
 
 import argparse, hashlib, json, os, re, subprocess, sys, tempfile, zipfile
@@ -21,9 +21,9 @@ from datetime import datetime
 # These defaults are used only when --team is not supplied.
 # When --team is supplied these are overridden by the team config sources block.
 
-SRC_RESULTS  = "teams/greens/u15-2025-26/results/"
-SRC_PLAYERS  = "teams/greens/u15-2025-26/players/"
-SRC_CHAT     = "teams/greens/u15-2025-26/chat/stjohns_chat.zip"
+SRC_RESULTS  = "teams/u15-2025-26/greens/results/"
+SRC_PLAYERS  = "teams/u15-2025-26/greens/players/"
+SRC_CHAT     = "teams/u15-2025-26/greens/chat/stjohns_chat.zip"
 HASH_FILE    = ".source_hashes.json"
 STJOHNS_RE   = re.compile(r"St\.?\s*John[‘’]?s?", re.I)
 
@@ -2017,12 +2017,12 @@ def main():
     parser.add_argument("--test",          action="store_true", help="Run Node.js JS validation")
     parser.add_argument("--extract-only", action="store_true", help="Extract/update season_config only — skip HTML build")
     parser.add_argument("--team",          default=None,
-                        help="Path to team config JSON, e.g. teams/greens/u15-2025-26/greens.json. "
+                        help="Path to team config JSON, e.g. teams/u15-2025-26/greens/greens.json. "
                              "Overrides --config and --out with values from the team file.")
     parser.add_argument("--team-2",        default=None, dest="team_2",
                         help="Path to a second team config JSON for a combined two-team build. "
                              "The second team's existing season_config is read (not re-extracted). "
-                             "Example: --team-2 teams/whites/u15-2025-26/whites.json")
+                             "Example: --team-2 teams/u15-2025-26/whites/whites.json")
     parser.add_argument("--fetch-table",   action="store_true",
                         help="Fetch latest league table from FA Full Time and update season_config.json")
     args = parser.parse_args()

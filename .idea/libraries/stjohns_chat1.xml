@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="stjohns_chat1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/teams/whites/chat/stjohns_chat.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
