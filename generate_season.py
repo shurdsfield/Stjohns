@@ -426,7 +426,7 @@ MOTM_RE = re.compile(
     r")",
     re.I
 )
-_SJ_RESULT_RE = r"(?:St\.?\s*Johns?|St\.?\s*John['’]?s?|StJFC)"
+_SJ_RESULT_RE = "(?:St[\\s.]*John\\W*s?|StJFC)"
 
 def _find_result(text):
     """
@@ -484,10 +484,18 @@ def _is_scorer_line(line, player_names=None):
         has_player = any(re.search(r"\b" + re.escape(p) + r"\b", line, re.I) for p in names)
         if not has_player:
             return False
-    # Must contain a number, 'OG', 'Walkover', or look like a scorer line
+    # Must contain a number, 'OG', 'Walkover', or be a pure list of player names (each scored 1)
     has_num = bool(re.search(r"\d+|OG|Walkover", line, re.I))
     if not has_num:
-        return False
+        if not names:
+            return False
+        # Allow lines that are purely player names with no other text (each scored once)
+        remaining = line
+        for p in names:
+            remaining = re.sub(r"\b" + re.escape(p) + r"\b", "", remaining, flags=re.I)
+        remaining = re.sub(r"[\s,!?]+|\band\b", "", remaining, flags=re.I).strip()
+        if remaining:
+            return False  # non-player text remains — not a scorer line
     # Avoid long squad lists (many names, very few numbers relative to names)
     if names:
         names_found = sum(1 for p in names if re.search(r"\b" + re.escape(p) + r"\b", line, re.I))
@@ -1801,7 +1809,7 @@ def build_html(cfg, config_hash, sun_cfg=None):
         f'<meta name="description" content="{meta.get("description","")}">\n'
         f'<meta property="og:title" content="{meta.get("og_title","")}">\n'
         f'<meta property="og:description" content="{meta.get("og_description","")}">\n'
-        f'<title>{meta.get("title","St John\'s Chorlton U15s")}</title>\n'
+        '<title>' + meta.get("title","St John’s Chorlton U15s") + '</title>\n'
         f'<style>\n' + _CSS + '</style>\n</head>\n<body>\n'
     )
 
