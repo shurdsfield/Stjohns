@@ -31,13 +31,13 @@
       "text": "🏆 League <strong>45 pts</strong>"
     },
     {
-      "text": "⚽ Goals <strong>128 scored</strong>"
+      "text": "⚽ Goals <strong>{goals} scored</strong>"
     },
     {
-      "text": "✅ <strong>21 wins</strong> all comps"
+      "text": "✅ <strong>{wins} wins</strong> all comps"
     },
     {
-      "text": "📅 <strong>29 games</strong> played"
+      "text": "📅 <strong>{games} games</strong> played"
     }
   ],
   "stat_cards": [
@@ -987,7 +987,7 @@
       {
         "heading": "Introduction",
         "paras": [
-          "What a season it has been. From the opening pre-season friendly against Barr Hill right through to a <span class=\"highlight\">4–4 draw away at Wythenshawe</span> on the final day — the only points the champions dropped all season — the St John's U15 Greens have grown into a team that any manager would be proud of. Twenty-one wins from twenty-nine games across all competitions and a league points total of <span class=\"highlight\">45</span> — the numbers tell a story of real quality and total consistency.",
+          "What a season it has been. From the opening pre-season friendly against Barr Hill right through to a <span class=\"highlight\">4–4 draw away at Wythenshawe</span> on the final day — the only points the champions dropped all season — the St John's U15 Greens have grown into a team that any manager would be proud of. Nineteen wins from twenty-eight games across league and cup competitions and a league points total of <span class=\"highlight\">45</span> — the numbers tell a story of real quality and total consistency.",
           "<span class=\"player-ref\">Nick</span> and <span class=\"player-ref\">Steve</span> deserve enormous credit for the way they have developed this group throughout the year. The tactical evolution — particularly the 5-3-2 system that produced such excellent results in the autumn — showed a coaching team not afraid to adapt and innovate. More importantly, the lads responded every single time they were asked to raise their game."
         ]
       },

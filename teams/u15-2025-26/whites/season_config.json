@@ -36,13 +36,13 @@
       "text": "🏆 League <strong>9 pts</strong>"
     },
     {
-      "text": "⚽ Goals <strong>34 scored</strong>"
+      "text": "⚽ Goals <strong>{goals} scored</strong>"
     },
     {
-      "text": "✅ <strong>4 wins</strong> all comps"
+      "text": "✅ <strong>{wins} wins</strong> all comps"
     },
     {
-      "text": "📅 <strong>22 games</strong> played"
+      "text": "📅 <strong>{games} games</strong> played"
     }
   ],
   "stat_cards": [

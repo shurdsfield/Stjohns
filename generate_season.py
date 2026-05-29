@@ -1808,6 +1808,30 @@ def _player_to_js(p, include_friendlies=True):
         out["note"] = p["note"]
     return out
 
+def _banner_stats(cfg_matches, include_friendlies):
+    """Compute games-played / wins / goals for the overview banner.
+
+    Games played = matches with a real result (W/L/D), so postponed (P) and
+    abandoned (ABN) games are excluded — and friendlies too unless enabled.
+    Goals = sum of our scored side of each non-walkover scoreline.
+    """
+    games = wins = goals = 0
+    for m in cfg_matches:
+        if not include_friendlies and m.get("comp") == "Friendly":
+            continue
+        res = m.get("res")
+        if res in ("W", "D", "L"):
+            games += 1
+        if res == "W":
+            wins += 1
+        s = m.get("score", "")
+        if s and s != "W/O" and "–" in s:
+            ours = s.split("–")[0].strip()
+            if ours.isdigit():
+                goals += int(ours)
+    return {"games": games, "wins": wins, "goals": goals}
+
+
 def build_html(cfg, config_hash, sun_cfg=None, include_friendlies=False, sun_include_friendlies=False):
     """
     Build single self-contained HTML file.
@@ -1852,9 +1876,15 @@ def build_html(cfg, config_hash, sun_cfg=None, include_friendlies=False, sun_inc
         team_switcher = ''
 
     # ── BANNER(S) ──────────────────────────────────────────────────────────
-    def _banner(b_team, b_cfg, bid=None, hidden=False):
+    def _banner(b_team, b_cfg, stats, bid=None, hidden=False):
+        # Pills may contain {games}/{wins}/{goals} tokens, filled from `stats`
+        # so the banner counts respect include_friendlies.
         t_pills = b_cfg.get("banner_pills", [])
-        ph = "\n    ".join(f'<div class="season-pill">{p["text"]}</div>' for p in t_pills)
+        def fill(txt):
+            for k, v in stats.items():
+                txt = txt.replace("{" + k + "}", str(v))
+            return txt
+        ph = "\n    ".join(f'<div class="season-pill">{fill(p["text"])}</div>' for p in t_pills)
         id_attr    = f' id="{bid}"' if bid else ''
         style_attr = (' style="display:none;background:linear-gradient(135deg,'
                       '#16295e 0%,#162a4a 40%,#16375e 100%)"') if hidden else ''
@@ -1867,13 +1897,15 @@ def build_html(cfg, config_hash, sun_cfg=None, include_friendlies=False, sun_inc
             f'  <div class="season-pills">\n    {ph}\n  </div>\n</div>\n\n'
         )
 
+    sat_stats = _banner_stats(cfg.get("matches", []), include_friendlies)
     if dual:
+        sun_stats = _banner_stats(sun_cfg.get("matches", []), sun_include_friendlies)
         banner = (
-            _banner(team, cfg, bid="sat-banner") +
-            _banner(sun_cfg.get("team", {}), sun_cfg, bid="sun-banner", hidden=True)
+            _banner(team, cfg, sat_stats, bid="sat-banner") +
+            _banner(sun_cfg.get("team", {}), sun_cfg, sun_stats, bid="sun-banner", hidden=True)
         )
     else:
-        banner = _banner(team, cfg)
+        banner = _banner(team, cfg, sat_stats)
 
     # ── NAV ────────────────────────────────────────────────────────────────
     nav = (
