@@ -727,11 +727,12 @@
       "fa_starts": 15,
       "fa_bench": 3,
       "fri_apps": 1,
-      "lge_apps": 13,
+      "lge_apps": 12,
       "cup_apps": 5,
       "lge_goals": 0,
       "cup_goals": 0,
       "fri_goals": 0,
+      "_note": "FA total (18) includes George's games — George was unregistered so was recorded under Digby on FA Full Time. Real Digby apps = FA total minus George's actual appearances.",
       "motm": {
         "League": 1
       },
@@ -745,12 +746,12 @@
       "fa_starts": 0,
       "fa_bench": 0,
       "fri_apps": 0,
-      "lge_apps": 1,
+      "lge_apps": 2,
       "cup_apps": 1,
       "lge_goals": 0,
       "cup_goals": 0,
       "fri_goals": 0,
-      "_note": "Not in FA PDF — may not be registered. Appearances tracked manually from WhatsApp.",
+      "_note": "Unregistered — recorded under Digby on FA Full Time, so not in FA PDF. Apps tracked from WhatsApp: 07 Mar vs RS Titans (League Cup, debut), 22 Apr vs Man SE (League, squad named Digby but report confirms George in goal), 09 May vs Reddish Vulcans (League).",
       "motm": {},
       "note": "Debut worldie save vs RS Titans (Mar)"
     },
