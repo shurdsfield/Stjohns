@@ -1255,14 +1255,17 @@ def merge_and_flag(fa_results, fa_players, wa_matches, existing_config):
 
 NODE_MOCK = r"""
 const elMap = {};
+const mockEl = () => ({
+  innerHTML:'', textContent:'', style:{cssText:'', display:''},
+  classList:{ add:()=>{}, remove:()=>{}, contains:()=>false },
+  setAttribute:()=>{}, getAttribute:()=>null,
+  addEventListener:()=>{}, appendChild:()=>{}
+});
 const mock = {
-  getElementById:      id => elMap[id] || (elMap[id] = { innerHTML:'', appendChild:()=>{}, style:{} }),
+  getElementById:      id => elMap[id] || (elMap[id] = mockEl()),
   querySelectorAll:    () => [],
-  querySelector:       () => null,
-  createElement:       tag => ({
-    className:'', innerHTML:'', textContent:'', style:{cssText:''},
-    setAttribute:()=>{}, addEventListener:()=>{}, appendChild:()=>{}
-  })
+  querySelector:       () => mockEl(),
+  createElement:       tag => mockEl()
 };
 """
 
@@ -1426,8 +1429,8 @@ const BC = {
   Friendly:     '#7c3aed'
 };
 const RC = { W:'#4ade80', D:'#facc15', L:'#f87171', ABN:'#64748b' };
-function totalG(p){ return (p.friG||0)+(p.lgeG||0)+(p.cupG||0); }
-function totalA(p){ return (p.friA||0)+(p.lgeA||0)+(p.cupA||0); }
+function totalG(p){ return (includeFriendlies?(p.friG||0):0)+(p.lgeG||0)+(p.cupG||0); }
+function totalA(p){ return (includeFriendlies?(p.friA||0):0)+(p.lgeA||0)+(p.cupA||0); }
 function totalM(p){ return Object.values(p.motm||{}).reduce((s,v)=>s+v,0); }
 function gd(n){ return (n>=0?'+':'')+n; }
 
@@ -1443,7 +1446,7 @@ function buildStatCards(){
   ).join('');
 }
 function buildCompSummary(){
-  const comps=['League','League Cup','Plate Cup','SDFL Cup','Friendly'];
+  const comps=['League','League Cup','Plate Cup','SDFL Cup',...(includeFriendlies?['Friendly']:[])].filter(c=>c);
   const data={};
   comps.forEach(c=>{ data[c]={P:0,W:0,D:0,L:0,GF:0,GA:0,Pts:0,wo:0}; });
   matches.forEach(m=>{
@@ -1500,9 +1503,10 @@ function buildCompSummary(){
   document.getElementById('comp-summary-wrap').innerHTML=t;
 }
 function buildTopScorers(){
+  const friCol=includeFriendlies?'<th class="r" style="color:#b0c4d8">Friendly</th>':'';
   let t=`<table><thead><tr>
     <th>#</th><th>Player</th>
-    <th class="r" style="color:#b0c4d8">Friendly</th>
+    ${friCol}
     <th class="r" style="color:#93c5fd">League</th>
     <th class="r" style="color:#86efac">Cup</th>
     <th class="r">Total</th>
@@ -1514,7 +1518,7 @@ function buildTopScorers(){
     t+=`<tr class="${i%2===0?'ev':'od'}">
       <td style="color:var(--text-sub)">${i+1}</td>
       <td style="font-weight:600;color:#fff">${p.name} <span style="color:var(--text-muted);font-size:11px">${p.surname||''}</span></td>
-      ${cell(p.friG,'#b0c4d8')}${cell(p.lgeG,'#93c5fd')}${cell(p.cupG,'#86efac')}
+      ${includeFriendlies?cell(p.friG,'#b0c4d8'):''}${cell(p.lgeG,'#93c5fd')}${cell(p.cupG,'#86efac')}
       <td class="r" style="color:${tc};font-weight:800;font-size:14px">${tot}</td>
     </tr>`;
   });
@@ -1522,8 +1526,9 @@ function buildTopScorers(){
   const tL=playersSorted.reduce((s,p)=>s+(p.lgeG||0),0);
   const tC=playersSorted.reduce((s,p)=>s+(p.cupG||0),0);
   t+=`<tr class="tr-row"><td></td><td><strong>Totals</strong></td>
-    <td class="r">${tF}</td><td class="r">${tL}</td><td class="r">${tC}</td>
-    <td class="r" style="font-size:14px">${tF+tL+tC}</td>
+    ${includeFriendlies?`<td class="r">${tF}</td>`:''}
+    <td class="r">${tL}</td><td class="r">${tC}</td>
+    <td class="r" style="font-size:14px">${(includeFriendlies?tF:0)+tL+tC}</td>
   </tr></tbody></table>`;
   document.getElementById('overview-scorers').innerHTML=t;
 }
@@ -1635,17 +1640,20 @@ function renderMatches(filter){
 }
 function buildPlayers(){
   const wrap=document.getElementById('player-table-wrap');
+  const friAH=includeFriendlies?'<th class="r" style="color:#b0c4d8">Fri</th>':'';
+  const friGH=includeFriendlies?'<th class="r" style="color:#b0c4d8">Fri</th>':'';
+  const noGoalCols=includeFriendlies?11:9;
   let t=`<table><thead><tr>
     <th>Player</th><th style="color:var(--text-sub);font-size:11px">Position</th>
     <th class="r">Apps</th>
-    <th class="r" style="color:#b0c4d8">Fri</th><th class="r" style="color:#93c5fd">League</th><th class="r" style="color:#86efac">Cup</th>
+    ${friAH}<th class="r" style="color:#93c5fd">League</th><th class="r" style="color:#86efac">Cup</th>
     <th class="r" style="color:#fbbf24;border-left:2px solid var(--border)">Goals</th>
-    <th class="r" style="color:#b0c4d8">Fri</th><th class="r" style="color:#93c5fd">League</th><th class="r" style="color:#86efac">Cup</th>
+    ${friGH}<th class="r" style="color:#93c5fd">League</th><th class="r" style="color:#86efac">Cup</th>
     <th class="r" style="color:#a78bfa">MOTM</th>
   </tr></thead><tbody>`;
   playersSorted.forEach((p,i)=>{
     if(i>0&&totalG(playersSorted[i-1])>0&&totalG(p)===0){
-      t+=`<tr style="background:#0f1e30"><td colspan="11" style="padding:6px 12px;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)">No goals scored</td></tr>`;
+      t+=`<tr style="background:#0f1e30"><td colspan="${noGoalCols}" style="padding:6px 12px;font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)">No goals scored</td></tr>`;
     }
     const tot=totalG(p),apps=totalA(p);
     const gc=tot>=20?'#6ee7b7':tot>=10?'#93c5fd':tot>0?'#f1f5f9':'var(--text-muted)';
@@ -1656,9 +1664,9 @@ function buildPlayers(){
       <td><span style="font-weight:700;color:#fff">${p.name}${p.gk?' 🧤':''}</span>${p.surname?` <span style="color:var(--text-muted);font-size:11px">${p.surname}</span>`:''}${p.note?`<div style="font-size:11px;color:var(--text-sub);margin-top:2px">${p.note}</div>`:''}</td>
       <td style="color:var(--text-sub);font-size:12px">${p.role}</td>
       <td class="r" style="font-weight:700;font-size:14px;color:${ac}">${apps}</td>
-      ${cell(p.friA)}${cell(p.lgeA,true)}${cell(p.cupA)}
+      ${includeFriendlies?cell(p.friA):''}${cell(p.lgeA,true)}${cell(p.cupA)}
       <td class="r" style="font-weight:800;font-size:${tot>=10?15:13}px;color:${gc};border-left:2px solid var(--border)">${tot||'—'}</td>
-      ${cell(p.friG)}${cell(p.lgeG,true)}${cell(p.cupG)}
+      ${includeFriendlies?cell(p.friG):''}${cell(p.lgeG,true)}${cell(p.cupG)}
       <td class="r" style="font-size:11px;color:#a78bfa">${mb}</td>
     </tr>`;
   });
@@ -1666,9 +1674,11 @@ function buildPlayers(){
   const gG=playersSorted.reduce((s,p)=>s+totalG(p),0);
   t+=`<tr class="tr-row"><td colspan="2"><strong>Totals</strong></td>
     <td class="r">${playersSorted.reduce((s,p)=>s+totalA(p),0)}</td>
-    <td class="r">${sA('friA')}</td><td class="r">${sA('lgeA')}</td><td class="r">${sA('cupA')}</td>
+    ${includeFriendlies?`<td class="r">${sA('friA')}</td>`:''}
+    <td class="r">${sA('lgeA')}</td><td class="r">${sA('cupA')}</td>
     <td class="r" style="font-size:15px;border-left:2px solid var(--border)">${gG}</td>
-    <td class="r">${sA('friG')}</td><td class="r">${sA('lgeG')}</td><td class="r">${sA('cupG')}</td>
+    ${includeFriendlies?`<td class="r">${sA('friG')}</td>`:''}
+    <td class="r">${sA('lgeG')}</td><td class="r">${sA('cupG')}</td>
     <td class="r" style="color:#a78bfa">${playersSorted.reduce((s,p)=>s+totalM(p),0)}</td>
   </tr></tbody></table>`;
   wrap.innerHTML=t;
@@ -1768,6 +1778,7 @@ function loadTeam(id){
   const d=id==='sat'?satData:sunData;
   matches=d.matches;players=d.players;highlights=d.highlights;
   leagueTable=d.leagueTable;seasonStory=d.seasonStory;statCards=d.statCards;
+  includeFriendlies=d.includeFriendlies??true;
   playersSorted=[...players].sort((a,b)=>totalG(b)-totalG(a)||totalA(b)-totalA(a));
   document.querySelectorAll('.team-btn').forEach(b=>b.classList.remove('active'));
   const ab=document.querySelector('.team-btn[data-team="'+id+'"]');if(ab)ab.classList.add('active');
@@ -1783,23 +1794,27 @@ function loadTeam(id){
 def _match_to_js(m):
     return {k: m[k] for k in ("date","comp","ha","opp","score","res","pts","motm","scorers","summary") if k in m}
 
-def _player_to_js(p):
+def _player_to_js(p, include_friendlies=True):
     out = {
         "name": p["name"], "surname": p.get("surname",""), "role": p.get("role",""),
         "gk": p.get("gk", False),
-        "friA": p.get("fri_apps",0), "lgeA": p.get("lge_apps",0), "cupA": p.get("cup_apps",0),
-        "friG": p.get("fri_goals",0), "lgeG": p.get("lge_goals",0), "cupG": p.get("cup_goals",0),
+        "friA": p.get("fri_apps",0) if include_friendlies else 0,
+        "lgeA": p.get("lge_apps",0), "cupA": p.get("cup_apps",0),
+        "friG": p.get("fri_goals",0) if include_friendlies else 0,
+        "lgeG": p.get("lge_goals",0), "cupG": p.get("cup_goals",0),
         "motm": p.get("motm",{}),
     }
     if p.get("note"):
         out["note"] = p["note"]
     return out
 
-def build_html(cfg, config_hash, sun_cfg=None):
+def build_html(cfg, config_hash, sun_cfg=None, include_friendlies=False, sun_include_friendlies=False):
     """
     Build single self-contained HTML file.
     cfg:     primary (Saturday/Greens) team season_config dict
     sun_cfg: optional secondary (Sunday/Whites) season_config — triggers two-team mode
+    include_friendlies: show friendly matches/stats for primary team
+    sun_include_friendlies: show friendly matches/stats for secondary team
     """
     dual = sun_cfg is not None
     meta  = cfg.get("meta", {})
@@ -1948,8 +1963,9 @@ def build_html(cfg, config_hash, sun_cfg=None):
         )
 
     # ── JS DATA + SCRIPT ───────────────────────────────────────────────────
-    matches_js = [_match_to_js(m) for m in cfg.get("matches", [])]
-    players_js = [_player_to_js(p) for p in cfg.get("players", [])]
+    matches_js = [_match_to_js(m) for m in cfg.get("matches", [])
+                  if include_friendlies or m.get("comp") != "Friendly"]
+    players_js = [_player_to_js(p, include_friendlies) for p in cfg.get("players", [])]
 
     if dual:
         sun_team_d   = sun_cfg.get("team", {})
@@ -1959,24 +1975,27 @@ def build_html(cfg, config_hash, sun_cfg=None):
                    f"Final standings {sun_team_d.get('season','')}")
 
         sat_data = {
-            "matches":       matches_js,
-            "players":       players_js,
-            "highlights":    cfg.get("highlights", []),
-            "leagueTable":   cfg.get("league_table", []),
-            "seasonStory":   cfg.get("season_story", {}),
-            "statCards":     cfg.get("stat_cards", []),
-            "leagueCaption": sat_cap,
+            "matches":           matches_js,
+            "players":           players_js,
+            "highlights":        cfg.get("highlights", []),
+            "leagueTable":       cfg.get("league_table", []),
+            "seasonStory":       cfg.get("season_story", {}),
+            "statCards":         cfg.get("stat_cards", []),
+            "leagueCaption":     sat_cap,
+            "includeFriendlies": include_friendlies,
         }
-        sun_matches_js = [_match_to_js(m) for m in sun_cfg.get("matches", [])]
-        sun_players_js = [_player_to_js(p) for p in sun_cfg.get("players", [])]
+        sun_matches_js = [_match_to_js(m) for m in sun_cfg.get("matches", [])
+                          if sun_include_friendlies or m.get("comp") != "Friendly"]
+        sun_players_js = [_player_to_js(p, sun_include_friendlies) for p in sun_cfg.get("players", [])]
         sun_data = {
-            "matches":       sun_matches_js,
-            "players":       sun_players_js,
-            "highlights":    sun_cfg.get("highlights", []),
-            "leagueTable":   sun_cfg.get("league_table", []),
-            "seasonStory":   sun_cfg.get("season_story", {}),
-            "statCards":     sun_cfg.get("stat_cards", []),
-            "leagueCaption": sun_cap,
+            "matches":           sun_matches_js,
+            "players":           sun_players_js,
+            "highlights":        sun_cfg.get("highlights", []),
+            "leagueTable":       sun_cfg.get("league_table", []),
+            "seasonStory":       sun_cfg.get("season_story", {}),
+            "statCards":         sun_cfg.get("stat_cards", []),
+            "leagueCaption":     sun_cap,
+            "includeFriendlies": sun_include_friendlies,
         }
 
         script = (
@@ -1984,7 +2003,7 @@ def build_html(cfg, config_hash, sun_cfg=None):
             "// ── DATA ─────────────────────────────────────────────────────────────\n"
             f"const satData = {j(sat_data)};\n\n"
             f"const sunData = {j(sun_data)};\n\n"
-            "let matches, players, highlights, leagueTable, seasonStory, statCards, playersSorted;\n\n"
+            "let matches, players, highlights, leagueTable, seasonStory, statCards, playersSorted, includeFriendlies;\n\n"
             "// ── FUNCTIONS ─────────────────────────────────────────────────────────\n"
             + _JS_FUNCS
             + _JS_TEAM_LOADER
@@ -2001,6 +2020,7 @@ def build_html(cfg, config_hash, sun_cfg=None):
             f"const leagueTable = {j(cfg.get('league_table', []))};\n\n"
             f"const seasonStory = {j(cfg.get('season_story', {}))};\n\n"
             f"const statCards = {j(cfg.get('stat_cards', []))};\n\n"
+            f"let includeFriendlies = {'true' if include_friendlies else 'false'};\n\n"
             "// ── FUNCTIONS ─────────────────────────────────────────────────────────\n"
             + _JS_FUNCS
             + "const playersSorted=[...players].sort((a,b)=>totalG(b)-totalG(a)||totalA(b)-totalA(a));\n"
@@ -2298,7 +2318,10 @@ def main():
             print(f"  Two-team build: {cfg.get('team',{}).get('name','')} + "
                   f"{sun_season_cfg.get('team',{}).get('name','')}")
 
-        html = build_html(cfg, cfg_hash_new, sun_cfg=sun_season_cfg)
+        sat_inc_fri = (team_cfg or {}).get("include_friendlies", False)
+        sun_inc_fri = (team2_cfg or {}).get("include_friendlies", False) if sun_season_cfg else False
+        html = build_html(cfg, cfg_hash_new, sun_cfg=sun_season_cfg,
+                          include_friendlies=sat_inc_fri, sun_include_friendlies=sun_inc_fri)
         with open(args.out, "w", encoding="utf-8") as f:
             f.write(html)
         size_kb = os.path.getsize(args.out) / 1024

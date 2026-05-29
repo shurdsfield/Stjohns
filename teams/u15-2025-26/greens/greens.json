@@ -4,6 +4,7 @@
   "team_id": "greens",
   "age_group": "U15",
   "season_slug": "u15-2025-26",
+  "include_friendlies": false,
 
   "team": {
     "name": "St John's Chorlton U15 Greens",
