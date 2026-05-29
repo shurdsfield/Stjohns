@@ -1,0 +1,48 @@
+{
+  "_comment": "U13 CD Allen team config 2025-26. Stats from Pitchero club website; results/appearances/goals parsed from there. Chat is the shared managers WhatsApp — filtered by Craig's posts.",
+
+  "team_id": "allen",
+  "age_group": "U13",
+  "season_slug": "u13-2025-26",
+  "include_friendlies": false,
+
+  "team": {
+    "name": "St John's Chorlton U13 CD Allen",
+    "short_name": "CD Allen",
+    "season": "2025–26",
+    "league": "TBC",
+    "division": "TBC",
+    "managers": "Craig Allen",
+    "day": "Sunday"
+  },
+
+  "sources": {
+    "stats_url":     "https://www.stjohnsjfc.co.uk/teams/206000/statistics",
+    "results_url":   "https://www.stjohnsjfc.co.uk/teams/206000/results",
+    "results_pdf":   "",
+    "players_pdf":   "",
+    "chat_zip":      "teams/u13-2025-26/allen/chat/managers_chat.zip",
+    "season_config": "teams/u13-2025-26/allen/season_config.json",
+    "output_html":   "u13/index.html"
+  },
+
+  "pitchero": {
+    "team_id": 206000,
+    "stats_url":   "https://www.stjohnsjfc.co.uk/teams/206000/statistics",
+    "results_url": "https://www.stjohnsjfc.co.uk/teams/206000/results",
+    "notes": [
+      "Pitchero club site — stats and results fetched via --fetch-stats flag.",
+      "If fetch fails (e.g. WAF/403), place a manually-saved stats.html and results.html",
+      "in teams/u13-2025-26/allen/ and re-run."
+    ]
+  },
+
+  "our_team_name_in_fa": "",
+
+  "whatsapp": {
+    "managers": ["Craig a home"],
+    "player_names": [],
+    "season_start_hints": [],
+    "name_normalisations": {}
+  }
+}

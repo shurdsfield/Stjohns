@@ -389,6 +389,271 @@ def parse_players_pdf(path):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+#  PITCHERO CLUB WEBSITE PARSER
+# ══════════════════════════════════════════════════════════════════════════════
+
+def _fetch_url_html(url, timeout=20):
+    """
+    Fetch a URL with browser-like headers. Returns HTML string or None.
+    Works on standard machines; may be blocked in sandboxed environments.
+    """
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/124.0.0.0 Safari/537.36"
+        ),
+        "Accept":          "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-GB,en;q=0.9",
+        "Referer":         "https://www.stjohnsjfc.co.uk/",
+    }
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode    = ssl.CERT_NONE
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=timeout, context=ctx) as resp:
+            return resp.read().decode("utf-8", errors="replace")
+    except Exception as e:
+        print(f"  ✗ Fetch failed ({url}): {e}", file=sys.stderr)
+        return None
+
+
+def _strip_tags(s):
+    """Remove all HTML tags and decode common entities."""
+    s = re.sub(r'<[^>]+>', '', s)
+    s = s.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">").replace("&nbsp;", " ")
+    return s.strip()
+
+
+def parse_pitchero_stats_html(html):
+    """
+    Parse a Pitchero /teams/{id}/statistics page.
+    Returns list of {name, apps, goals} or [] if nothing found.
+
+    Pitchero renders a server-side HTML table with columns:
+      Player | Position | Apps | Goals | Assists | Clean Sheets | YC | RC
+    Column order can vary; we locate columns by header text.
+    """
+    results = []
+
+    # Find all tables on the page
+    tables = re.findall(r'<table[^>]*>(.*?)</table>', html, re.S | re.I)
+    for table_html in tables:
+        # Check this table has player-stats-looking headers
+        headers_raw = re.findall(r'<th[^>]*>(.*?)</th>', table_html, re.S | re.I)
+        headers = [_strip_tags(h).lower() for h in headers_raw]
+        if not headers:
+            continue
+
+        # Must have at least an apps or goals column to be a stats table
+        has_apps  = any("app" in h for h in headers)
+        has_goals = any("goal" in h for h in headers)
+        if not (has_apps or has_goals):
+            continue
+
+        # Determine column indices
+        name_col  = next((i for i, h in enumerate(headers) if "player" in h or "name" in h), 0)
+        apps_col  = next((i for i, h in enumerate(headers) if "app"  in h), -1)
+        goals_col = next((i for i, h in enumerate(headers) if "goal" in h), -1)
+
+        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', table_html, re.S | re.I)
+        for row in rows:
+            cells_raw = re.findall(r'<td[^>]*>(.*?)</td>', row, re.S | re.I)
+            if not cells_raw or len(cells_raw) < 2:
+                continue
+            cells = [_strip_tags(c) for c in cells_raw]
+            if name_col >= len(cells):
+                continue
+            name = cells[name_col]
+            if not name or name.lower() in ("player", "name", ""):
+                continue
+            apps  = 0
+            goals = 0
+            try:
+                if apps_col  >= 0 and apps_col  < len(cells):
+                    apps  = int(re.sub(r'[^\d]', '', cells[apps_col])  or 0)
+                if goals_col >= 0 and goals_col < len(cells):
+                    goals = int(re.sub(r'[^\d]', '', cells[goals_col]) or 0)
+            except ValueError:
+                continue
+            results.append({"name": name, "apps": apps, "goals": goals})
+
+        if results:
+            break  # Use first matching table
+
+    return results
+
+
+def parse_pitchero_results_html(html):
+    """
+    Parse a Pitchero /teams/{id}/results page.
+    Returns list of {date, opp, score, ha, comp} or [].
+
+    Pitchero results pages list matches in divs or table rows.
+    We try to extract: date, H/A, opponent, score, competition.
+    """
+    results = []
+
+    # Pattern 1: Pitchero fixture blocks — common structure
+    # Looks for blocks containing a date + teams + score
+    blocks = re.findall(
+        r'<(?:div|tr)[^>]*class="[^"]*(?:fixture|result|match)[^"]*"[^>]*>(.*?)</(?:div|tr)>',
+        html, re.S | re.I
+    )
+
+    # Pattern 2: fallback — rows in a results table
+    if not blocks:
+        table_m = re.search(r'<table[^>]*>(.*?)</table>', html, re.S | re.I)
+        if table_m:
+            blocks = re.findall(r'<tr[^>]*>(.*?)</tr>', table_m.group(1), re.S | re.I)
+
+    for block in blocks:
+        text = _strip_tags(block)
+        # Try to extract score "X - Y" or "X–Y"
+        score_m = re.search(r'(\d+)\s*[-–]\s*(\d+)', text)
+        if not score_m:
+            continue
+        home_goals, away_goals = score_m.group(1), score_m.group(2)
+
+        # Try to extract date (various formats)
+        date_m = re.search(
+            r'(\d{1,2})[/\-\s]+(\w{3,9})[/\-\s]+(\d{2,4})'
+            r'|\b(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\w*\s+(\d{2,4})',
+            text, re.I
+        )
+        date_str = ""
+        if date_m:
+            if date_m.group(4):
+                date_str = f"{date_m.group(4)} {date_m.group(5)[:3]}"
+            else:
+                date_str = f"{date_m.group(1)} {date_m.group(2)[:3]}"
+
+        # H/A
+        ha = "H" if re.search(r'\bHome\b|\bH\b', text, re.I) else \
+             "A" if re.search(r'\bAway\b|\bA\b', text, re.I) else "?"
+
+        # Competition
+        comp = "League"
+        if re.search(r'\bCup\b', text, re.I):
+            comp = "Cup"
+        elif re.search(r'\bFriendly\b', text, re.I):
+            comp = "Friendly"
+
+        results.append({
+            "date":  date_str,
+            "opp":   "",        # Hard to extract reliably without known team name
+            "score": f"{home_goals}–{away_goals}",
+            "ha":    ha,
+            "comp":  comp,
+        })
+
+    return results
+
+
+def fetch_pitchero_data(team_cfg, season_config_path):
+    """
+    Fetch stats and results from a Pitchero website and update season_config.json.
+    Called when --fetch-stats is set and pitchero.stats_url / results_url are configured.
+    Returns True if anything was updated.
+    """
+    pitchero_cfg = team_cfg.get("pitchero", {})
+    stats_url    = pitchero_cfg.get("stats_url") or team_cfg["sources"].get("stats_url")
+    results_url  = pitchero_cfg.get("results_url") or team_cfg["sources"].get("results_url")
+
+    # Also check for manually-saved HTML fallback files
+    team_dir      = os.path.dirname(season_config_path)
+    stats_html_path   = os.path.join(team_dir, "stats.html")
+    results_html_path = os.path.join(team_dir, "results.html")
+
+    updated = False
+
+    # Load or create season_config
+    if os.path.exists(season_config_path):
+        with open(season_config_path, encoding="utf-8") as f:
+            cfg = json.load(f)
+    else:
+        cfg = {}
+
+    # ── Player stats ──────────────────────────────────────────────────────────
+    stats_html = None
+    if stats_url:
+        print(f"  Fetching Pitchero stats…\n    {stats_url}")
+        stats_html = _fetch_url_html(stats_url)
+    if not stats_html and os.path.exists(stats_html_path):
+        print(f"  Using saved stats HTML: {stats_html_path}")
+        with open(stats_html_path, encoding="utf-8", errors="replace") as f:
+            stats_html = f.read()
+
+    if stats_html:
+        player_rows = parse_pitchero_stats_html(stats_html)
+        if player_rows:
+            print(f"  ✓ Parsed {len(player_rows)} players from stats page")
+            existing_by_name = {p["name"]: p for p in cfg.get("players", [])}
+            for row in player_rows:
+                name = row["name"]
+                if name in existing_by_name:
+                    existing_by_name[name]["lge_apps"]   = row["apps"]
+                    existing_by_name[name]["lge_goals"]  = row["goals"]
+                else:
+                    existing_by_name[name] = {
+                        "name": name, "role": "",
+                        "lge_apps": row["apps"], "cup_apps": 0, "fri_apps": 0,
+                        "lge_goals": row["goals"], "cup_goals": 0, "fri_goals": 0,
+                        "motm": {},
+                    }
+            cfg["players"] = list(existing_by_name.values())
+            updated = True
+        else:
+            print("  ⚠  Could not parse player stats from HTML (structure may differ from expected)")
+    else:
+        print("  ✗ No stats HTML available (URL failed and no stats.html fallback found)")
+
+    # ── Results ───────────────────────────────────────────────────────────────
+    results_html = None
+    if results_url:
+        print(f"  Fetching Pitchero results…\n    {results_url}")
+        results_html = _fetch_url_html(results_url)
+    if not results_html and os.path.exists(results_html_path):
+        print(f"  Using saved results HTML: {results_html_path}")
+        with open(results_html_path, encoding="utf-8", errors="replace") as f:
+            results_html = f.read()
+
+    if results_html:
+        match_rows = parse_pitchero_results_html(results_html)
+        if match_rows:
+            print(f"  ✓ Parsed {len(match_rows)} results from results page")
+            cfg.setdefault("matches", [])
+            # Merge: add any matches not already in config (by date+score)
+            existing_keys = {(m.get("date",""), m.get("score","")) for m in cfg["matches"]}
+            added = 0
+            for row in match_rows:
+                key = (row.get("date",""), row.get("score",""))
+                if key not in existing_keys:
+                    cfg["matches"].append({
+                        "date": row["date"], "comp": row["comp"],
+                        "ha": row["ha"], "opp": row["opp"],
+                        "score": row["score"], "res": "",
+                        "pts": None, "motm": None, "scorers": "", "summary": "",
+                    })
+                    added += 1
+            if added:
+                print(f"    + {added} new matches added")
+            updated = True
+        else:
+            print("  ⚠  Could not parse results from HTML")
+    else:
+        print("  ✗ No results HTML available")
+
+    if updated:
+        with open(season_config_path, "w", encoding="utf-8") as f:
+            json.dump(cfg, f, indent=2, ensure_ascii=False)
+        print(f"  ✓ season_config updated: {season_config_path}")
+
+    return updated
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 #  WHATSAPP CHAT PARSER
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -2085,6 +2350,8 @@ def main():
                              "Example: --team-2 teams/u15-2025-26/whites/whites.json")
     parser.add_argument("--fetch-table",   action="store_true",
                         help="Fetch latest league table from FA Full Time and update season_config.json")
+    parser.add_argument("--fetch-stats",   action="store_true",
+                        help="Fetch player stats and results from Pitchero club website (stjohnsjfc.co.uk)")
     args = parser.parse_args()
 
     force_extract = args.force or args.force_extract
@@ -2194,18 +2461,36 @@ def main():
             else:
                 print("  League table NOT updated (fetch/parse failed).")
 
+    # ── STEP 0b: Fetch Pitchero stats/results (if requested) ──────────────────
+    if args.fetch_stats:
+        if team_cfg and (team_cfg["sources"].get("stats_url") or team_cfg.get("pitchero")):
+            print("\nFetching Pitchero stats and results…")
+            if fetch_pitchero_data(team_cfg, args.config):
+                force_extract = False   # Data is already in season_config; skip WhatsApp re-parse
+                force_build   = True
+        else:
+            print("  ✗ No stats_url or pitchero config found in team config.", file=sys.stderr)
+
+    # ── Ensure output directory exists ────────────────────────────────────────
+    out_dir = os.path.dirname(args.out)
+    if out_dir and not os.path.exists(out_dir):
+        os.makedirs(out_dir, exist_ok=True)
+        print(f"  Created output directory: {out_dir}/")
+
     # ── Check which source files exist (chat required; PDFs optional) ─────────
-    has_results_pdf = os.path.exists(sources["results_pdf"])
-    has_players_pdf = os.path.exists(sources["players_pdf"])
+    has_results_pdf = bool(sources["results_pdf"]) and os.path.exists(sources["results_pdf"])
+    has_players_pdf = bool(sources["players_pdf"]) and os.path.exists(sources["players_pdf"])
     has_chat        = os.path.exists(sources["chat_zip"])
 
     if not has_chat:
         print(f"ERROR: chat file not found: {sources['chat_zip']}", file=sys.stderr)
         sys.exit(1)
     if not has_results_pdf:
-        print(f"  ⚠  Results PDF not found ({sources['results_pdf']}) — match results from WhatsApp only")
+        src = sources["results_pdf"] or "(none configured)"
+        print(f"  ⚠  Results PDF not found ({src}) — match results from WhatsApp only")
     if not has_players_pdf:
-        print(f"  ⚠  Players PDF not found ({sources['players_pdf']}) — player stats from WhatsApp only")
+        src = sources["players_pdf"] or "(none configured)"
+        print(f"  ⚠  Players PDF not found ({src}) — player stats from WhatsApp only")
 
     # ── STEP 1: Check source file hashes ─────────────────────────────────────
     print("Checking source files…")
