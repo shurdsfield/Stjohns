@@ -315,8 +315,15 @@ def parse_results_pdf(path):
 
         if is_wo:
             score = "W/O"
-            res   = "W"
-            pts   = 3 if comp_type != "F" else 0
+            wo_type = status_m.group(1).lower() if status_m else "walkover"
+            if "home" in wo_type:
+                sj_wins = (ha == "H")
+            elif "away" in wo_type:
+                sj_wins = (ha == "A")
+            else:
+                sj_wins = True  # plain "Walkover" — assume ours
+            res = "W" if sj_wins else "L"
+            pts = (3 if comp_type != "F" else 0) if sj_wins else 0
         else:
             # Find both team score lines
             scores = score_re.findall(block)
@@ -1113,13 +1120,14 @@ def merge_and_flag(fa_results, fa_players, wa_matches, existing_config):
                 )
                 continue
 
-            # Score check
+            # Score check (skip if score_source=whatsapp — intentional override)
             if cfg_m.get("score") and fa["score"] != "?" and cfg_m["score"] != fa["score"]:
                 if not (cfg_m["score"] == "W/O" and fa["score"] == "W/O"):
-                    discrepancies.append(
-                        f"[SCORE] {date} vs {cfg_m['opp']}: "
-                        f"config='{cfg_m['score']}' FA='{fa['score']}'"
-                    )
+                    if cfg_m.get("score_source") != "whatsapp":
+                        discrepancies.append(
+                            f"[SCORE] {date} vs {cfg_m['opp']}: "
+                            f"config='{cfg_m['score']}' FA='{fa['score']}'"
+                        )
 
             # Result check
             if cfg_m.get("res") and fa["res"] not in ("?",) and cfg_m["res"] != fa["res"]:
