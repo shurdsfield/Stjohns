@@ -21,7 +21,8 @@
     "results_url":   "https://www.stjohnsjfc.co.uk/teams/206000/results",
     "results_pdf":   "",
     "players_pdf":   "",
-    "chat_zip":      "teams/u13-2025-26/allen/chat/managers_chat.zip",
+    "chat_zip":      "shared/chat/managers_chat.zip",
+    "_chat_note":    "Shared managers/coaches chat — all age groups. Filter by whatsapp.managers below.",
     "season_config": "teams/u13-2025-26/allen/season_config.json",
     "output_html":   "u13/index.html"
   },
