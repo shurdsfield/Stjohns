@@ -599,6 +599,11 @@ def parse_pitchero_fixtures_results_html(html):
                             "motm":    None,
                             "scorers": "",
                             "summary": "",
+                            # transient — used to drill into the match-centre page for
+                            # scorers; stripped before season_config.json is written
+                            "_fixture_id":  fix.get("id") or _fid,
+                            "_fixture_url": (fix.get("url") or fix.get("path")
+                                             or fix.get("slug") or ""),
                         })
                 if nd_matches:
                     nd_matches.sort(key=lambda m: m["date"])
@@ -731,6 +736,168 @@ def parse_pitchero_fixtures_results_html(html):
     return matches
 
 
+def _extract_player_name(obj):
+    """Pull a player display name out of a goal/event dict, however it's nested."""
+    if not isinstance(obj, dict):
+        return ""
+    # direct string fields
+    for k in ("playerName", "scorer", "name", "fullName", "displayName"):
+        v = obj.get(k)
+        if isinstance(v, str) and v.strip():
+            return v.strip()
+    # nested player object
+    for k in ("player", "member", "person", "athlete"):
+        v = obj.get(k)
+        if isinstance(v, dict):
+            n = _extract_player_name(v)
+            if n:
+                return n
+    # firstName + lastName
+    first = obj.get("firstName") or obj.get("first") or ""
+    last  = obj.get("lastName")  or obj.get("surname") or obj.get("last") or ""
+    full  = (str(first).strip() + " " + str(last).strip()).strip()
+    return full
+
+
+def _deep_find_goal_scorers(obj):
+    """
+    Recursively walk a parsed JSON tree looking for goal events.
+    Returns a list of {name, side, own_goal} dicts.
+    Recognises:
+      - event dicts: {type/eventType/event: '...goal...', player..., side/ha/team...}
+      - explicit goal arrays under keys like 'goalScorers'/'scorers'/'goals'
+    """
+    found = []
+
+    def side_of(o):
+        for k in ("side", "ha", "team", "teamType", "homeAway"):
+            v = o.get(k)
+            if isinstance(v, str) and v.strip():
+                s = v.strip().lower()
+                if s in ("home", "h"):
+                    return "h"
+                if s in ("away", "a"):
+                    return "a"
+                return s
+        if o.get("isHome") is True:
+            return "h"
+        if o.get("isHome") is False:
+            return "a"
+        return ""
+
+    def walk(o):
+        if isinstance(o, dict):
+            type_val = " ".join(
+                str(o.get(k) or "") for k in ("type", "eventType", "event", "kind", "name")
+            ).lower()
+            is_goal = ("goal" in type_val) or (o.get("isGoal") is True)
+            if is_goal:
+                name = _extract_player_name(o)
+                if name:
+                    found.append({
+                        "name": name,
+                        "side": side_of(o),
+                        "own_goal": "own" in type_val,
+                    })
+            for v in o.values():
+                walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                walk(v)
+
+    walk(obj)
+    return found
+
+
+def _format_scorers(goal_events):
+    """Turn a list of {name,...} goal events into 'Name 2, Name' style string."""
+    counts = {}
+    order = []
+    for g in goal_events:
+        name = g["name"] + (" (OG)" if g.get("own_goal") else "")
+        if name not in counts:
+            counts[name] = 0
+            order.append(name)
+        counts[name] += 1
+    parts = []
+    for name in order:
+        parts.append(f"{name} {counts[name]}" if counts[name] > 1 else name)
+    return ", ".join(parts)
+
+
+def fetch_pitchero_match_scorers(match, base_url, team_id, match_html_dir=None,
+                                 match_url_template=None):
+    """
+    Drill into a single Pitchero match-centre page and return its scorers string
+    for our team (or "" if none found).
+
+    Strategy:
+      1. Build the match URL from the fixture's own url/path, or a template.
+      2. Fetch it (or read a saved match_{id}.html from match_html_dir).
+      3. Parse __NEXT_DATA__ and recursively find goal events; keep only our side.
+      4. On failure, save the page so its structure can be inspected.
+    """
+    fid = match.get("_fixture_id")
+    if not fid:
+        return ""
+
+    # 1) resolve URL ---------------------------------------------------------
+    fix_url = match.get("_fixture_url") or ""
+    if fix_url.startswith("http"):
+        url = fix_url
+    elif fix_url.startswith("/"):
+        url = base_url.rstrip("/") + fix_url
+    elif match_url_template:
+        url = match_url_template.format(base=base_url.rstrip("/"),
+                                        team_id=team_id, fixture_id=fid)
+    else:
+        url = f"{base_url.rstrip('/')}/teams/{team_id}/matchcentre/{fid}"
+
+    # 2) fetch (or use saved copy) ------------------------------------------
+    html = None
+    saved_path = (os.path.join(match_html_dir, f"match_{fid}.html")
+                  if match_html_dir else None)
+    if saved_path and os.path.exists(saved_path):
+        with open(saved_path, encoding="utf-8", errors="replace") as f:
+            html = f.read()
+    else:
+        html = _fetch_url_html(url)
+
+    if not html:
+        return ""
+
+    # 3) parse scorers -------------------------------------------------------
+    our_side = match.get("ha", "h")
+    our_side = "h" if str(our_side).lower() in ("h", "home") else "a"
+
+    next_data = _parse_next_data(html)
+    goal_events = _deep_find_goal_scorers(next_data) if next_data else []
+
+    # keep only goals attributed to our side (drop opponent goals & own-goals
+    # we can't attribute). If no side info present, assume all are ours only
+    # when the count matches our score — otherwise keep all as a best effort.
+    sided = [g for g in goal_events if g.get("side")]
+    if sided:
+        ours = [g for g in sided if g["side"] == our_side and not g["own_goal"]]
+    else:
+        ours = [g for g in goal_events if not g["own_goal"]]
+
+    scorers = _format_scorers(ours)
+
+    # 4) save sample on failure for inspection ------------------------------
+    if not scorers and match_html_dir and not (saved_path and os.path.exists(saved_path)):
+        try:
+            os.makedirs(match_html_dir, exist_ok=True)
+            with open(saved_path, "w", encoding="utf-8") as f:
+                f.write(html)
+            print(f"      ⚠ no scorers parsed for {match.get('date')} "
+                  f"{match.get('opp')} — saved page to {saved_path}")
+        except OSError:
+            pass
+
+    return scorers
+
+
 def fetch_pitchero_data(team_cfg, season_config_path):
     """
     Fetch stats and results from a Pitchero website and update season_config.json.
@@ -738,6 +905,7 @@ def fetch_pitchero_data(team_cfg, season_config_path):
     Returns True if anything was updated.
     """
     pitchero_cfg = team_cfg.get("pitchero", {})
+    team_id      = pitchero_cfg.get("team_id", "")
     stats_url    = pitchero_cfg.get("stats_url")   or team_cfg["sources"].get("stats_url")
     results_url  = pitchero_cfg.get("results_url") or team_cfg["sources"].get("results_url")
 
@@ -807,6 +975,27 @@ def fetch_pitchero_data(team_cfg, season_config_path):
         match_rows = parse_pitchero_fixtures_results_html(results_html)
         if match_rows:
             print(f"  ✓ Parsed {len(match_rows)} results from results page")
+
+            # ── Drill into each match-centre page for scorers ─────────────
+            # The fixtures-results listing has no goalscorers — those live on
+            # the individual match pages, so we fetch each one.
+            base_url       = pitchero_cfg.get("base_url", "https://www.stjohnsjfc.co.uk")
+            url_template   = pitchero_cfg.get("match_url_template")
+            match_html_dir = pitchero_cfg.get("local_match_dir",
+                                              os.path.join(team_dir, "matches"))
+            print(f"  Drilling into {len(match_rows)} match pages for scorers…")
+            with_scorers = 0
+            for row in match_rows:
+                scorers = fetch_pitchero_match_scorers(
+                    row, base_url, team_id,
+                    match_html_dir=match_html_dir,
+                    match_url_template=url_template,
+                )
+                if scorers:
+                    row["scorers"] = scorers
+                    with_scorers += 1
+            print(f"    ✓ scorers found for {with_scorers}/{len(match_rows)} matches")
+
             cfg.setdefault("matches", [])
             existing_by_key = {(m.get("date",""), m.get("score","")): i
                                for i, m in enumerate(cfg["matches"])}
@@ -822,6 +1011,9 @@ def fetch_pitchero_data(team_cfg, season_config_path):
                     if m.get("ha") in ("?", "", None) and row.get("ha"):
                         m["ha"] = row["ha"]
                         changed = True
+                    if not m.get("scorers") and row.get("scorers"):
+                        m["scorers"] = row["scorers"]
+                        changed = True
                     if changed:
                         updated_fields += 1
                 else:
@@ -829,18 +1021,24 @@ def fetch_pitchero_data(team_cfg, season_config_path):
                         "date": row["date"], "comp": row["comp"],
                         "ha": row["ha"], "opp": row["opp"],
                         "score": row["score"], "res": row.get("res", ""),
-                        "pts": row.get("pts"), "motm": None, "scorers": "", "summary": "",
+                        "pts": row.get("pts"), "motm": None,
+                        "scorers": row.get("scorers", ""), "summary": "",
                     })
                     added += 1
             if added:
                 print(f"    + {added} new matches added")
             if updated_fields:
-                print(f"    ✓ {updated_fields} existing matches updated with ha/opp")
+                print(f"    ✓ {updated_fields} existing matches updated")
             updated = True
         else:
             print("  ⚠  Could not parse results from HTML")
     else:
         print("  ✗ No results HTML available")
+
+    # strip transient drill-in keys before persisting
+    for m in cfg.get("matches", []):
+        m.pop("_fixture_id", None)
+        m.pop("_fixture_url", None)
 
     if updated:
         with open(season_config_path, "w", encoding="utf-8") as f:
