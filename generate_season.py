@@ -1137,6 +1137,71 @@ def _display_date_to_dt(display_date):
     except ValueError:
         return None
 
+
+def enrich_pitchero_matches_from_wa(cfg, wa_matches):
+    """
+    For teams where Pitchero is the official data source, overlay WhatsApp match
+    summaries and MOTM onto existing season_config matches without touching any
+    stats (scores, apps, goals).
+
+    Matching heuristic: normalise both scores to "X–Y" and compare; if only one
+    match has that score in the config, attach the summary to it.  Falls back to
+    date proximity (within 7 days) when multiple same-score matches exist.
+
+    Returns the updated cfg dict (modified in-place).
+    """
+    if not wa_matches:
+        return cfg
+
+    existing_matches = cfg.get("matches", [])
+    if not existing_matches:
+        return cfg
+
+    def norm_score(s):
+        if not s:
+            return ""
+        return re.sub(r"\s", "", s).replace("–", "-").replace("—", "-")
+
+    def match_dt(m):
+        return _display_date_to_dt(m.get("date", "")) if m.get("date") else None
+
+    unmatched = 0
+    for wm in wa_matches:
+        wa_score = norm_score(wm.get("score", ""))
+        wa_dt    = _wa_date_to_dt(wm.get("_wa_date", "")) if wm.get("_wa_date") else None
+        summary  = (wm.get("summary") or "").strip()
+        motm     = (wm.get("motm") or "").strip()
+        if not summary and not motm:
+            continue
+
+        # Candidates: existing matches with same normalised score
+        candidates = [m for m in existing_matches if norm_score(m.get("score","")) == wa_score]
+
+        # Narrow by date if multiple candidates
+        if len(candidates) > 1 and wa_dt:
+            by_date = sorted(candidates, key=lambda m: abs(
+                (match_dt(m) - wa_dt).days if match_dt(m) else 999
+            ))
+            candidates = [c for c in by_date if match_dt(c) and abs((match_dt(c) - wa_dt).days) <= 7]
+
+        if len(candidates) == 1:
+            target = candidates[0]
+            if summary and not target.get("summary"):
+                target["summary"] = summary
+            if motm and not target.get("motm"):
+                target["motm"] = motm
+        else:
+            unmatched += 1
+
+    if unmatched:
+        print(f"  ⚠  {unmatched} WhatsApp summaries could not be matched to Pitchero matches")
+
+    matched = sum(1 for m in existing_matches if m.get("summary"))
+    print(f"  ✓ {matched}/{len(existing_matches)} matches enriched with WhatsApp summaries")
+    cfg["matches"] = existing_matches
+    return cfg
+
+
 def parse_squad_appearances(zip_path, season_matches, wa_cfg=None):
     """
     Parse WhatsApp chat squad messages and compute player appearance counts.
@@ -2601,47 +2666,60 @@ def main():
             existing_cfg = {}
             print(f"\n  No existing config — will create fresh")
 
-        # Merge + flag discrepancies
-        print("\nCross-referencing data…")
-        updated_cfg, discrepancies = merge_and_flag(fa_results, fa_players, wa_matches, existing_cfg)
+        data_source = (team_cfg or {}).get("sources", {}).get("data_source", "fa_pdf")
 
-        # ── Always persist the merged config ─────────────────────────────────
+        if data_source == "pitchero":
+            # ── Pitchero is official source ───────────────────────────────────
+            # Stats (apps, goals, results) come exclusively from --fetch-stats.
+            # WhatsApp only enriches existing Pitchero matches with summaries/MOTM.
+            print("\nPitchero data source — WhatsApp used for summaries/MOTM only…")
+            if not existing_cfg.get("matches"):
+                print("  ⚠  No Pitchero match data yet. Run: python3 generate_season.py "
+                      f"--team {args.team} --fetch-stats")
+                print("     Building from WhatsApp as interim fallback…")
+                updated_cfg, discrepancies = merge_and_flag([], [], wa_matches, existing_cfg)
+            else:
+                updated_cfg = enrich_pitchero_matches_from_wa(existing_cfg, wa_matches)
+                discrepancies = []
+        else:
+            # ── FA PDF / WhatsApp merge (existing flow) ───────────────────────
+            print("\nCross-referencing data…")
+            updated_cfg, discrepancies = merge_and_flag(fa_results, fa_players, wa_matches, existing_cfg)
+
+            # ── Squad appearances (when no players PDF) ───────────────────────
+            if not has_players_pdf and updated_cfg.get("matches"):
+                print("\n  → Squad appearances from WhatsApp…", flush=True)
+                squad_apps = parse_squad_appearances(
+                    sources["chat_zip"],
+                    updated_cfg.get("matches", []),
+                    wa_cfg
+                )
+                if squad_apps:
+                    for p in updated_cfg.get("players", []):
+                        pname = p["name"]
+                        if pname in squad_apps:
+                            p["lge_apps"] = squad_apps[pname].get("lge", 0)
+                            p["cup_apps"] = squad_apps[pname].get("cup", 0)
+                            p["fri_apps"] = squad_apps[pname].get("fri", 0)
+                    for sname, scounts in squad_apps.items():
+                        if not any(p["name"] == sname for p in updated_cfg.get("players", [])):
+                            total = scounts["lge"] + scounts["cup"] + scounts["fri"]
+                            if total > 0:
+                                updated_cfg.setdefault("players", []).append({
+                                    "name": sname,
+                                    "lge_goals": 0, "cup_goals": 0, "fri_goals": 0,
+                                    "lge_apps": scounts["lge"],
+                                    "cup_apps": scounts["cup"],
+                                    "fri_apps": scounts["fri"],
+                                })
+                    with open(args.config, "w", encoding="utf-8") as f:
+                        json.dump(updated_cfg, f, indent=2, ensure_ascii=False)
+                    print(f"     Appearances written to {args.config}")
+
+        # ── Always persist the merged/enriched config ────────────────────────
         with open(args.config, "w", encoding="utf-8") as f:
             json.dump(updated_cfg, f, indent=2, ensure_ascii=False)
         force_build = True
-
-        # ── Squad appearances (when no players PDF) ───────────────────────────
-        if not has_players_pdf and updated_cfg.get("matches"):
-            print("\n  → Squad appearances from WhatsApp…", flush=True)
-            squad_apps = parse_squad_appearances(
-                sources["chat_zip"],
-                updated_cfg.get("matches", []),
-                wa_cfg
-            )
-            if squad_apps:
-                # Patch player app counts in updated_cfg
-                for p in updated_cfg.get("players", []):
-                    pname = p["name"]
-                    if pname in squad_apps:
-                        p["lge_apps"] = squad_apps[pname].get("lge", 0)
-                        p["cup_apps"] = squad_apps[pname].get("cup", 0)
-                        p["fri_apps"] = squad_apps[pname].get("fri", 0)
-                    # Add players who appeared in squads but aren't in the players list
-                for sname, scounts in squad_apps.items():
-                    if not any(p["name"] == sname for p in updated_cfg.get("players", [])):
-                        total = scounts["lge"] + scounts["cup"] + scounts["fri"]
-                        if total > 0:
-                            updated_cfg.setdefault("players", []).append({
-                                "name": sname,
-                                "lge_goals": 0, "cup_goals": 0, "fri_goals": 0,
-                                "lge_apps": scounts["lge"],
-                                "cup_apps": scounts["cup"],
-                                "fri_apps": scounts["fri"],
-                            })
-                # Re-persist config with squad appearances added
-                with open(args.config, "w", encoding="utf-8") as f:
-                    json.dump(updated_cfg, f, indent=2, ensure_ascii=False)
-                print(f"     Appearances written to {args.config}")
 
         # Report discrepancies
         if discrepancies:
