@@ -17,11 +17,13 @@
   },
 
   "sources": {
-    "results_pdf":   "teams/u15-2025-26/whites/results/",
-    "players_pdf":   "teams/u15-2025-26/whites/players/",
-    "chat_zip":      "teams/u15-2025-26/whites/chat/stjohns_chat.zip",
-    "season_config": "teams/u15-2025-26/whites/season_config.json",
-    "output_html":   "index.html"
+    "data_source":     "fa_pdf",
+    "results_pdf":     "teams/u15-2025-26/whites/results/",
+    "players_pdf":     "teams/u15-2025-26/whites/players/",
+    "chat_zip":        "teams/u15-2025-26/whites/chat/stjohns_chat.zip",
+    "shared_chat_zip": "shared/chat/managers_chat.zip",
+    "season_config":   "teams/u15-2025-26/whites/season_config.json",
+    "output_html":     "index.html"
   },
 
   "fulltime": {

@@ -730,6 +730,45 @@ def _find_result(text):
         return int(m.group(3)), int(m.group(2)), m.group(1).strip()
     return None
 
+def _find_result_narrative(text, opp_hint=""):
+    """
+    Extract (sj_goals, opp_goals, opp_raw) from narrative match reports
+    (e.g. Craig's U13 posts: '8-0 winners', 'losing 10-1', '9-3 victory').
+    Returns None if no result found.
+    """
+    score_m = re.search(r'(\d+)\s*[-–]\s*(\d+)', text)
+    if not score_m:
+        return None
+    a, b = int(score_m.group(1)), int(score_m.group(2))
+
+    # Context window around the score
+    ctx = text[max(0, score_m.start() - 40):score_m.end() + 40].lower()
+
+    win_words  = re.compile(r'winner|victor|ran\s+out|running\s+out|\bwon\b|\bbeat\b|\bwin\b', re.I)
+    loss_words = re.compile(r'defeat|loss|\blost\b|\blosing\b|\bbeaten\b', re.I)
+    draw_words = re.compile(r'\bdraw\b|\ball\b|\blevel\b|stalemate', re.I)
+
+    if win_words.search(ctx):
+        sj_g, opp_g = a, b
+    elif loss_words.search(ctx):
+        sj_g, opp_g = b, a
+    elif draw_words.search(ctx):
+        sj_g, opp_g = a, b
+    else:
+        return None
+
+    # Extract opponent from text
+    opp = opp_hint
+    opp_m = re.search(
+        r'\b(?:against|versus|vs\.?|over)\s+([A-Z][A-Za-z\s&\'\-]{2,30?}?)(?=[,.\n(]|$)',
+        text
+    )
+    if opp_m:
+        opp = opp_m.group(1).strip()
+
+    return sj_g, opp_g, opp
+
+
 def _wa_date_to_display(date_str):
     """Convert '9/6/25' → '06 Sep'."""
     parts = date_str.split("/")
@@ -860,9 +899,11 @@ def parse_whatsapp(zip_path, wa_cfg=None):
         if m:
             if current:
                 messages.append(current)
+            sender = m.group(2).strip()
+            sender = sender.replace(' ', ' ')  # normalise tilde+NBSP prefix (~ ) → tilde+space
             current = {
                 "date_raw": m.group(1),
-                "sender":   m.group(2).strip(),
+                "sender":   sender,
                 "text":     m.group(3),
                 "extra":    []
             }
@@ -886,6 +927,11 @@ def parse_whatsapp(zip_path, wa_cfg=None):
 
         # Check if this message announces a result
         result = _find_result(msg["text"])
+        if result is None and (wa_cfg or {}).get("result_format") == "narrative":
+            # Try the full first message text for narrative-format reports
+            result = _find_result_narrative(msg["text"])
+            if result is None:
+                result = _find_result_narrative(full_text)
         if not result:
             i += 1
             continue
@@ -2414,16 +2460,31 @@ def main():
             print(f"  WARNING: Team 2 season_config not found: {sun_config_path}", file=sys.stderr)
             print(f"    Run: python3 generate_season.py --team {args.team_2} first", file=sys.stderr)
 
+    _team_sources = team_cfg["sources"] if team_cfg else {}
     _raw_sources = {
-        "results_pdf": team_cfg["sources"]["results_pdf"] if team_cfg else SRC_RESULTS,
-        "players_pdf": team_cfg["sources"]["players_pdf"] if team_cfg else SRC_PLAYERS,
-        "chat_zip":    team_cfg["sources"]["chat_zip"]    if team_cfg else SRC_CHAT,
+        "results_pdf": _team_sources.get("results_pdf") or (SRC_RESULTS if not team_cfg else ""),
+        "players_pdf": _team_sources.get("players_pdf") or (SRC_PLAYERS if not team_cfg else ""),
+        "chat_zip":    _team_sources.get("chat_zip") or "",
+        "shared_chat_zip": _team_sources.get("shared_chat_zip") or "",
     }
+
+    # Chat fallback: team chat → shared chat
+    _team_chat   = _raw_sources["chat_zip"]
+    _shared_chat = _raw_sources["shared_chat_zip"]
+    if _team_chat and os.path.exists(_team_chat):
+        _resolved_chat = _team_chat
+    elif _shared_chat and os.path.exists(_shared_chat):
+        print(f"  ℹ  Team chat not found — using shared chat: {_shared_chat}")
+        _resolved_chat = _shared_chat
+    else:
+        _resolved_chat = _team_chat or _shared_chat or (SRC_CHAT if not team_cfg else "")
+
     sources = {
         "results_pdf": _resolve_pdf(_raw_sources["results_pdf"]) or _raw_sources["results_pdf"],
         "players_pdf": _resolve_pdf(_raw_sources["players_pdf"]) or _raw_sources["players_pdf"],
-        "chat_zip":    _raw_sources["chat_zip"],
+        "chat_zip":    _resolved_chat,
     }
+    data_source = _team_sources.get("data_source", "fa_pdf")  # "fa_pdf" | "pitchero"
 
     # ── STEP 0: Fetch league table from FA Full Time (if requested) ───────────
     if args.fetch_table:
@@ -2491,6 +2552,8 @@ def main():
     if not has_players_pdf:
         src = sources["players_pdf"] or "(none configured)"
         print(f"  ⚠  Players PDF not found ({src}) — player stats from WhatsApp only")
+    if data_source == "pitchero":
+        print(f"  ℹ  Data source: Pitchero (run with --fetch-stats to update)")
 
     # ── STEP 1: Check source file hashes ─────────────────────────────────────
     print("Checking source files…")
