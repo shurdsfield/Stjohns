@@ -17,25 +17,27 @@
   },
 
   "sources": {
-    "data_source":     "pitchero",
-    "stats_url":       "https://www.stjohnsjfc.co.uk/teams/206000/statistics",
-    "results_url":     "https://www.stjohnsjfc.co.uk/teams/206000/results",
-    "results_pdf":     "",
-    "players_pdf":     "",
-    "chat_zip":        "",
-    "shared_chat_zip": "shared/chat/managers_chat.zip",
-    "_chat_note":      "No team-specific chat — falls back to shared managers chat, filtered by whatsapp.managers.",
-    "season_config":   "teams/u13-2025-26/u13s/season_config.json",
-    "output_html":     "u13/index.html"
+    "data_source":        "pitchero",
+    "stats_url":          "https://www.stjohnsjfc.co.uk/teams/206000/statistics",
+    "results_url":        "https://www.stjohnsjfc.co.uk/teams/206000/fixtures-results",
+    "results_pdf":        "",
+    "players_pdf":        "",
+    "chat_zip":           "",
+    "shared_chat_zip":    "shared/chat/managers_chat.zip",
+    "_chat_note":         "No team-specific chat — falls back to shared managers chat, filtered by whatsapp.managers.",
+    "season_config":      "teams/u13-2025-26/u13s/season_config.json",
+    "output_html":        "u13/index.html"
   },
 
   "pitchero": {
-    "team_id": 206000,
-    "stats_url":   "https://www.stjohnsjfc.co.uk/teams/206000/statistics",
-    "results_url": "https://www.stjohnsjfc.co.uk/teams/206000/results",
+    "team_id":    206000,
+    "stats_url":  "https://www.stjohnsjfc.co.uk/teams/206000/statistics",
+    "results_url": "https://www.stjohnsjfc.co.uk/teams/206000/fixtures-results",
+    "local_stats_html":   "teams/u13-2025-26/u13s/stats.html",
+    "local_results_html": "teams/u13-2025-26/u13s/results.html",
     "notes": [
       "Pitchero club site — stats and results fetched via --fetch-stats flag.",
-      "If fetch fails, place manually-saved stats.html and results.html in teams/u13-2025-26/u13s/ and re-run."
+      "Fallback: save pages as HTML and commit to local_stats_html / local_results_html paths above."
     ]
   },
 
