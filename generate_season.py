@@ -2605,8 +2605,13 @@ def main():
         print("\nCross-referencing data…")
         updated_cfg, discrepancies = merge_and_flag(fa_results, fa_players, wa_matches, existing_cfg)
 
+        # ── Always persist the merged config ─────────────────────────────────
+        with open(args.config, "w", encoding="utf-8") as f:
+            json.dump(updated_cfg, f, indent=2, ensure_ascii=False)
+        force_build = True
+
         # ── Squad appearances (when no players PDF) ───────────────────────────
-        if not has_players_pdf and existing_cfg.get("matches"):
+        if not has_players_pdf and updated_cfg.get("matches"):
             print("\n  → Squad appearances from WhatsApp…", flush=True)
             squad_apps = parse_squad_appearances(
                 sources["chat_zip"],
@@ -2633,11 +2638,10 @@ def main():
                                 "cup_apps": scounts["cup"],
                                 "fri_apps": scounts["fri"],
                             })
-                # Save updated config with appearances
+                # Re-persist config with squad appearances added
                 with open(args.config, "w", encoding="utf-8") as f:
                     json.dump(updated_cfg, f, indent=2, ensure_ascii=False)
                 print(f"     Appearances written to {args.config}")
-                force_build = True
 
         # Report discrepancies
         if discrepancies:
