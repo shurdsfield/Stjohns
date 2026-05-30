@@ -763,12 +763,17 @@ def _deep_find_goal_scorers(obj):
     """
     Recursively walk a parsed JSON tree looking for goal events.
     Returns a list of {name, side, own_goal} dicts.
-    Recognises:
-      - event dicts: {type/eventType/event: '...goal...', player..., side/ha/team...}
-      - explicit goal arrays under keys like 'goalScorers'/'scorers'/'goals'
-    """
-    found = []
 
+    Three strategies tried in order:
+
+    1. Named scorer arrays — keys literally called goalScorers / scorers /
+       homeGoalScorers etc. that contain lists of player-like objects.
+    2. Event walk — walk every dict in the tree; if a dict's type/eventType
+       field contains "goal", extract the player name from it.
+    3. Discovery pass — if strategies 1+2 find nothing, scan every list in
+       the tree for ones whose items all have player-name-looking fields;
+       pick the best candidate and infer scorer names from it.
+    """
     def side_of(o):
         for k in ("side", "ha", "team", "teamType", "homeAway"):
             v = o.get(k)
@@ -785,28 +790,119 @@ def _deep_find_goal_scorers(obj):
             return "a"
         return ""
 
-    def walk(o):
+    # ── Strategy 1: named scorer arrays ──────────────────────────────────────
+    named_keys = (
+        "goalScorers", "goal_scorers", "scorers", "goals",
+        "homeGoalScorers", "awayGoalScorers",
+        "homeScorers", "awayScorers",
+    )
+
+    def extract_from_named_arrays(o, path_side=""):
+        """Recursively look for lists under known scorer-array keys."""
+        results = []
+        if isinstance(o, dict):
+            for k, v in o.items():
+                k_lower = k.lower()
+                # infer side from key name
+                if "homegoal" in k_lower or "homescor" in k_lower:
+                    implied_side = "h"
+                elif "awaygoal" in k_lower or "awayscor" in k_lower:
+                    implied_side = "a"
+                else:
+                    implied_side = path_side
+
+                if k in named_keys and isinstance(v, list):
+                    for item in v:
+                        name = _extract_player_name(item) if isinstance(item, dict) else (
+                            str(item).strip() if isinstance(item, str) else "")
+                        if not name:
+                            continue
+                        item_side = (side_of(item) if isinstance(item, dict) else "") or implied_side
+                        type_str = " ".join(
+                            str((item or {}).get(f, ""))
+                            for f in ("type","eventType","event")
+                        ).lower() if isinstance(item, dict) else ""
+                        results.append({
+                            "name": name,
+                            "side": item_side,
+                            "own_goal": "own" in type_str,
+                        })
+                else:
+                    results.extend(extract_from_named_arrays(v, implied_side))
+        elif isinstance(o, list):
+            for item in o:
+                results.extend(extract_from_named_arrays(item, path_side))
+        return results
+
+    named = extract_from_named_arrays(obj)
+    if named:
+        return named
+
+    # ── Strategy 2: event walk ────────────────────────────────────────────────
+    event_found = []
+
+    def walk_events(o):
         if isinstance(o, dict):
             type_val = " ".join(
-                str(o.get(k) or "") for k in ("type", "eventType", "event", "kind", "name")
+                str(o.get(k) or "") for k in ("type", "eventType", "event", "kind")
             ).lower()
             is_goal = ("goal" in type_val) or (o.get("isGoal") is True)
             if is_goal:
                 name = _extract_player_name(o)
                 if name:
-                    found.append({
+                    event_found.append({
                         "name": name,
                         "side": side_of(o),
                         "own_goal": "own" in type_val,
                     })
             for v in o.values():
-                walk(v)
+                walk_events(v)
         elif isinstance(o, list):
             for v in o:
-                walk(v)
+                walk_events(v)
 
-    walk(obj)
-    return found
+    walk_events(obj)
+    if event_found:
+        return event_found
+
+    # ── Strategy 3: discovery pass ────────────────────────────────────────────
+    # Collect all lists in the tree; score each by how many items have
+    # player-like fields. Return names from the best-scoring list.
+    candidates = []
+
+    def collect_lists(o, depth=0):
+        if depth > 15:
+            return
+        if isinstance(o, list) and o:
+            score = sum(1 for item in o
+                        if isinstance(item, dict) and _extract_player_name(item))
+            if score > 0:
+                candidates.append((score, o))
+            for item in o:
+                collect_lists(item, depth + 1)
+        elif isinstance(o, dict):
+            for v in o.values():
+                collect_lists(v, depth + 1)
+
+    collect_lists(obj)
+    if candidates:
+        # pick the list where the most items look like player objects
+        best = max(candidates, key=lambda x: x[0])[1]
+        disc = []
+        for item in best:
+            if not isinstance(item, dict):
+                continue
+            name = _extract_player_name(item)
+            if name:
+                disc.append({
+                    "name": name,
+                    "side": side_of(item),
+                    "own_goal": False,
+                })
+        if disc:
+            return disc
+
+    return []
 
 
 def _format_scorers(goal_events):
@@ -873,29 +969,30 @@ def fetch_pitchero_match_scorers(match, base_url, team_id, match_html_dir=None,
     next_data = _parse_next_data(html)
     goal_events = _deep_find_goal_scorers(next_data) if next_data else []
 
-    # keep only goals attributed to our side (drop opponent goals & own-goals
-    # we can't attribute). If no side info present, assume all are ours only
-    # when the count matches our score — otherwise keep all as a best effort.
+    # Keep only our-side goals. If no side info available in the events,
+    # cross-check count against our expected score to decide whether to
+    # keep all (count matches) or drop all (count clearly wrong).
     sided = [g for g in goal_events if g.get("side")]
     if sided:
         ours = [g for g in sided if g["side"] == our_side and not g["own_goal"]]
     else:
-        ours = [g for g in goal_events if not g["own_goal"]]
-
-    scorers = _format_scorers(ours)
-
-    # 4) save sample on failure for inspection ------------------------------
-    if not scorers and match_html_dir and not (saved_path and os.path.exists(saved_path)):
+        # No side info — use score to validate
+        unsided = [g for g in goal_events if not g["own_goal"]]
         try:
-            os.makedirs(match_html_dir, exist_ok=True)
-            with open(saved_path, "w", encoding="utf-8") as f:
-                f.write(html)
-            print(f"      ⚠ no scorers parsed for {match.get('date')} "
-                  f"{match.get('opp')} — saved page to {saved_path}")
-        except OSError:
-            pass
+            sj_str, _ = match.get("score", "0–0").split("–")
+            expected = int(sj_str)
+        except (ValueError, TypeError):
+            expected = None
+        if expected is not None and len(unsided) == expected:
+            ours = unsided
+        elif expected is not None and len(unsided) > expected:
+            # More names than our goals — probably includes opponent; keep nothing
+            # rather than show wrong data
+            ours = []
+        else:
+            ours = unsided
 
-    return scorers
+    return _format_scorers(ours)
 
 
 def fetch_pitchero_data(team_cfg, season_config_path):
