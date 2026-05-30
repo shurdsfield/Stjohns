@@ -426,15 +426,76 @@ def _strip_tags(s):
     return s.strip()
 
 
+def _parse_next_data(html):
+    """Extract __NEXT_DATA__ JSON from a Next.js page. Returns parsed dict or None."""
+    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', html, re.S)
+    if m:
+        try:
+            return json.loads(m.group(1))
+        except (json.JSONDecodeError, ValueError):
+            pass
+    return None
+
+
 def parse_pitchero_stats_html(html):
     """
     Parse a Pitchero /teams/{id}/statistics page.
     Returns list of {name, apps, goals} or [].
-
-    Pitchero stats table columns (order can vary):
-      Player | Position | Apps | Goals | Assists | Clean Sheets | YC | RC
-    We locate columns by header text.
+    Tries __NEXT_DATA__ JSON first (Next.js), falls back to HTML table parsing.
     """
+    # ── Next.js: data embedded as JSON ───────────────────────────────────────
+    next_data = _parse_next_data(html)
+    if next_data:
+        try:
+            stats_redux = (next_data.get("props", {})
+                           .get("initialReduxState", {})
+                           .get("teams", {})
+                           .get("statistics", {}))
+            # Prefer playerStatsTables — full squad with per-stat columns
+            stat_tables = stats_redux.get("playerStatsTables", {})
+            if stat_tables:
+                season_key = next(iter(stat_tables))
+                rows = stat_tables[season_key][0]["table"]["rows"]
+                results = []
+                for row in rows:
+                    name = row.get("player", {}).get("name", "")
+                    if not name:
+                        continue
+                    s = row.get("stats", {})
+                    results.append({
+                        "name":   name,
+                        "apps":   int(s.get("appearances") or 0),
+                        "goals":  int(s.get("goal") or 0),
+                    })
+                if results:
+                    return results
+            # Fallback: playerStatistics — top-3 per category only
+            player_stats = stats_redux.get("playerStatistics", {})
+            if player_stats:
+                season_key = next(iter(player_stats))
+                categories = player_stats[season_key]
+                apps_by_name = {}
+                goals_by_name = {}
+                for cat in categories:
+                    cat_name = cat.get("name", "").lower()
+                    for entry in cat.get("players", []):
+                        name = entry.get("player", {}).get("name", "")
+                        value = int(entry.get("value") or 0)
+                        if not name:
+                            continue
+                        if "appear" in cat_name:
+                            apps_by_name[name] = value
+                        elif "scor" in cat_name or "goal" in cat_name:
+                            goals_by_name[name] = value
+                all_names = sorted(set(apps_by_name) | set(goals_by_name))
+                results = [{"name": n, "apps": apps_by_name.get(n, 0), "goals": goals_by_name.get(n, 0)}
+                           for n in all_names]
+                if results:
+                    return results
+        except (KeyError, StopIteration, TypeError):
+            pass
+
+    # ── Legacy HTML table fallback ────────────────────────────────────────────
     results = []
 
     tables = re.findall(r'<table[^>]*>(.*?)</table>', html, re.S | re.I)
@@ -484,14 +545,68 @@ def parse_pitchero_fixtures_results_html(html):
     """
     Parse a Pitchero /teams/{id}/fixtures-results page.
     Returns list of {date, opp, score, ha, comp, res, scorers} or [].
-
-    Pitchero renders each fixture as an <li> or <div> containing:
-      - date (e.g. "Sunday 7th September 2025")
-      - competition label (League / Cup / Friendly)
-      - home/away indicator
-      - team names + score
-      - goalscorers list (below the score)
+    Tries __NEXT_DATA__ JSON first (Next.js), falls back to HTML parsing.
     """
+    # ── Next.js: data embedded as JSON ───────────────────────────────────────
+    next_data = _parse_next_data(html)
+    if next_data:
+        try:
+            fixtures_top = (next_data.get("props", {})
+                            .get("initialReduxState", {})
+                            .get("teams", {})
+                            .get("fixtures", {})
+                            .get("fixtures", {}))
+            if fixtures_top:
+                from datetime import datetime as _dt
+                nd_matches = []
+                for _team_id, team_fixtures in fixtures_top.items():
+                    for _fid, fix in team_fixtures.items():
+                        if fix.get("isCancelledOrPostponed"):
+                            continue
+                        outcome = fix.get("outcome", "")
+                        if outcome not in ("W", "L", "D"):
+                            continue
+                        date_raw = (fix.get("dateTime") or "")[:10]
+                        try:
+                            date_str = _dt.strptime(date_raw, "%Y-%m-%d").strftime("%d %b")
+                        except (ValueError, TypeError):
+                            date_str = date_raw
+                        ha = fix.get("ha", "h")
+                        opp = fix.get("opponent", "")
+                        home = fix.get("homeSide", {})
+                        away = fix.get("awaySide", {})
+                        if ha == "h":
+                            sj_score  = home.get("score") or "0"
+                            opp_score = away.get("score") or "0"
+                        else:
+                            sj_score  = away.get("score") or "0"
+                            opp_score = home.get("score") or "0"
+                        comp_type = fix.get("type", "")
+                        if "pre-season" in comp_type.lower() or "friendly" in comp_type.lower():
+                            comp = "Friendly"
+                        elif "cup" in comp_type.lower():
+                            comp = "Cup"
+                        else:
+                            comp = "League"
+                        nd_matches.append({
+                            "date":    date_str,
+                            "comp":    comp,
+                            "ha":      ha,
+                            "opp":     opp,
+                            "score":   f"{sj_score}–{opp_score}",
+                            "res":     outcome,
+                            "pts":     3 if outcome == "W" else (1 if outcome == "D" else 0),
+                            "motm":    None,
+                            "scorers": "",
+                            "summary": "",
+                        })
+                if nd_matches:
+                    nd_matches.sort(key=lambda m: m["date"])
+                    return nd_matches
+        except (KeyError, TypeError):
+            pass
+
+    # ── Legacy HTML parsing fallback ─────────────────────────────────────────
     matches = []
 
     # ── Strategy 1: look for fixture/result list items or divs ───────────────
@@ -693,21 +808,34 @@ def fetch_pitchero_data(team_cfg, season_config_path):
         if match_rows:
             print(f"  ✓ Parsed {len(match_rows)} results from results page")
             cfg.setdefault("matches", [])
-            # Merge: add any matches not already in config (by date+score)
-            existing_keys = {(m.get("date",""), m.get("score","")) for m in cfg["matches"]}
-            added = 0
+            existing_by_key = {(m.get("date",""), m.get("score","")): i
+                               for i, m in enumerate(cfg["matches"])}
+            added = updated_fields = 0
             for row in match_rows:
                 key = (row.get("date",""), row.get("score",""))
-                if key not in existing_keys:
+                if key in existing_by_key:
+                    m = cfg["matches"][existing_by_key[key]]
+                    changed = False
+                    if not m.get("opp") and row.get("opp"):
+                        m["opp"] = row["opp"]
+                        changed = True
+                    if m.get("ha") in ("?", "", None) and row.get("ha"):
+                        m["ha"] = row["ha"]
+                        changed = True
+                    if changed:
+                        updated_fields += 1
+                else:
                     cfg["matches"].append({
                         "date": row["date"], "comp": row["comp"],
                         "ha": row["ha"], "opp": row["opp"],
-                        "score": row["score"], "res": "",
-                        "pts": None, "motm": None, "scorers": "", "summary": "",
+                        "score": row["score"], "res": row.get("res", ""),
+                        "pts": row.get("pts"), "motm": None, "scorers": "", "summary": "",
                     })
                     added += 1
             if added:
                 print(f"    + {added} new matches added")
+            if updated_fields:
+                print(f"    ✓ {updated_fields} existing matches updated with ha/opp")
             updated = True
         else:
             print("  ⚠  Could not parse results from HTML")

@@ -10,8 +10,8 @@
     "name": "St John's Chorlton U13s",
     "short_name": "U13s",
     "season": "2025–26",
-    "league": "TBC",
-    "division": "TBC",
+    "league": "Timperley & District JFL",
+    "division": "Division 5",
     "managers": "Craig Allen",
     "day": "Sunday"
   },
@@ -41,7 +41,14 @@
     ]
   },
 
-  "our_team_name_in_fa": "",
+  "our_team_name_in_fa": "St Johns (CHORLTON) U13 JFC",
+
+  "fulltime": {
+    "league_table_url": "https://fulltime.thefa.com/index.html?selectedSeason=354462616&selectedFixtureGroupAgeGroup=10&selectedDivision=791455334&selectedCompetition=0",
+    "division_id": "791455334",
+    "season_id": "354462616",
+    "notes": ["Timperley & District JFL Division 5 2025-26. Key param: selectedFixtureGroupAgeGroup=10 (U13)."]
+  },
 
   "whatsapp": {
     "managers": ["~ Craig A Home", "~ Craig A WORK"],
