@@ -1630,15 +1630,43 @@ def _display_date_to_dt(display_date):
         return None
 
 
+def _extract_narrative_scorers(text, player_names):
+    """
+    Extract scorer names from narrative match report text.
+    Handles patterns like:
+      "Goals from Lawson and Ryli"
+      "a goal from Jack"
+      "Goals: Jack 2, Mateo"
+      "goal from Jack (2) and Leo"
+    Returns a formatted scorer string or "".
+    """
+    # Colon form: "Goals: Name 2, Name"
+    m = re.search(r"goals?\s*:\s*([A-Z][A-Za-z\s,\(\)\d&]+?)(?:\.|$)", text, re.I)
+    if m:
+        raw = m.group(1)
+        # already scorer-line-ish; let _extract_scorers_text handle it
+        return raw.strip()
+
+    # "Goals from X, Y and Z" / "a goal from X"
+    m = re.search(
+        r"\bgoals?\s+(?:from|by|scored?\s+by)\s+"
+        r"([A-Z][A-Za-z]+(?:\s+\(\d+\))?(?:(?:,\s*|\s+and\s+)[A-Z][A-Za-z]+(?:\s+\(\d+\))?)*)",
+        text, re.I
+    )
+    if m:
+        return m.group(1).strip()
+
+    return ""
+
+
 def enrich_pitchero_matches_from_wa(cfg, wa_matches):
     """
     For teams where Pitchero is the official data source, overlay WhatsApp match
-    summaries and MOTM onto existing season_config matches without touching any
-    stats (scores, apps, goals).
+    summaries, MOTM, and scorer fallback onto existing season_config matches
+    without touching official stats (scores, apps, goals from Pitchero).
 
-    Matching heuristic: normalise both scores to "X–Y" and compare; if only one
-    match has that score in the config, attach the summary to it.  Falls back to
-    date proximity (within 7 days) when multiple same-score matches exist.
+    Matching: normalise both scores to "X-Y" and compare; narrow by date
+    proximity (±7 days) when multiple same-score matches exist.
 
     Returns the updated cfg dict (modified in-place).
     """
@@ -1659,22 +1687,30 @@ def enrich_pitchero_matches_from_wa(cfg, wa_matches):
 
     unmatched = 0
     for wm in wa_matches:
-        wa_score = norm_score(wm.get("score", ""))
-        wa_dt    = _wa_date_to_dt(wm.get("_wa_date", "")) if wm.get("_wa_date") else None
-        summary  = (wm.get("summary") or "").strip()
-        motm     = (wm.get("motm") or "").strip()
-        if not summary and not motm:
+        wa_score = norm_score(wm.get("wa_score", ""))
+        wa_dt    = _display_date_to_dt(wm.get("date", "")) if wm.get("date") else None
+        summary  = (wm.get("wa_summary") or "").strip()
+        motm     = (wm.get("wa_motm") or "").strip()
+        scorers  = (wm.get("wa_scorers") or "").strip()
+
+        # Try to extract scorers from narrative summary if not found as a scorer line
+        if not scorers and summary:
+            scorers = _extract_narrative_scorers(summary, set())
+
+        if not summary and not motm and not scorers:
             continue
 
         # Candidates: existing matches with same normalised score
-        candidates = [m for m in existing_matches if norm_score(m.get("score","")) == wa_score]
+        candidates = [m for m in existing_matches
+                      if norm_score(m.get("score", "")) == wa_score]
 
-        # Narrow by date if multiple candidates
+        # Narrow by date proximity when multiple candidates share the same score
         if len(candidates) > 1 and wa_dt:
             by_date = sorted(candidates, key=lambda m: abs(
                 (match_dt(m) - wa_dt).days if match_dt(m) else 999
             ))
-            candidates = [c for c in by_date if match_dt(c) and abs((match_dt(c) - wa_dt).days) <= 7]
+            candidates = [c for c in by_date
+                          if match_dt(c) and abs((match_dt(c) - wa_dt).days) <= 7]
 
         if len(candidates) == 1:
             target = candidates[0]
@@ -1682,14 +1718,20 @@ def enrich_pitchero_matches_from_wa(cfg, wa_matches):
                 target["summary"] = summary
             if motm and not target.get("motm"):
                 target["motm"] = motm
+            # Only use WA scorers as fallback — never overwrite Pitchero data
+            if scorers and not target.get("scorers"):
+                target["scorers"] = scorers
         else:
             unmatched += 1
 
     if unmatched:
-        print(f"  ⚠  {unmatched} WhatsApp summaries could not be matched to Pitchero matches")
+        print(f"  ⚠  {unmatched} WhatsApp match reports could not be matched to Pitchero matches")
 
-    matched = sum(1 for m in existing_matches if m.get("summary"))
-    print(f"  ✓ {matched}/{len(existing_matches)} matches enriched with WhatsApp summaries")
+    matched_summary = sum(1 for m in existing_matches if m.get("summary"))
+    matched_scorers = sum(1 for m in existing_matches if m.get("scorers"))
+    print(f"  ✓ {matched_summary}/{len(existing_matches)} matches enriched with WhatsApp summaries")
+    if matched_scorers:
+        print(f"  ✓ {matched_scorers}/{len(existing_matches)} matches have scorers")
     cfg["matches"] = existing_matches
     return cfg
 
