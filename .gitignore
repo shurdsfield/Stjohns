@@ -2,3 +2,4 @@
 __pycache__/
 *.pyc
 .source_hashes.json
+.claude/worktrees/
