@@ -36,5 +36,12 @@
     ]
   },
 
-  "our_team_name_in_fa": "St Johns (CHORLTON) U15 JFC Whites"
+  "our_team_name_in_fa": "St Johns (CHORLTON) U15 JFC Whites",
+
+  "stats_precedence": {
+    "appearances": "fa_pdf",
+    "goals": "fa_pdf",
+    "motm": "whatsapp"
+  },
+  "_comment_stats_precedence": "appearances: spreadsheet|fa_pdf|whatsapp  goals: fa_pdf|spreadsheet|whatsapp  motm: spreadsheet|whatsapp"
 }

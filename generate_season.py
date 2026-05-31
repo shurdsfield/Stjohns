@@ -389,6 +389,46 @@ def parse_players_pdf(path):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+#  MANAGER SPREADSHEET PARSER
+# ══════════════════════════════════════════════════════════════════════════════
+
+def parse_manager_spreadsheet(path):
+    """Parse manager's Excel spreadsheet → dict of player_name → sheet_* stats.
+
+    Expected layout (row 2 = header, data from row 3):
+      col B = Player name
+      col D = League App
+      col F = Cup App
+      col H = Total App
+      col J = League Goals
+      col L = Cup Goals
+      col N = Total Goals
+      col P = MOTM
+    """
+    try:
+        import openpyxl
+    except ImportError:
+        print("  ⚠  openpyxl not installed — skipping spreadsheet parse", file=sys.stderr)
+        return {}
+    wb = openpyxl.load_workbook(path)
+    ws = wb.active
+    result = {}
+    for r in ws.iter_rows(min_row=2):
+        v = [c.value for c in r]
+        name = v[1]  # col B (index 1)
+        if not name or name == 'Player':
+            continue
+        result[name] = {
+            'sheet_lge_apps':  int(v[3] or 0),   # col D
+            'sheet_cup_apps':  int(v[5] or 0),   # col F
+            'sheet_lge_goals': int(v[9] or 0),   # col J
+            'sheet_cup_goals': int(v[11] or 0),  # col L
+            'sheet_motm':      int(v[15] or 0),  # col P
+        }
+    return result
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 #  PITCHERO CLUB WEBSITE PARSER
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -2160,6 +2200,45 @@ def merge_and_flag(fa_results, fa_players, wa_matches, existing_config):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+#  STATS PRECEDENCE
+# ══════════════════════════════════════════════════════════════════════════════
+
+def apply_stats_precedence(cfg, precedence):
+    """Apply stats_precedence rules to set display fields from the authoritative source.
+
+    precedence keys:
+      appearances: spreadsheet | fa_pdf | whatsapp
+      goals:       fa_pdf | spreadsheet | whatsapp
+      motm:        spreadsheet | whatsapp
+    """
+    if not precedence:
+        return cfg
+    app_src   = precedence.get("appearances", "fa_pdf")
+    goals_src = precedence.get("goals", "fa_pdf")
+    motm_src  = precedence.get("motm", "whatsapp")
+
+    for p in cfg.get("players", []):
+        # Appearances
+        if app_src == "spreadsheet":
+            if "sheet_lge_apps" in p:
+                p["lge_apps"] = p["sheet_lge_apps"]
+                p["cup_apps"] = p["sheet_cup_apps"]
+        # Goals
+        if goals_src == "spreadsheet":
+            if "sheet_lge_goals" in p:
+                p["lge_goals"] = p["sheet_lge_goals"]
+                p["cup_goals"] = p["sheet_cup_goals"]
+        # MOTM
+        if motm_src == "spreadsheet":
+            sheet_total = p.get("sheet_motm", 0)
+            wa_total    = sum(p.get("motm", {}).values())
+            if sheet_total > wa_total:
+                p.setdefault("motm", {})
+                p["motm"]["Unattributed"] = sheet_total - wa_total
+    return cfg
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 #  NODE.JS VALIDATION
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -2332,11 +2411,12 @@ tr.tr-row td{font-weight:700;color:#ffffff;padding:12px 13px;border-top:2px soli
 
 _JS_FUNCS = """
 const BC = {
-  League:       '#2563eb',
-  'League Cup': '#16a34a',
-  'Plate Cup':  '#d97706',
-  'SDFL Cup':   '#dc2626',
-  Friendly:     '#7c3aed'
+  League:         '#2563eb',
+  'League Cup':   '#16a34a',
+  'Plate Cup':    '#d97706',
+  'SDFL Cup':     '#dc2626',
+  Friendly:       '#7c3aed',
+  Unattributed:   '#64748b'
 };
 const RC = { W:'#4ade80', D:'#facc15', L:'#f87171', ABN:'#64748b' };
 function totalG(p){ return (includeFriendlies?(p.friG||0):0)+(p.lgeG||0)+(p.cupG||0); }
@@ -3065,6 +3145,7 @@ def main():
         "players_pdf": _team_sources.get("players_pdf") or (SRC_PLAYERS if not team_cfg else ""),
         "chat_zip":    _team_sources.get("chat_zip") or "",
         "shared_chat_zip": _team_sources.get("shared_chat_zip") or "",
+        "spreadsheet": _team_sources.get("spreadsheet") or "",
     }
 
     # Chat fallback: team chat → shared chat
@@ -3082,6 +3163,7 @@ def main():
         "results_pdf": _resolve_pdf(_raw_sources["results_pdf"]) or _raw_sources["results_pdf"],
         "players_pdf": _resolve_pdf(_raw_sources["players_pdf"]) or _raw_sources["players_pdf"],
         "chat_zip":    _resolved_chat,
+        "spreadsheet": _raw_sources["spreadsheet"],
     }
     data_source = _team_sources.get("data_source", "fa_pdf")  # "fa_pdf" | "pitchero"
 
@@ -3140,6 +3222,7 @@ def main():
     # ── Check which source files exist (chat required; PDFs optional) ─────────
     has_results_pdf = bool(sources["results_pdf"]) and os.path.exists(sources["results_pdf"])
     has_players_pdf = bool(sources["players_pdf"]) and os.path.exists(sources["players_pdf"])
+    has_spreadsheet = bool(sources["spreadsheet"]) and os.path.exists(sources["spreadsheet"])
     has_chat        = os.path.exists(sources["chat_zip"])
 
     if not has_chat:
@@ -3220,6 +3303,17 @@ def main():
             print("\nCross-referencing data…")
             updated_cfg, discrepancies = merge_and_flag(fa_results, fa_players, wa_matches, existing_cfg)
 
+            # ── Manager spreadsheet ───────────────────────────────────────────
+            if has_spreadsheet:
+                print("  → Manager spreadsheet…", flush=True)
+                sheet_data = parse_manager_spreadsheet(sources["spreadsheet"])
+                print(f"     {len(sheet_data)} players extracted")
+                for p in updated_cfg.get("players", []):
+                    if p["name"] in sheet_data:
+                        p.update(sheet_data[p["name"]])
+            else:
+                print("  → Manager spreadsheet… not present")
+
             # ── Squad appearances (when no players PDF) ───────────────────────
             if not has_players_pdf and updated_cfg.get("matches"):
                 print("\n  → Squad appearances from WhatsApp…", flush=True)
@@ -3249,6 +3343,10 @@ def main():
                     with open(args.config, "w", encoding="utf-8") as f:
                         json.dump(updated_cfg, f, indent=2, ensure_ascii=False)
                     print(f"     Appearances written to {args.config}")
+
+        # ── Apply stats precedence rules ──────────────────────────────────────
+        precedence = (team_cfg or {}).get("stats_precedence", {})
+        apply_stats_precedence(updated_cfg, precedence)
 
         # ── Always persist the merged/enriched config ────────────────────────
         with open(args.config, "w", encoding="utf-8") as f:

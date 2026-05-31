@@ -23,8 +23,16 @@
     "chat_zip":        "teams/u15-2025-26/greens/chat/stjohns_chat.zip",
     "shared_chat_zip": "shared/chat/managers_chat.zip",
     "season_config":   "teams/u15-2025-26/greens/season_config.json",
-    "output_html":     "index.html"
+    "output_html":     "index.html",
+    "spreadsheet":     "teams/u15-2025-26/greens/players/U15s St Johns 25-26 Salford League Stats.xlsx"
   },
+
+  "stats_precedence": {
+    "appearances": "spreadsheet",
+    "goals": "fa_pdf",
+    "motm": "spreadsheet"
+  },
+  "_comment_stats_precedence": "appearances: spreadsheet|fa_pdf|whatsapp  goals: fa_pdf|spreadsheet|whatsapp  motm: spreadsheet|whatsapp",
 
   "fulltime": {
     "league_table_url": "https://fulltime.thefa.com/table.html?selectedSeason=104067364&selectedDivision=156824807&ftsTablePageContent.fixtureAnalysisForm.standingsTableDay=27&ftsTablePageContent.fixtureAnalysisForm.standingsTableMonth=4&ftsTablePageContent.fixtureAnalysisForm.standingsTableYear=2026&activeTab=1#tab-1",

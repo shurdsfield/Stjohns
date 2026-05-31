@@ -451,15 +451,21 @@
       "fa_starts": 8,
       "fa_bench": 16,
       "fri_apps": 1,
-      "lge_apps": 18,
+      "lge_apps": 19,
       "cup_apps": 6,
       "lge_goals": 25,
       "cup_goals": 4,
       "fri_goals": 2,
       "motm": {
-        "League": 3
+        "League": 3,
+        "Unattributed": 1
       },
-      "note": "Top scorer — 29 FA goals + 2 friendly = 31 total"
+      "note": "Top scorer — 29 FA goals + 2 friendly = 31 total",
+      "sheet_lge_apps": 19,
+      "sheet_cup_apps": 6,
+      "sheet_lge_goals": 24,
+      "sheet_cup_goals": 4,
+      "sheet_motm": 4
     },
     {
       "name": "Dylan H",
@@ -470,16 +476,22 @@
       "fa_bench": 1,
       "fri_apps": 0,
       "lge_apps": 11,
-      "cup_apps": 3,
+      "cup_apps": 4,
       "lge_goals": 18,
       "cup_goals": 6,
       "fri_goals": 0,
       "_note_goals": "WhatsApp match-by-match count = 20 league + 6 cup = 26 total. FA PDF says 24. Was previously 21 lge — the 20 Dec goal belonged to Micah (Dylan H absent that day, confirmed by parent message 19 Dec).",
       "motm": {
         "League": 1,
-        "Cup": 1
+        "Cup": 1,
+        "Unattributed": 1
       },
-      "note": "Three hat-tricks during the season"
+      "note": "Three hat-tricks during the season",
+      "sheet_lge_apps": 11,
+      "sheet_cup_apps": 4,
+      "sheet_lge_goals": 17,
+      "sheet_cup_goals": 6,
+      "sheet_motm": 3
     },
     {
       "name": "Dylan C",
@@ -489,7 +501,7 @@
       "fa_starts": 3,
       "fa_bench": 16,
       "fri_apps": 1,
-      "lge_apps": 14,
+      "lge_apps": 15,
       "cup_apps": 5,
       "lge_goals": 15,
       "cup_goals": 1,
@@ -498,7 +510,12 @@
       "motm": {
         "League": 2
       },
-      "note": "Wonder goal vs Salford L&G (Jan) · Penalty save vs RS Titans (Dec)"
+      "note": "Wonder goal vs Salford L&G (Jan) · Penalty save vs RS Titans (Dec)",
+      "sheet_lge_apps": 15,
+      "sheet_cup_apps": 5,
+      "sheet_lge_goals": 15,
+      "sheet_cup_goals": 1,
+      "sheet_motm": 2
     },
     {
       "name": "Max",
@@ -508,7 +525,7 @@
       "fa_starts": 2,
       "fa_bench": 17,
       "fri_apps": 1,
-      "lge_apps": 14,
+      "lge_apps": 15,
       "cup_apps": 5,
       "lge_goals": 5,
       "cup_goals": 4,
@@ -516,7 +533,12 @@
       "motm": {
         "Cup": 1
       },
-      "note": "Hat-trick in Plate Cup vs Whalley Range"
+      "note": "Hat-trick in Plate Cup vs Whalley Range",
+      "sheet_lge_apps": 15,
+      "sheet_cup_apps": 5,
+      "sheet_lge_goals": 5,
+      "sheet_cup_goals": 4,
+      "sheet_motm": 1
     },
     {
       "name": "Micah",
@@ -526,7 +548,7 @@
       "fa_starts": 19,
       "fa_bench": 0,
       "fri_apps": 1,
-      "lge_apps": 14,
+      "lge_apps": 13,
       "cup_apps": 6,
       "lge_goals": 6,
       "cup_goals": 2,
@@ -534,7 +556,12 @@
       "_note_goals": "lge_goals updated from 5 to 6: Micah scored in 20 Dec vs RS Titans (Dylan H was absent). Confirmed by Steve's match report 'Petr raphy Micah' and edited scorer list.",
       "motm": {
         "Cup": 2
-      }
+      },
+      "sheet_lge_apps": 13,
+      "sheet_cup_apps": 6,
+      "sheet_lge_goals": 6,
+      "sheet_cup_goals": 2,
+      "sheet_motm": 2
     },
     {
       "name": "Jamie",
@@ -550,8 +577,14 @@
       "cup_goals": 2,
       "fri_goals": 1,
       "motm": {
-        "League": 2
-      }
+        "League": 2,
+        "Unattributed": 1
+      },
+      "sheet_lge_apps": 18,
+      "sheet_cup_apps": 4,
+      "sheet_lge_goals": 8,
+      "sheet_cup_goals": 2,
+      "sheet_motm": 3
     },
     {
       "name": "Ivan",
@@ -569,7 +602,12 @@
       "_note_goals": "SDFL Cup goal (direct from corner) may be recorded as OG in FA — cup_goals kept as 1",
       "motm": {
         "League": 1
-      }
+      },
+      "sheet_lge_apps": 18,
+      "sheet_cup_apps": 6,
+      "sheet_lge_goals": 2,
+      "sheet_cup_goals": 1,
+      "sheet_motm": 1
     },
     {
       "name": "Luke",
@@ -579,14 +617,19 @@
       "fa_starts": 21,
       "fa_bench": 0,
       "fri_apps": 0,
-      "lge_apps": 17,
+      "lge_apps": 18,
       "cup_apps": 5,
       "lge_goals": 2,
       "cup_goals": 1,
       "fri_goals": 0,
       "motm": {
         "League": 3
-      }
+      },
+      "sheet_lge_apps": 18,
+      "sheet_cup_apps": 5,
+      "sheet_lge_goals": 2,
+      "sheet_cup_goals": 1,
+      "sheet_motm": 3
     },
     {
       "name": "Sonny",
@@ -603,7 +646,12 @@
       "fri_goals": 0,
       "motm": {
         "League": 1
-      }
+      },
+      "sheet_lge_apps": 19,
+      "sheet_cup_apps": 6,
+      "sheet_lge_goals": 1,
+      "sheet_cup_goals": 1,
+      "sheet_motm": 1
     },
     {
       "name": "Lucas",
@@ -613,14 +661,20 @@
       "fa_starts": 25,
       "fa_bench": 0,
       "fri_apps": 1,
-      "lge_apps": 19,
+      "lge_apps": 20,
       "cup_apps": 6,
       "lge_goals": 2,
       "cup_goals": 0,
       "fri_goals": 1,
       "motm": {
-        "League": 1
-      }
+        "League": 1,
+        "Unattributed": 1
+      },
+      "sheet_lge_apps": 20,
+      "sheet_cup_apps": 6,
+      "sheet_lge_goals": 2,
+      "sheet_cup_goals": 0,
+      "sheet_motm": 2
     },
     {
       "name": "Ewan",
@@ -631,13 +685,19 @@
       "fa_bench": 0,
       "fri_apps": 1,
       "lge_apps": 17,
-      "cup_apps": 5,
+      "cup_apps": 6,
       "lge_goals": 2,
       "cup_goals": 0,
       "fri_goals": 0,
       "motm": {
-        "Cup": 1
-      }
+        "Cup": 1,
+        "Unattributed": 1
+      },
+      "sheet_lge_apps": 17,
+      "sheet_cup_apps": 6,
+      "sheet_lge_goals": 1,
+      "sheet_cup_goals": 1,
+      "sheet_motm": 2
     },
     {
       "name": "Raphie",
@@ -647,14 +707,20 @@
       "fa_starts": 21,
       "fa_bench": 0,
       "fri_apps": 1,
-      "lge_apps": 16,
-      "cup_apps": 5,
+      "lge_apps": 17,
+      "cup_apps": 6,
       "lge_goals": 2,
       "cup_goals": 0,
       "fri_goals": 0,
       "motm": {
-        "Cup": 1
-      }
+        "Cup": 1,
+        "Unattributed": 1
+      },
+      "sheet_lge_apps": 17,
+      "sheet_cup_apps": 6,
+      "sheet_lge_goals": 2,
+      "sheet_cup_goals": 0,
+      "sheet_motm": 2
     },
     {
       "name": "Connor",
@@ -664,13 +730,18 @@
       "fa_starts": 10,
       "fa_bench": 1,
       "fri_apps": 1,
-      "lge_apps": 9,
-      "cup_apps": 2,
+      "lge_apps": 8,
+      "cup_apps": 4,
       "lge_goals": 2,
       "cup_goals": 1,
       "fri_goals": 0,
       "_note_goals": "FA PDF total = 2; WhatsApp shows 2 league goals + 1 cup = 3. FA may have missed one. Using WhatsApp count.",
-      "motm": {}
+      "motm": {},
+      "sheet_lge_apps": 8,
+      "sheet_cup_apps": 4,
+      "sheet_lge_goals": 2,
+      "sheet_cup_goals": 1,
+      "sheet_motm": 0
     },
     {
       "name": "Ilyas",
@@ -680,14 +751,20 @@
       "fa_starts": 20,
       "fa_bench": 0,
       "fri_apps": 1,
-      "lge_apps": 15,
-      "cup_apps": 6,
+      "lge_apps": 18,
+      "cup_apps": 4,
       "lge_goals": 0,
       "cup_goals": 1,
       "fri_goals": 0,
       "motm": {
-        "League": 1
-      }
+        "League": 1,
+        "Unattributed": 1
+      },
+      "sheet_lge_apps": 18,
+      "sheet_cup_apps": 4,
+      "sheet_lge_goals": 0,
+      "sheet_cup_goals": 1,
+      "sheet_motm": 2
     },
     {
       "name": "Harry",
@@ -702,7 +779,12 @@
       "lge_goals": 2,
       "cup_goals": 0,
       "fri_goals": 0,
-      "motm": {}
+      "motm": {},
+      "sheet_lge_apps": 6,
+      "sheet_cup_apps": 0,
+      "sheet_lge_goals": 2,
+      "sheet_cup_goals": 0,
+      "sheet_motm": 0
     },
     {
       "name": "Noah",
@@ -712,12 +794,17 @@
       "fa_starts": 1,
       "fa_bench": 5,
       "fri_apps": 1,
-      "lge_apps": 6,
+      "lge_apps": 7,
       "cup_apps": 0,
       "lge_goals": 1,
       "cup_goals": 0,
       "fri_goals": 0,
-      "motm": {}
+      "motm": {},
+      "sheet_lge_apps": 7,
+      "sheet_cup_apps": 0,
+      "sheet_lge_goals": 1,
+      "sheet_cup_goals": 0,
+      "sheet_motm": 0
     },
     {
       "name": "Digby",
@@ -727,8 +814,8 @@
       "fa_starts": 15,
       "fa_bench": 3,
       "fri_apps": 1,
-      "lge_apps": 11,
-      "cup_apps": 4,
+      "lge_apps": 12,
+      "cup_apps": 3,
       "lge_goals": 0,
       "cup_goals": 0,
       "fri_goals": 0,
@@ -736,7 +823,12 @@
       "motm": {
         "League": 1
       },
-      "note": "Pen saves: Salford Storm (Jan) &amp; Wythenshawe (Jan cup)"
+      "note": "Pen saves: Salford Storm (Jan) &amp; Wythenshawe (Jan cup)",
+      "sheet_lge_apps": 12,
+      "sheet_cup_apps": 3,
+      "sheet_lge_goals": 0,
+      "sheet_cup_goals": 0,
+      "sheet_motm": 1
     },
     {
       "name": "George",
@@ -746,14 +838,19 @@
       "fa_starts": 0,
       "fa_bench": 0,
       "fri_apps": 0,
-      "lge_apps": 2,
+      "lge_apps": 3,
       "cup_apps": 1,
       "lge_goals": 0,
       "cup_goals": 0,
       "fri_goals": 0,
       "_note": "Unregistered — recorded under Digby on FA Full Time, so not in FA PDF. Apps tracked from WhatsApp: 07 Mar vs RS Titans (League Cup, debut), 22 Apr vs Man SE (League, squad named Digby but report confirms George in goal), 09 May vs Reddish Vulcans (League).",
       "motm": {},
-      "note": "Debut worldie save vs RS Titans (Mar)"
+      "note": "Debut worldie save vs RS Titans (Mar)",
+      "sheet_lge_apps": 3,
+      "sheet_cup_apps": 1,
+      "sheet_lge_goals": 0,
+      "sheet_cup_goals": 0,
+      "sheet_motm": 0
     },
     {
       "name": "Elliot",
@@ -763,12 +860,17 @@
       "fa_starts": 11,
       "fa_bench": 0,
       "fri_apps": 1,
-      "lge_apps": 7,
-      "cup_apps": 4,
+      "lge_apps": 8,
+      "cup_apps": 3,
       "lge_goals": 0,
       "cup_goals": 0,
       "fri_goals": 0,
-      "motm": {}
+      "motm": {},
+      "sheet_lge_apps": 8,
+      "sheet_cup_apps": 3,
+      "sheet_lge_goals": 0,
+      "sheet_cup_goals": 0,
+      "sheet_motm": 0
     },
     {
       "name": "Ethan",
@@ -778,15 +880,21 @@
       "fa_starts": 5,
       "fa_bench": 7,
       "fri_apps": 0,
-      "lge_apps": 10,
+      "lge_apps": 9,
       "cup_apps": 4,
       "lge_goals": 0,
       "cup_goals": 0,
       "fri_goals": 0,
       "motm": {
-        "League": 3
+        "League": 3,
+        "Unattributed": 1
       },
-      "note": "Key defensive performer — 3 MOTM awards across all games"
+      "note": "Key defensive performer — 3 MOTM awards across all games",
+      "sheet_lge_apps": 9,
+      "sheet_cup_apps": 4,
+      "sheet_lge_goals": 0,
+      "sheet_cup_goals": 0,
+      "sheet_motm": 4
     },
     {
       "name": "Javar",
@@ -804,7 +912,12 @@
       "motm": {
         "League": 1
       },
-      "note": "3 assists vs Salford Storm (Sep)"
+      "note": "3 assists vs Salford Storm (Sep)",
+      "sheet_lge_apps": 9,
+      "sheet_cup_apps": 2,
+      "sheet_lge_goals": 0,
+      "sheet_cup_goals": 0,
+      "sheet_motm": 1
     },
     {
       "name": "Dalton",
@@ -814,12 +927,17 @@
       "fa_starts": 3,
       "fa_bench": 0,
       "fri_apps": 0,
-      "lge_apps": 3,
-      "cup_apps": 0,
+      "lge_apps": 2,
+      "cup_apps": 1,
       "lge_goals": 0,
       "cup_goals": 0,
       "fri_goals": 0,
-      "motm": {}
+      "motm": {},
+      "sheet_lge_apps": 2,
+      "sheet_cup_apps": 1,
+      "sheet_lge_goals": 0,
+      "sheet_cup_goals": 0,
+      "sheet_motm": 0
     },
     {
       "name": "Connor C",
